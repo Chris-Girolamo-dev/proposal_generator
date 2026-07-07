@@ -2,7 +2,7 @@
 // Domain: clinical-supply / demand forecasting for B2B biotech & pharma.
 // These are starting points the editor pre-fills; you edit per client.
 
-import type { ProposalDraft } from "./types";
+import type { AgreementClause, ProposalDraft } from "./types";
 
 export const SECTION_TITLES = {
   opportunity: "Your areas of opportunity", // renamed from "problem areas" for the biotech market
@@ -10,8 +10,9 @@ export const SECTION_TITLES = {
   deliverables: "What you get",
   timeline: "How we get there",
   whyUs: "Why us",
-  investment: "Investment",
+  investment: "What you're investing",
   nextSteps: "Next steps",
+  agreement: "Services agreement",
 } as const;
 
 /** Intro paragraph that sits under each numbered section, mirroring the LeftClick layout. */
@@ -21,6 +22,62 @@ export const SECTION_INTROS = {
   solution:
     "Closing these gaps is straightforward, and we have done it many times before. In practice the fix is almost always a combination of clean data pipelines, probabilistic modeling, and repeatable SOPs. Here is what that looks like for you:",
 } as const;
+
+/**
+ * Generic services-agreement boilerplate. This is a starting point, not legal advice — have
+ * counsel review before relying on it for a real engagement. The Effective Date / party details
+ * are rendered separately in ServicesAgreementSection from live proposal data.
+ */
+export const DEFAULT_SERVICES_AGREEMENT: AgreementClause[] = [
+  { number: "1", title: "Services", body: [
+    'Provider will perform the services described in this proposal (the "Services") in accordance with the scope, timeline, and deliverables set out above.',
+  ] },
+  { number: "2.1", title: "Fees", body: [
+    "Client will pay the fees set out in the Investment section above.",
+  ] },
+  { number: "2.2", title: "Invoicing", body: [
+    "Provider will invoice Client upon completion of each milestone; payment is due within fifteen (15) days of the invoice date.",
+  ] },
+  { number: "3.1", title: "Payment Terms", body: [
+    "Late payments accrue interest at 1.5% per month, or the maximum allowed by law, whichever is lower.",
+  ] },
+  { number: "3.2", title: "Taxes", body: [
+    "Client is responsible for all sales, use, VAT, or similar taxes, excluding taxes on Provider's net income.",
+  ] },
+  { number: "3.3", title: "Third-Party Costs", body: [
+    "Client will reimburse Provider for third-party software licenses, API-usage fees, or comparable platform costs necessary to perform the Services, provided Provider obtains Client's written approval before incurring any such expense.",
+  ] },
+  { number: "4", title: "Client Responsibilities", bullets: true, body: [
+    "Timely access to relevant staff, systems, data, and credentials.",
+    "A single point of contact with decision-making authority.",
+    "Prompt review/approval of deliverables (deemed accepted if no written rejection within five (5) business days).",
+    "Compliance with all laws governing Client data supplied to Provider.",
+  ] },
+  { number: "5.1", title: "Provider Materials", body: [
+    'Tools, code libraries, frameworks, models, prompts, pre-existing IP, and generic know-how ("Background IP") remain Provider property; Provider grants Client a non-exclusive, perpetual, worldwide license to use Background IP only as embedded in Deliverables.',
+  ] },
+  { number: "5.2", title: "Deliverables", body: [
+    'Custom code, configurations, documentation, and model outputs created specifically for Client under this proposal ("Deliverables") become Client property upon full payment.',
+  ] },
+  { number: "6.1", title: "Confidentiality", body: [
+    "Each Party will protect the other's Confidential Information with at least the same care it uses for its own similar information, but no less than reasonable care.",
+  ] },
+  { number: "6.2", title: "Survival", body: [
+    "Obligations last three (3) years after termination, except trade secrets, which remain protected while they are trade secrets under applicable law.",
+  ] },
+  { number: "7.1", title: "Provider Indemnity", body: [
+    "Provider will defend and indemnify Client against third-party claims that Deliverables infringe intellectual-property rights.",
+  ] },
+  { number: "7.2", title: "Client Indemnity", body: [
+    "Client will defend and indemnify Provider against claims arising from Client data, misuse of Deliverables, or Client's violation of law.",
+  ] },
+  { number: "8", title: "Limitation of Liability", body: [
+    "Each Party's total liability is limited to the greater of (i) US $100,000 or (ii) the fees paid or payable under this Agreement in the twelve (12) months preceding the claim. Neither Party is liable for indirect, incidental, consequential, special, or punitive damages, including lost profits or revenue.",
+  ] },
+  { number: "9", title: "General", body: [
+    "Provider is an independent contractor. This Agreement is governed by the laws of [Governing State/Country], without regard to conflict-of-laws principles. This Agreement is the entire understanding between the Parties and supersedes all prior proposals or agreements. Amendments must be in writing signed by both Parties.",
+  ] },
+];
 
 export const DEFAULT_PROPOSAL: ProposalDraft = {
   client_company: "[Client Company]",
@@ -77,10 +134,34 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   ],
 
   timeline: [
-    { phase: "01", label: "Discovery & Data Audit", detail: "Map your data sources, assumptions, and current forecasting workflow.", duration: "Week 1" },
-    { phase: "02", label: "Model Build", detail: "Stand up the forecasting model and Monte Carlo risk engine against your data.", duration: "Weeks 2–3" },
-    { phase: "03", label: "Dashboard & Scenarios", detail: "Ship the interactive dashboard with one-click scenario planning.", duration: "Weeks 4–5" },
-    { phase: "04", label: "Validation & Handover", detail: "Validate against known outcomes, deliver SOPs, and train your team.", duration: "Week 6" },
+    {
+      phase: "01",
+      label: "Discovery & Data Audit",
+      detail: "Map your data sources, assumptions, and current forecasting workflow.",
+      whyItMatters: "Every model input reflects how your program actually runs, not textbook assumptions, so the forecast is trustworthy from day one.",
+      duration: "Week 1",
+    },
+    {
+      phase: "02",
+      label: "Model Build",
+      detail: "Stand up the forecasting model and Monte Carlo risk engine against your data.",
+      whyItMatters: "Calibrating against your real data means the risk numbers you see are the risk numbers you'll actually face, not generic benchmarks.",
+      duration: "Weeks 2–3",
+    },
+    {
+      phase: "03",
+      label: "Dashboard & Scenarios",
+      detail: "Ship the interactive dashboard with one-click scenario planning.",
+      whyItMatters: "A one-click scenario tool means you can defend supply decisions in the room, not after the meeting.",
+      duration: "Weeks 4–5",
+    },
+    {
+      phase: "04",
+      label: "Validation & Handover",
+      detail: "Validate against known outcomes, deliver SOPs, and train your team.",
+      whyItMatters: "Validating against known outcomes before handover means you inherit a proven system, not an unproven black box.",
+      duration: "Week 6",
+    },
   ],
 
   why_us: {
@@ -107,4 +188,6 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     { label: "Clinical Supply Forecasting System", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 0 },
   ],
   currency: "usd",
+
+  services_agreement: DEFAULT_SERVICES_AGREEMENT,
 };

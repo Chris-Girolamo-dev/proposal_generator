@@ -7,6 +7,7 @@ import { TimelineSection } from "./sections/TimelineSection";
 import { WhyUsSection } from "./sections/WhyUsSection";
 import { InvestmentSection } from "./sections/InvestmentSection";
 import { NextStepsSection } from "./sections/NextStepsSection";
+import { ServicesAgreementSection } from "./sections/ServicesAgreementSection";
 
 /**
  * The LeftClick-structured, OPFOR-skinned proposal document. This is the exact
@@ -36,6 +37,10 @@ export function ProposalDocument({ proposal }: { proposal: Proposal }) {
       <WhyUsSection whyUs={proposal.why_us} />
       <InvestmentSection items={proposal.cost_items} currency={proposal.currency} />
       <NextStepsSection steps={proposal.next_steps} guarantee={proposal.guarantee} />
+      <ServicesAgreementSection
+        clauses={proposal.services_agreement}
+        clientCompany={proposal.client_company}
+      />
     </div>
   );
 }

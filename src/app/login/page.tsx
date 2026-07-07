@@ -34,8 +34,9 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-canvas px-4">
       <div className="card w-full max-w-sm p-8">
         <div className="mb-8 text-center">
-          <p className="eyebrow mb-2">OPFOR</p>
-          <h1 className="font-display text-xl font-semibold text-fg">Proposal Generator</h1>
+          <p className="eyebrow mb-3">OPFOR Proposal Generator</p>
+          <h1 className="font-display text-2xl font-semibold text-fg">Sign in</h1>
+          <p className="mt-1 text-sm text-text-2">Enter your credentials to continue</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

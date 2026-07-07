@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { FileText, LogOut } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { signOut } from "@/lib/supabase/actions";
 import { formatMoney } from "@/lib/proposal/types";
 import type { Proposal } from "@/lib/proposal/types";
 
@@ -25,13 +27,26 @@ export default async function DashboardPage() {
           <p className="eyebrow mb-1">OPFOR</p>
           <h1 className="font-display text-2xl font-semibold text-fg">Proposals</h1>
         </div>
-        <Link href="/proposals/new" className="btn-primary">
-          New Proposal
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/proposals/new" className="btn-primary">
+            New Proposal
+          </Link>
+          <form action={signOut}>
+            <button
+              type="submit"
+              className="btn-secondary px-2.5"
+              aria-label="Sign out"
+              title="Sign out"
+            >
+              <LogOut size={16} />
+            </button>
+          </form>
+        </div>
       </div>
 
       {list.length === 0 ? (
         <div className="card flex flex-col items-center gap-3 px-8 py-16 text-center">
+          <FileText size={28} className="text-text-3" strokeWidth={1.5} />
           <p className="font-display text-lg font-medium text-fg">No proposals yet</p>
           <p className="max-w-sm text-sm text-text-2">
             Create your first proposal from the OPFOR template — fill in the client details and

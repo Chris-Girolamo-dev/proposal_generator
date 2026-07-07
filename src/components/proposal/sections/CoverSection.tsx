@@ -15,19 +15,16 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
         />
       </div>
 
-      <div className="hero-mesh mt-10 min-h-[4.4in] flex-1" />
-
-      <div className="mt-10">
-        <h1 className="font-serif text-6xl font-medium leading-[1.05]">
-          <mark className="bg-[#F5E14C] px-2 py-1">{proposal.client_company}</mark>
+      <div className="flex flex-1 flex-col justify-center">
+        <h1 className="font-serif text-6xl font-medium leading-[1.05] text-[#1a1a1a]">
+          {proposal.client_company}
         </h1>
+        <div className="mt-6 h-px w-24 bg-[#d5d5d5]" />
         <p className="mt-6 max-w-xl text-lg text-[#4a4a4a]">{proposal.project_title}</p>
         {proposal.subtitle && (
-          <p className="mt-2 max-w-xl text-base text-[#7a7a7a]">{proposal.subtitle}</p>
+          <p className="mt-2 max-w-xl text-base text-[#8a8a8a]">{proposal.subtitle}</p>
         )}
       </div>
-
-      <div className="mt-10 h-1.5 w-full bg-red" />
     </section>
   );
 }

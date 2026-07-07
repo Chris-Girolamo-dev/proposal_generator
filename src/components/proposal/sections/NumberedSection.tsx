@@ -22,7 +22,7 @@ export function NumberedSection({
       <div className="mt-16 grid grid-cols-2 gap-x-12 gap-y-12">
         {items.map((item) => (
           <div key={item.n}>
-            <span className="font-serif text-5xl text-[#e8b7ba]">{item.n}</span>
+            <span className="font-serif text-5xl text-[#c4c4c4]">{item.n}</span>
             <p className="mt-3 max-w-sm text-[#2a2a2a]">{item.text}</p>
           </div>
         ))}

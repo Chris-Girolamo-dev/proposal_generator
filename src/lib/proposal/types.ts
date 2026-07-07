@@ -12,8 +12,16 @@ export interface NumberedItem {
 export interface TimelinePhase {
   phase: string; // "01"
   label: string; // "Discovery & Data Audit"
-  detail: string; // one-line description
+  detail: string; // "what happens"
+  whyItMatters?: string; // "why it matters" — optional: absent on proposals created before this field existed
   duration?: string; // "Week 1"
+}
+
+export interface AgreementClause {
+  number: string; // "3.1"
+  title: string;
+  body: string[]; // one or more paragraphs
+  bullets?: boolean; // render body as a bulleted list instead of paragraphs
 }
 
 export interface WhyUs {
@@ -45,6 +53,7 @@ export interface Proposal {
   why_us: WhyUs;
   next_steps: { step: string }[];
   guarantee: string;
+  services_agreement: AgreementClause[];
 
   cost_items: CostItem[];
   currency: string;

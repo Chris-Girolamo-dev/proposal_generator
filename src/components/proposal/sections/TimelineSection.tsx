@@ -9,17 +9,27 @@ export function TimelineSection({ phases }: { phases: TimelinePhase[] }) {
         A phased build, so you see progress every step of the way.
       </p>
 
-      <div className="mt-16 space-y-10">
+      <div className="mt-16 overflow-hidden rounded-lg border border-[#e5e5e5]">
+        <div className="grid grid-cols-[7rem_1fr_1fr] bg-[#12141c] px-6 py-3 text-[10px] font-semibold uppercase tracking-wider text-white">
+          <span>Step</span>
+          <span>What happens</span>
+          <span>Why it matters</span>
+        </div>
+
         {phases.map((phase) => (
-          <div key={phase.phase} className="grid grid-cols-[3.5rem_1fr_auto] items-baseline gap-6">
-            <span className="font-serif text-4xl text-[#e8b7ba]">{phase.phase}</span>
+          <div
+            key={phase.phase}
+            className="grid grid-cols-[7rem_1fr_1fr] gap-6 border-t border-[#e5e5e5] bg-white px-6 py-6"
+          >
             <div>
-              <p className="font-medium text-[#2a2a2a]">{phase.label}</p>
-              <p className="mt-1 text-sm text-[#7a7a7a]">{phase.detail}</p>
+              <p className="font-serif text-2xl text-[#1a1a1a]">{phase.phase}</p>
+              <p className="mt-1 text-xs text-[#8a8a8a]">
+                {phase.label}
+                {phase.duration && ` · ${phase.duration}`}
+              </p>
             </div>
-            {phase.duration && (
-              <span className="text-sm text-[#7a7a7a]">{phase.duration}</span>
-            )}
+            <p className="text-sm text-[#4a4a4a]">{phase.detail}</p>
+            <p className="text-sm text-[#4a4a4a]">{phase.whyItMatters ?? ""}</p>
           </div>
         ))}
       </div>

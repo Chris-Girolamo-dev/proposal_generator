@@ -127,15 +127,16 @@ body {
 .input-field {
   width: 100%;
   padding: 10px 14px;
-  background: var(--color-surface);
+  background: var(--color-surface-2);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   font-size: 14px;
   color: var(--color-fg);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 .input-field:focus {
   outline: none;
+  background: var(--color-surface);
   border-color: var(--color-red);
   box-shadow: 0 0 0 3px var(--color-red-soft);
 }
@@ -157,28 +158,8 @@ body {
   color: var(--color-red);
 }
 
-/* ── Proposal document: abstract hero art (stand-in for LeftClick's photography/3D
-   renders) — a dark red-glow mesh with a faint grid texture, entirely CSS so it
-   prints identically to what's on screen. ─────────────────────────────────────── */
-.hero-mesh {
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  background:
-    radial-gradient(120% 120% at 12% 15%, rgba(229, 25, 43, 0.55), transparent 60%),
-    radial-gradient(90% 90% at 88% 85%, rgba(229, 25, 43, 0.28), transparent 55%),
-    linear-gradient(160deg, #0a0a0a 0%, #16171d 55%, #1f2029 100%);
-}
-.hero-mesh::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 56px),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 56px);
-  mix-blend-mode: overlay;
-}
-
+/* ── Proposal document: minimal/monochrome per the reference LeftClick output —
+   logo + red accents only; everything else is black/gray typography. ──────────── */
 .stat-card {
   border-radius: 10px;
   background: #0a0a0a;
@@ -187,6 +168,12 @@ body {
 
 .section-tint {
   background: #fafaf8;
+}
+
+/* Eyebrow labels stay red in the app shell, but read as monochrome inside the
+   proposal document — the doc itself should be black/gray + the logo only. */
+.proposal-doc .eyebrow {
+  color: var(--color-text-3);
 }
 
 /* Print — proposal document exports to PDF via a server-rendered route in this same app.

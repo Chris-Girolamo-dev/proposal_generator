@@ -5,10 +5,9 @@ export function WhyUsSection({ whyUs }: { whyUs: WhyUs }) {
     <section className="min-h-[11in] p-20">
       <p className="eyebrow mb-3">OPFOR</p>
       <h2 className="font-serif text-4xl">Why us.</h2>
-
-      <div className="hero-mesh mt-8 h-56" />
-
-      <p className="mt-8 max-w-2xl text-[#5a5a5a]">{whyUs.blurb}</p>
+      <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">
+        {whyUs.blurb}
+      </p>
 
       <div className="mt-12 grid grid-cols-3 gap-4">
         {whyUs.stats.map((stat, i) => (
