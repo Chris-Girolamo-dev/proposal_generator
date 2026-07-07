@@ -4,15 +4,15 @@ import type { Proposal } from "@/lib/proposal/types";
 export function CoverSection({ proposal }: { proposal: Proposal }) {
   return (
     <section className="flex min-h-[11in] flex-col justify-between p-20">
-      <div className="flex items-center gap-2">
+      {/* Logo is a glow-on-dark wordmark; a dark chip gives it the contrast it's designed for. */}
+      <div className="inline-flex w-fit items-center rounded-md bg-[#0a0a0a] px-4 py-2.5">
         <Image
           src="/brand/logo/OPFOR_LOGO_NEW_2026.png"
           alt="OPFOR"
-          width={28}
-          height={28}
-          className="h-7 w-auto"
+          width={1536}
+          height={1024}
+          className="h-6 w-auto"
         />
-        <span className="font-display text-sm font-bold tracking-tight">OPFOR</span>
       </div>
 
       <div>

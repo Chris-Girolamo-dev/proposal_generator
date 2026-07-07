@@ -2,8 +2,14 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 const PUBLIC_PATHS = ["/login"];
+// Fully exempt from auth — no Supabase call at all (used for the no-DB template preview route).
+const AUTH_EXEMPT_PATHS = ["/preview"];
 
 export async function middleware(request: NextRequest) {
+  if (AUTH_EXEMPT_PATHS.some((p) => request.nextUrl.pathname.startsWith(p))) {
+    return NextResponse.next();
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
