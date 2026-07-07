@@ -206,6 +206,48 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       { value: "95%+", label: "target service levels engineered into every model" },
       { value: "End-to-end", label: "from data pipeline to boardroom dashboard" },
     ],
+    capabilities: [
+      "Monte Carlo Risk Modeling",
+      "Per-SKU Buffer Optimization",
+      "Depot-Level Demand Tracking",
+      "Randomization-Aware Forecasting",
+      "Shortfall Early Warning",
+      "Multi-Country Rollout Planning",
+      "Real-Time Scenario Replanning",
+      "SOC 2-Compliant Hosting",
+    ],
+    points: [
+      {
+        title: "We build systems, not slide decks.",
+        description:
+          "You get a working model and dashboard, not a strategy deck for another vendor to implement.",
+      },
+      {
+        title: "Calibrated to your data, not a benchmark.",
+        description:
+          "Every model ships trained against your actual historical and protocol data, not a generic industry template.",
+      },
+      {
+        title: "Senior team, narrow focus.",
+        description:
+          "The same person who scopes the model builds it and hands it over. No account-manager-to-engineer relay.",
+      },
+      {
+        title: "We build for the forecast, not the deck.",
+        description:
+          "The dashboard is how this gets funded internally. Forecast accuracy is why it matters. We optimize for the second, and the first follows.",
+      },
+      {
+        title: "Decision-ready, or we say so.",
+        description:
+          "If the data can't support a confident forecast at your target service level, we tell you before you pay for a model that can't deliver it.",
+      },
+      {
+        title: "Done with you, not for you.",
+        description:
+          "Your team owns the model, the pipeline, and the documentation when we're done, not us.",
+      },
+    ],
   },
 
   next_steps: [

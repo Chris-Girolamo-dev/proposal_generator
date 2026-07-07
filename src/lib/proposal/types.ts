@@ -36,6 +36,8 @@ export interface WhyUs {
   headline: string;
   blurb: string;
   stats: { value: string; label: string }[];
+  capabilities?: string[]; // pill row, e.g. "Monte Carlo Risk Modeling" — optional: absent on older proposals
+  points?: { title: string; description: string }[]; // numbered two-column reasoning grid
 }
 
 export interface CostItem {
