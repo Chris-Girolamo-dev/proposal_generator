@@ -11,9 +11,11 @@ export interface NumberedItem {
 
 export interface TimelinePhase {
   phase: string; // "01"
-  label: string; // "Discovery & Data Audit"
-  detail: string; // "what happens"
-  whyItMatters?: string; // "why it matters" — optional: absent on proposals created before this field existed
+  label: string; // bold prefix, e.g. "Discovery & Data Audit."
+  tagline?: string; // italic accent phrase, e.g. "map the terrain before you build."
+  detail: string; // first paragraph — what happens
+  whyItMatters?: string; // second paragraph — why it matters. optional: absent on proposals created before this field existed
+  deliverables?: string[]; // short tags shown as a slash-separated row, e.g. ["Data audit", "Model spec"]
   duration?: string; // "Week 1"
 }
 

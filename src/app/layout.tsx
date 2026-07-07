@@ -22,11 +22,12 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-// Bold headline sans for the proposal document (section headings) — distinct from the app
-// shell's Space Grotesk, which reads too quirky/indie for a premium bold display treatment.
+// Proposal document typeface (headings + body) — distinct from the app shell's Space Grotesk
+// (too quirky/indie) and Geist (too generic-SaaS); used at 400/500 for body copy and 700/800
+// for headline treatments.
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-jakarta",
   display: "swap",
 });

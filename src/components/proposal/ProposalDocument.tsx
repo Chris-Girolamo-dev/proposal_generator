@@ -17,7 +17,7 @@ import { ServicesAgreementSection } from "./sections/ServicesAgreementSection";
  */
 export function ProposalDocument({ proposal }: { proposal: Proposal }) {
   return (
-    <div className="proposal-doc bg-white text-[#1a1a1a]">
+    <div className="proposal-doc bg-white font-heading text-[#1a1a1a]">
       <CoverSection proposal={proposal} />
 
       <NumberedSection

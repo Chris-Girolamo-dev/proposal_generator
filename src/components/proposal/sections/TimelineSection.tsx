@@ -9,27 +9,37 @@ export function TimelineSection({ phases }: { phases: TimelinePhase[] }) {
         A phased build, so you see progress every step of the way.
       </p>
 
-      <div className="mt-16 overflow-hidden rounded-lg border border-[#e5e5e5]">
-        <div className="grid grid-cols-[7rem_1fr_1fr] bg-[#12141c] px-6 py-3 text-[10px] font-semibold uppercase tracking-wider text-white">
-          <span>Step</span>
-          <span>What happens</span>
-          <span>Why it matters</span>
-        </div>
-
+      <div className="mt-16 divide-y divide-[#e5e5e5]">
         {phases.map((phase) => (
-          <div
-            key={phase.phase}
-            className="grid grid-cols-[7rem_1fr_1fr] gap-6 border-t border-[#e5e5e5] bg-white px-6 py-6"
-          >
+          <div key={phase.phase} className="grid grid-cols-[3.5rem_1fr] gap-6 py-8 first:pt-0">
+            <span className="font-heading text-3xl font-extrabold text-[#1a1a1a]">{phase.phase}.</span>
             <div>
-              <p className="font-serif text-2xl text-[#1a1a1a]">{phase.phase}</p>
-              <p className="mt-1 text-xs text-[#8a8a8a]">
-                {phase.label}
-                {phase.duration && ` · ${phase.duration}`}
-              </p>
+              <div className="flex items-baseline justify-between gap-6">
+                <p className="font-heading text-lg font-bold text-[#1a1a1a]">
+                  {phase.label}{" "}
+                  {phase.tagline && (
+                    <em className="font-serif italic font-normal">{phase.tagline}</em>
+                  )}
+                </p>
+                {phase.duration && (
+                  <span className="eyebrow shrink-0 whitespace-nowrap">{phase.duration}</span>
+                )}
+              </div>
+
+              <p className="mt-3 max-w-2xl text-sm text-[#4a4a4a]">{phase.detail}</p>
+              {phase.whyItMatters && (
+                <p className="mt-2 max-w-2xl text-sm text-[#4a4a4a]">{phase.whyItMatters}</p>
+              )}
+
+              {phase.deliverables && phase.deliverables.length > 0 && (
+                <p className="mt-4 text-xs text-[#8a8a8a]">
+                  <span className="font-semibold uppercase tracking-wide text-[#1a1a1a]">
+                    Deliverables{" "}
+                  </span>
+                  {phase.deliverables.join(" / ")}
+                </p>
+              )}
             </div>
-            <p className="text-sm text-[#4a4a4a]">{phase.detail}</p>
-            <p className="text-sm text-[#4a4a4a]">{phase.whyItMatters ?? ""}</p>
           </div>
         ))}
       </div>

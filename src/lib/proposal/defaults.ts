@@ -151,30 +151,46 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   timeline: [
     {
       phase: "01",
-      label: "Discovery & Data Audit",
-      detail: "Map your data sources, assumptions, and current forecasting workflow.",
-      whyItMatters: "Every model input reflects how your program actually runs, not textbook assumptions, so the forecast is trustworthy from day one.",
+      label: "Discovery & Data Audit.",
+      tagline: "map the terrain before you build.",
+      detail:
+        "We read your current forecasting workflow end to end: existing spreadsheets, data sources, and the assumptions baked into each. Then we map exactly where the manual rework happens and where uncertainty is being dropped on the floor.",
+      whyItMatters:
+        "Every model input reflects how your program actually runs, not textbook assumptions, so the forecast is trustworthy from day one.",
+      deliverables: ["Data source audit", "Assumption map", "Day-4 working review"],
       duration: "Week 1",
     },
     {
       phase: "02",
-      label: "Model Build",
-      detail: "Stand up the forecasting model and Monte Carlo risk engine against your data.",
-      whyItMatters: "Calibrating against your real data means the risk numbers you see are the risk numbers you'll actually face, not generic benchmarks.",
+      label: "Model Build.",
+      tagline: "the forecasting engine, calibrated to you.",
+      detail:
+        "We stand up the parameterized forecasting model and Monte Carlo risk engine directly against your historical data, not a generic template.",
+      whyItMatters:
+        "Calibrating against your real data means the risk numbers you see are the risk numbers you'll actually face, not generic benchmarks.",
+      deliverables: ["Forecasting model", "Monte Carlo risk engine", "Day-4 working review"],
       duration: "Weeks 2–3",
     },
     {
       phase: "03",
-      label: "Dashboard & Scenarios",
-      detail: "Ship the interactive dashboard with one-click scenario planning.",
-      whyItMatters: "A one-click scenario tool means you can defend supply decisions in the room, not after the meeting.",
+      label: "Dashboard & Scenarios.",
+      tagline: "one-click answers for the room.",
+      detail:
+        "We ship the interactive dashboard, wire up one-click scenario planning, and connect the whole thing to your enrollment and inventory sources.",
+      whyItMatters:
+        "A one-click scenario tool means you can defend supply decisions in the room, not after the meeting.",
+      deliverables: ["Interactive dashboard", "Scenario planner", "Data pipeline connected"],
       duration: "Weeks 4–5",
     },
     {
       phase: "04",
-      label: "Validation & Handover",
-      detail: "Validate against known outcomes, deliver SOPs, and train your team.",
-      whyItMatters: "Validating against known outcomes before handover means you inherit a proven system, not an unproven black box.",
+      label: "Validation & Handover.",
+      tagline: "a system your team owns, not ours.",
+      detail:
+        "We validate the model against known outcomes, document the SOPs your team needs to run and update it, and train your team to own it going forward.",
+      whyItMatters:
+        "Validating against known outcomes before handover means you inherit a proven system, not an unproven black box.",
+      deliverables: ["Validation report", "Documented SOPs", "Team training", "30-day support"],
       duration: "Week 6",
     },
   ],
