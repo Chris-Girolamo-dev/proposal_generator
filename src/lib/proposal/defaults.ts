@@ -169,7 +169,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       whyItMatters:
         "Calibrating against your real data means the risk numbers you see are the risk numbers you'll actually face, not generic benchmarks.",
       deliverables: ["Forecasting model", "Monte Carlo risk engine", "Day-4 working review"],
-      duration: "Weeks 2–3",
+      duration: "Week 2",
     },
     {
       phase: "03",
@@ -180,7 +180,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       whyItMatters:
         "A one-click scenario tool means you can defend supply decisions in the room, not after the meeting.",
       deliverables: ["Interactive dashboard", "Scenario planner", "Data pipeline connected"],
-      duration: "Weeks 4–5",
+      duration: "Week 3",
     },
     {
       phase: "04",
@@ -191,7 +191,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       whyItMatters:
         "Seeing the model checked against known outcomes before handoff means you inherit a proven system, not an unproven black box.",
       deliverables: ["Signal report", "Documented SOPs", "Team training", "30-day support"],
-      duration: "Week 6",
+      duration: "Week 4",
     },
   ],
 
