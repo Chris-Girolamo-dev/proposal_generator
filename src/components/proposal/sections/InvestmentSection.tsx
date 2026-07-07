@@ -1,12 +1,10 @@
 import { lineTotalCents, subtotalCents, formatMoney, type CostItem } from "@/lib/proposal/types";
+import { SectionHeading } from "./SectionHeading";
 
 export function InvestmentSection({ items, currency }: { items: CostItem[]; currency: string }) {
   return (
     <section className="min-h-[11in] p-20">
-      <p className="eyebrow mb-3">OPFOR</p>
-      <h2 className="font-serif text-4xl">
-        <span className="font-semibold uppercase">What</span> you&rsquo;re investing.
-      </h2>
+      <SectionHeading number="07" eyebrow="THE INVESTMENT" boldText="What you're" accentText="investing." />
       <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">
         A one-time investment covering the full build, described below.
       </p>

@@ -1,22 +1,26 @@
 import type { NumberedItem } from "@/lib/proposal/types";
+import { SectionHeading } from "./SectionHeading";
 
 export function NumberedSection({
+  number,
   eyebrow,
+  boldText,
+  accentText,
   intro,
   items,
   tint = false,
 }: {
+  number: string;
   eyebrow: string;
+  boldText: string;
+  accentText: string;
   intro: string;
   items: NumberedItem[];
   tint?: boolean;
 }) {
   return (
     <section className={`min-h-[11in] p-20 ${tint ? "section-tint" : ""}`}>
-      <p className="eyebrow mb-3">OPFOR</p>
-      <h2 className="font-serif text-4xl">
-        <span className="uppercase">{eyebrow}</span>
-      </h2>
+      <SectionHeading number={number} eyebrow={eyebrow} boldText={boldText} accentText={accentText} />
       <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">{intro}</p>
 
       <div className="mt-16 grid grid-cols-2 gap-x-12 gap-y-12">

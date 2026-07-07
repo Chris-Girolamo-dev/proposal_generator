@@ -24,6 +24,12 @@ export interface AgreementClause {
   bullets?: boolean; // render body as a bulleted list instead of paragraphs
 }
 
+export interface TeamMember {
+  role: string; // "Engagement Lead"
+  badge: string; // "CORE" | "SUPPORT"
+  description: string;
+}
+
 export interface WhyUs {
   headline: string;
   blurb: string;
@@ -50,6 +56,7 @@ export interface Proposal {
   benefits: NumberedItem[]; // rendered under "Your Solution"
   deliverables: { text: string }[];
   timeline: TimelinePhase[];
+  team: TeamMember[];
   why_us: WhyUs;
   next_steps: { step: string }[];
   guarantee: string;

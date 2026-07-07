@@ -1,10 +1,10 @@
 import type { WhyUs } from "@/lib/proposal/types";
+import { SectionHeading } from "./SectionHeading";
 
 export function WhyUsSection({ whyUs }: { whyUs: WhyUs }) {
   return (
     <section className="min-h-[11in] p-20">
-      <p className="eyebrow mb-3">OPFOR</p>
-      <h2 className="font-serif text-4xl">Why us.</h2>
+      <SectionHeading number="06" eyebrow="WHY US" boldText="Why" accentText="us." />
       <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">
         {whyUs.blurb}
       </p>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Mono, Fraunces } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Mono, Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "@/styles/globals.css";
 
@@ -22,6 +22,15 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
+// Bold headline sans for the proposal document (section headings) — distinct from the app
+// shell's Space Grotesk, which reads too quirky/indie for a premium bold display treatment.
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["700", "800"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Proposal Generator",
   description: "OPFOR proposal generator — build and export client proposals.",
@@ -32,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-theme="light"
-      className={`${GeistSans.variable} ${spaceGrotesk.variable} ${plexMono.variable} ${fraunces.variable}`}
+      className={`${GeistSans.variable} ${spaceGrotesk.variable} ${plexMono.variable} ${fraunces.variable} ${plusJakarta.variable}`}
     >
       <body>{children}</body>
     </html>

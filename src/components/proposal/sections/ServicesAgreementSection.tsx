@@ -21,7 +21,7 @@ export function ServicesAgreementSection({
   return (
     <section className="min-h-[11in] bg-[#f2ede3] p-16">
       <div className="mx-auto max-w-3xl rounded-2xl bg-white p-12 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-        <p className="eyebrow mb-3">OPFOR</p>
+        <p className="eyebrow mb-3">09 | SERVICES AGREEMENT</p>
         <h2 className="font-serif text-3xl uppercase tracking-tight text-[#1a1a1a]">
           Services Agreement
         </h2>

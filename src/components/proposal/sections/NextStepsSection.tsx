@@ -1,3 +1,5 @@
+import { SectionHeading } from "./SectionHeading";
+
 export function NextStepsSection({
   steps,
   guarantee,
@@ -7,8 +9,7 @@ export function NextStepsSection({
 }) {
   return (
     <section className="section-tint min-h-[11in] p-20">
-      <p className="eyebrow mb-3">OPFOR</p>
-      <h2 className="font-serif text-4xl">Next steps.</h2>
+      <SectionHeading number="08" eyebrow="NEXT STEPS" boldText="Next" accentText="steps." />
 
       <ol className="mt-16 max-w-xl space-y-6">
         {steps.map((s, i) => (

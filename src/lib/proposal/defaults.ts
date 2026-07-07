@@ -2,7 +2,7 @@
 // Domain: clinical-supply / demand forecasting for B2B biotech & pharma.
 // These are starting points the editor pre-fills; you edit per client.
 
-import type { AgreementClause, ProposalDraft } from "./types";
+import type { AgreementClause, ProposalDraft, TeamMember } from "./types";
 
 export const SECTION_TITLES = {
   opportunity: "Your areas of opportunity", // renamed from "problem areas" for the biotech market
@@ -77,6 +77,21 @@ export const DEFAULT_SERVICES_AGREEMENT: AgreementClause[] = [
   { number: "9", title: "General", body: [
     "Provider is an independent contractor. This Agreement is governed by the laws of [Governing State/Country], without regard to conflict-of-laws principles. This Agreement is the entire understanding between the Parties and supersedes all prior proposals or agreements. Amendments must be in writing signed by both Parties.",
   ] },
+];
+
+export const DEFAULT_TEAM: TeamMember[] = [
+  {
+    role: "Engagement Lead",
+    badge: "CORE",
+    description:
+      "On the work full time from kickoff to handover. Primary point of contact for the engagement.",
+  },
+  {
+    role: "Forecasting & Data Systems",
+    badge: "CORE",
+    description:
+      "Builds the model and Monte Carlo risk engine, and integrates it against your live data sources.",
+  },
 ];
 
 export const DEFAULT_PROPOSAL: ProposalDraft = {
@@ -163,6 +178,8 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       duration: "Week 6",
     },
   ],
+
+  team: DEFAULT_TEAM,
 
   why_us: {
     headline: "Why us",

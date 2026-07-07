@@ -1,10 +1,10 @@
 import type { TimelinePhase } from "@/lib/proposal/types";
+import { SectionHeading } from "./SectionHeading";
 
 export function TimelineSection({ phases }: { phases: TimelinePhase[] }) {
   return (
     <section className="section-tint min-h-[11in] p-20">
-      <p className="eyebrow mb-3">OPFOR</p>
-      <h2 className="font-serif text-4xl">How we get there.</h2>
+      <SectionHeading number="04" eyebrow="THE PLAN" boldText="How we" accentText="get there." />
       <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">
         A phased build, so you see progress every step of the way.
       </p>

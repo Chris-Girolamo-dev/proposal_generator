@@ -1,9 +1,10 @@
 import type { Proposal } from "@/lib/proposal/types";
-import { SECTION_INTROS, SECTION_TITLES } from "@/lib/proposal/defaults";
+import { SECTION_INTROS } from "@/lib/proposal/defaults";
 import { CoverSection } from "./sections/CoverSection";
 import { NumberedSection } from "./sections/NumberedSection";
 import { DeliverablesSection } from "./sections/DeliverablesSection";
 import { TimelineSection } from "./sections/TimelineSection";
+import { TeamSection } from "./sections/TeamSection";
 import { WhyUsSection } from "./sections/WhyUsSection";
 import { InvestmentSection } from "./sections/InvestmentSection";
 import { NextStepsSection } from "./sections/NextStepsSection";
@@ -20,13 +21,19 @@ export function ProposalDocument({ proposal }: { proposal: Proposal }) {
       <CoverSection proposal={proposal} />
 
       <NumberedSection
-        eyebrow={SECTION_TITLES.opportunity}
+        number="01"
+        eyebrow="AREAS OF OPPORTUNITY"
+        boldText="Your areas of"
+        accentText="opportunity."
         intro={SECTION_INTROS.opportunity}
         items={proposal.problems}
       />
 
       <NumberedSection
-        eyebrow={SECTION_TITLES.solution}
+        number="02"
+        eyebrow="YOUR SOLUTION"
+        boldText="Your"
+        accentText="solution."
         intro={SECTION_INTROS.solution}
         items={proposal.benefits}
         tint
@@ -34,6 +41,7 @@ export function ProposalDocument({ proposal }: { proposal: Proposal }) {
 
       <DeliverablesSection items={proposal.deliverables} />
       <TimelineSection phases={proposal.timeline} />
+      <TeamSection members={proposal.team} />
       <WhyUsSection whyUs={proposal.why_us} />
       <InvestmentSection items={proposal.cost_items} currency={proposal.currency} />
       <NextStepsSection steps={proposal.next_steps} guarantee={proposal.guarantee} />
