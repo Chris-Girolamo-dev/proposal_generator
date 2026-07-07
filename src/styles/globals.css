@@ -48,6 +48,30 @@
   --font-ocr-a: "OCR A Extended", ui-monospace, monospace;
 }
 
+/* `@theme inline` only feeds Tailwind's own utility generator (bg-red, text-fg, ...) — it does
+   NOT register --color-* as real runtime custom properties. Our hand-written component classes
+   below (.btn-primary, .input-field, .card, ...) aren't Tailwind utilities, so without this
+   mirror they read var(--color-red) etc. as unset. This app never toggles theme (light only),
+   so a plain :root mirror is safe and keeps those classes in sync with tokens.css. */
+:root {
+  --color-canvas: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-elevated: var(--elevated);
+  --color-border: var(--border);
+  --color-border-2: var(--border-2);
+  --color-fg: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-red: var(--red);
+  --color-red-hover: var(--red-hover);
+  --color-red-soft: var(--red-soft);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-crit: var(--crit);
+  --color-info: var(--info);
+}
+
 body {
   background: var(--color-canvas);
   color: var(--color-fg);

@@ -50,6 +50,9 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
           {savedAt && (
             <span className="text-xs text-text-3">Saved {savedAt.toLocaleTimeString()}</span>
           )}
+          <a href={`/api/pdf/${proposal.id}`} className="btn-secondary" target="_blank" rel="noopener noreferrer">
+            Download PDF
+          </a>
           <button onClick={handleSave} disabled={isPending} className="btn-primary">
             {isPending ? "Saving…" : "Save"}
           </button>

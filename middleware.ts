@@ -2,11 +2,18 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 const PUBLIC_PATHS = ["/login"];
-// Fully exempt from auth — no Supabase call at all (used for the no-DB template preview route).
+// Fully exempt from cookie-based auth — no Supabase call at all. /preview has no real data;
+// /proposals/*/print is the headless-Chromium render target and authorizes itself via a
+// short-lived signed token instead of cookies (see lib/pdf/sign.ts) since Puppeteer's browser
+// context carries none of the real user's session cookies.
 const AUTH_EXEMPT_PATHS = ["/preview"];
+const AUTH_EXEMPT_PATTERNS = [/^\/proposals\/[^/]+\/print$/];
 
 export async function middleware(request: NextRequest) {
-  if (AUTH_EXEMPT_PATHS.some((p) => request.nextUrl.pathname.startsWith(p))) {
+  if (
+    AUTH_EXEMPT_PATHS.some((p) => request.nextUrl.pathname.startsWith(p)) ||
+    AUTH_EXEMPT_PATTERNS.some((re) => re.test(request.nextUrl.pathname))
+  ) {
     return NextResponse.next();
   }
 
