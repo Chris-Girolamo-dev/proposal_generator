@@ -6,14 +6,15 @@ export function NextStepsSection({
   guarantee: string;
 }) {
   return (
-    <section className="min-h-[11in] p-20">
+    <section className="section-tint min-h-[11in] p-20">
+      <p className="eyebrow mb-3">OPFOR</p>
       <h2 className="font-serif text-4xl">Next steps.</h2>
 
       <ol className="mt-16 max-w-xl space-y-6">
         {steps.map((s, i) => (
           <li key={i} className="flex gap-6">
-            <span className="font-serif text-2xl text-[#c9c9c9]">{String(i + 1).padStart(2, "0")}</span>
-            <span className="pt-1 text-[#2a2a2a]">{s.step}</span>
+            <span className="font-serif text-3xl text-[#e8b7ba]">{String(i + 1).padStart(2, "0")}</span>
+            <span className="pt-1.5 text-[#2a2a2a]">{s.step}</span>
           </li>
         ))}
       </ol>

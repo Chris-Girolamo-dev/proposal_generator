@@ -3,7 +3,7 @@ import type { Proposal } from "@/lib/proposal/types";
 
 export function CoverSection({ proposal }: { proposal: Proposal }) {
   return (
-    <section className="flex min-h-[11in] flex-col justify-between p-20">
+    <section className="flex min-h-[11in] flex-col p-20">
       {/* Logo is a glow-on-dark wordmark; a dark chip gives it the contrast it's designed for. */}
       <div className="inline-flex w-fit items-center rounded-md bg-[#0a0a0a] px-4 py-2.5">
         <Image
@@ -15,7 +15,9 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
         />
       </div>
 
-      <div>
+      <div className="hero-mesh mt-10 min-h-[4.4in] flex-1" />
+
+      <div className="mt-10">
         <h1 className="font-serif text-6xl font-medium leading-[1.05]">
           <mark className="bg-[#F5E14C] px-2 py-1">{proposal.client_company}</mark>
         </h1>
@@ -25,7 +27,7 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
         )}
       </div>
 
-      <div className="h-1 w-full bg-red" />
+      <div className="mt-10 h-1.5 w-full bg-red" />
     </section>
   );
 }

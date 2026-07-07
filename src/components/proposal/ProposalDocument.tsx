@@ -28,6 +28,7 @@ export function ProposalDocument({ proposal }: { proposal: Proposal }) {
         eyebrow={SECTION_TITLES.solution}
         intro={SECTION_INTROS.solution}
         items={proposal.benefits}
+        tint
       />
 
       <DeliverablesSection items={proposal.deliverables} />
