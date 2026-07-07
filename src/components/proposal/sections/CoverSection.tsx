@@ -1,0 +1,31 @@
+import Image from "next/image";
+import type { Proposal } from "@/lib/proposal/types";
+
+export function CoverSection({ proposal }: { proposal: Proposal }) {
+  return (
+    <section className="flex min-h-[11in] flex-col justify-between p-20">
+      <div className="flex items-center gap-2">
+        <Image
+          src="/brand/logo/OPFOR_LOGO_NEW_2026.png"
+          alt="OPFOR"
+          width={28}
+          height={28}
+          className="h-7 w-auto"
+        />
+        <span className="font-display text-sm font-bold tracking-tight">OPFOR</span>
+      </div>
+
+      <div>
+        <h1 className="font-serif text-6xl font-medium leading-[1.05]">
+          <mark className="bg-[#F5E14C] px-2 py-1">{proposal.client_company}</mark>
+        </h1>
+        <p className="mt-6 max-w-xl text-lg text-[#4a4a4a]">{proposal.project_title}</p>
+        {proposal.subtitle && (
+          <p className="mt-2 max-w-xl text-base text-[#7a7a7a]">{proposal.subtitle}</p>
+        )}
+      </div>
+
+      <div className="h-1 w-full bg-red" />
+    </section>
+  );
+}
