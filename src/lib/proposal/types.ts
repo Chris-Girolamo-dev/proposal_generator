@@ -93,3 +93,15 @@ export const formatMoney = (cents: number, currency = "usd"): string =>
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(cents / 100);
+
+const SMALL_NUMBER_WORDS = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+
+export const numberWord = (n: number): string => SMALL_NUMBER_WORDS[n] ?? String(n);
+
+/** Total build duration, derived from the highest week number across all phase durations. */
+export const weeksLabelFromPhases = (phases: TimelinePhase[]): string => {
+  const weekNumbers = phases.flatMap((p) => (p.duration ? (p.duration.match(/\d+/g) ?? []) : []))
+    .map(Number);
+  const totalWeeks = weekNumbers.length > 0 ? Math.max(...weekNumbers) : phases.length;
+  return `${totalWeeks} week${totalWeeks === 1 ? "" : "s"}`;
+};

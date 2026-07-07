@@ -4,7 +4,7 @@ import { CoverSection } from "./sections/CoverSection";
 import { NumberedSection } from "./sections/NumberedSection";
 import { DeliverablesSection } from "./sections/DeliverablesSection";
 import { TimelineSection } from "./sections/TimelineSection";
-import { TeamSection } from "./sections/TeamSection";
+import { EngagementSection } from "./sections/EngagementSection";
 import { WhyUsSection } from "./sections/WhyUsSection";
 import { InvestmentSection } from "./sections/InvestmentSection";
 import { NextStepsSection } from "./sections/NextStepsSection";
@@ -41,7 +41,7 @@ export function ProposalDocument({ proposal }: { proposal: Proposal }) {
 
       <DeliverablesSection items={proposal.deliverables} />
       <TimelineSection phases={proposal.timeline} />
-      <TeamSection members={proposal.team} />
+      <EngagementSection members={proposal.team} phases={proposal.timeline} />
       <WhyUsSection whyUs={proposal.why_us} />
       <InvestmentSection items={proposal.cost_items} currency={proposal.currency} />
       <NextStepsSection steps={proposal.next_steps} guarantee={proposal.guarantee} />

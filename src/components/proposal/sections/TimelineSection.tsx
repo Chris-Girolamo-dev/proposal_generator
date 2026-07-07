@@ -1,10 +1,17 @@
-import type { TimelinePhase } from "@/lib/proposal/types";
+import { weeksLabelFromPhases, type TimelinePhase } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
 
 export function TimelineSection({ phases }: { phases: TimelinePhase[] }) {
+  const weeksLabel = weeksLabelFromPhases(phases);
+
   return (
     <section className="section-tint min-h-[11in] p-20">
-      <SectionHeading number="04" eyebrow="THE PLAN" boldText="How we" accentText="get there." />
+      <SectionHeading
+        number="04"
+        eyebrow="THE PLAN"
+        boldText={`${weeksLabel},`}
+        accentText="week by week."
+      />
       <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">
         A phased build, so you see progress every step of the way.
       </p>

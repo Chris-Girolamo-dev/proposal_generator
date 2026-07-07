@@ -84,7 +84,7 @@ export const DEFAULT_TEAM: TeamMember[] = [
     role: "Engagement Lead",
     badge: "CORE",
     description:
-      "On the work full time from kickoff to handover. Primary point of contact for the engagement.",
+      "On the work full time from kickoff to handoff. Primary point of contact for the engagement.",
   },
   {
     role: "Forecasting & Data Systems",
@@ -184,13 +184,13 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     },
     {
       phase: "04",
-      label: "Validation & Handover.",
-      tagline: "a system your team owns, not ours.",
+      label: "Signal & Warm Handoff.",
+      tagline: "proof it holds, then a clean handoff.",
       detail:
-        "We validate the model against known outcomes, document the SOPs your team needs to run and update it, and train your team to own it going forward.",
+        "We run the model against known outcomes so you see real signal that it holds, not performance we claim on our own docs. Then we document the SOPs your team needs and walk them through owning it.",
       whyItMatters:
-        "Validating against known outcomes before handover means you inherit a proven system, not an unproven black box.",
-      deliverables: ["Validation report", "Documented SOPs", "Team training", "30-day support"],
+        "Seeing the model checked against known outcomes before handoff means you inherit a proven system, not an unproven black box.",
+      deliverables: ["Signal report", "Documented SOPs", "Team training", "30-day support"],
       duration: "Week 6",
     },
   ],
