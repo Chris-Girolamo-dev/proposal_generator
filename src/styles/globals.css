@@ -257,10 +257,14 @@ body {
 
 /* plate — cartographic plate: a hairline frame inset on every page, so each page
    reads as a numbered survey plate. */
-.proposal-doc[data-variant="plate"] > section {
+.proposal-doc[data-variant="plate"] > section,
+.proposal-doc[data-variant="plate-globe"] > section,
+.proposal-doc[data-variant="plate-globe-dark"] > section {
   position: relative;
 }
-.proposal-doc[data-variant="plate"] > section::after {
+.proposal-doc[data-variant="plate"] > section::after,
+.proposal-doc[data-variant="plate-globe"] > section::after,
+.proposal-doc[data-variant="plate-globe-dark"] > section::after {
   content: "";
   position: absolute;
   inset: 26px;
@@ -293,7 +297,8 @@ body {
    flips here; red rule accents stay red. The wordmark swaps to the glow variant
    (designed for dark grounds — its alpha-channel glow smears on paper). */
 .proposal-doc[data-variant="dark"],
-.proposal-doc[data-variant="dark-globe"] {
+.proposal-doc[data-variant="dark-globe"],
+.proposal-doc[data-variant="plate-globe-dark"] {
   --pd-paper: #0B0F17;
   --pd-ink: #E7ECF4;
   --pd-dim: rgba(231, 236, 244, .56);
@@ -309,7 +314,8 @@ body {
    clients e-sign these (DocuSign etc.), and signatures don't work on a dark
    ground. Redefining the tokens on the section resets every descendant. */
 .proposal-doc[data-variant="dark"] .pd-agreement,
-.proposal-doc[data-variant="dark-globe"] .pd-agreement {
+.proposal-doc[data-variant="dark-globe"] .pd-agreement,
+.proposal-doc[data-variant="plate-globe-dark"] .pd-agreement {
   --pd-paper: #F7F8FA;
   --pd-ink: #0E1420;
   --pd-dim: rgba(14, 20, 32, .56);
@@ -327,6 +333,20 @@ body {
 .pd-globe { display: none; }
 .proposal-doc[data-variant="globe"] .pd-globe,
 .proposal-doc[data-variant="dark-globe"] .pd-globe { display: block; }
+
+/* plate-globe / plate-globe-dark — the plate frame clips the globe: the clipped
+   cover mount replaces the bleeding one, and a corner globe peeks from behind
+   the frame's lower-right quadrant on every continuous page. No linework ever
+   reaches the margin outside the border — the margin is the top layer. */
+.pd-globe-plate,
+.pd-globe-corner { display: none; }
+.proposal-doc[data-variant="plate-globe"] .pd-globe-plate,
+.proposal-doc[data-variant="plate-globe-dark"] .pd-globe-plate,
+.proposal-doc[data-variant="plate-globe"] .pd-globe-corner,
+.proposal-doc[data-variant="plate-globe-dark"] .pd-globe-corner { display: block; }
+/* The cover keeps only its own (clipped) globe — no corner globe there. */
+.proposal-doc[data-variant="plate-globe"] > section:first-child .pd-globe-corner,
+.proposal-doc[data-variant="plate-globe-dark"] > section:first-child .pd-globe-corner { display: none; }
 
 /* Print — proposal document exports to PDF via a server-rendered route in this same app.
    Keep pages white regardless of light/dark viewer theme. */

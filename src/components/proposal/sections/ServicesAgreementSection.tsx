@@ -1,6 +1,7 @@
 import type { AgreementClause } from "@/lib/proposal/types";
 import { PageHeader } from "./PageHeader";
 import { SectionHeading } from "./SectionHeading";
+import { CornerGlobe } from "./CoverGlobe";
 
 // Generic services-agreement boilerplate, not legal advice — the client's own legal/procurement
 // reviews and finalizes this off-platform (see PLAN decision: no in-app signing). Name/date lines
@@ -26,7 +27,8 @@ export function ServicesAgreementSection({
   return (
     // pd-agreement: in dark variants these pages reset to paper (see globals.css) —
     // clients e-sign here, and signatures need a light ground.
-    <section className="pd-agreement flex min-h-[11in] flex-col p-16">
+    <section className="pd-agreement isolate relative flex min-h-[11in] flex-col p-16">
+      <CornerGlobe />
       <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <SectionHeading
         number="09"

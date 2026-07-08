@@ -1,7 +1,13 @@
 // Static print rendition of the site's scroll-driven atlas globe: single-red-ink
 // orthographic linework — rim, dashed range ring, graticule, depot ticks, and one
-// dashed great-circle lane. Rendered on every cover but shown only by the "globe"
-// variant (see .pd-globe in globals.css). Vector, so it stays crisp in the PDF.
+// dashed great-circle lane. Vector, so it stays crisp in the PDF.
+//
+// Two cover mounts (visibility is variant-driven, see globals.css):
+// - .pd-globe        — unclipped, bleeds to the page edge (globe / dark-globe)
+// - .pd-globe-plate  — clipped to the plate frame so no linework reaches the
+//                      margin; the frame reads as the top layer (plate-globe /
+//                      plate-globe-dark). Offsets keep the globe in the same
+//                      spot relative to the page as the unclipped mount.
 const DEPOTS: { x: number; y: number; label: string; anchor?: "end" }[] = [
   { x: 150, y: 118, label: "BSL" },
   { x: 92, y: 252, label: "RDU", anchor: "end" },
@@ -9,14 +15,9 @@ const DEPOTS: { x: number; y: number; label: string; anchor?: "end" }[] = [
   { x: 236, y: 306, label: "GRU" },
 ];
 
-export function CoverGlobe() {
+export function GlobeArt({ className }: { className: string }) {
   return (
-    <svg
-      className="pd-globe pointer-events-none absolute right-[-36px] top-[130px] z-[-1] w-[470px] opacity-[.55]"
-      viewBox="0 0 420 420"
-      fill="none"
-      aria-hidden="true"
-    >
+    <svg className={className} viewBox="0 0 420 420" fill="none" aria-hidden="true">
       <g stroke="#E5192B">
         {/* dashed range ring + rim */}
         <circle cx="210" cy="210" r="209" strokeOpacity=".22" strokeWidth="1" strokeDasharray="2 7" />
@@ -59,5 +60,28 @@ export function CoverGlobe() {
         </text>
       ))}
     </svg>
+  );
+}
+
+export function CoverGlobe() {
+  return (
+    <>
+      <GlobeArt className="pd-globe pointer-events-none absolute right-[-36px] top-[130px] z-[-1] w-[470px] opacity-[.55]" />
+      {/* Clipped mount: the wrapper matches the plate frame (inset 26px) and hides
+          any linework that would spill into the margin outside the border. */}
+      <div className="pd-globe-plate pointer-events-none absolute inset-[26px] z-[-1] overflow-hidden">
+        <GlobeArt className="absolute right-[-62px] top-[104px] w-[470px] opacity-[.55]" />
+      </div>
+    </>
+  );
+}
+
+/** Corner globe for the plate-globe variants' continuous pages: sits behind the
+    frame's lower-right quadrant, clipped so nothing reaches the margin. */
+export function CornerGlobe() {
+  return (
+    <div className="pd-globe-corner pointer-events-none absolute inset-[26px] z-[-1] overflow-hidden">
+      <GlobeArt className="absolute bottom-[-225px] right-[-225px] w-[450px] opacity-[.45]" />
+    </div>
   );
 }
