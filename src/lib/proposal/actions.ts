@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { DEFAULT_PROPOSAL } from "./defaults";
 import { subtotalCents, type CostItem } from "./types";
@@ -43,4 +44,16 @@ export async function updateProposal(id: string, update: ProposalHeaderUpdate) {
     .eq("id", id);
 
   if (error) throw new Error(error.message);
+}
+
+export async function deleteProposal(id: string) {
+  const supabase = await createClient();
+
+  // RLS (proposals_delete_own) already scopes this to the caller's own rows —
+  // the .eq is belt-and-suspenders, not the security boundary.
+  const { error } = await supabase.from("proposals").delete().eq("id", id);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/dashboard");
 }

@@ -2,6 +2,8 @@ import Link from "next/link";
 import { FileText, LogOut } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/lib/supabase/actions";
+import { deleteProposal } from "@/lib/proposal/actions";
+import { DeleteProposalButton } from "@/components/editor/DeleteProposalButton";
 import { formatMoney } from "@/lib/proposal/types";
 import type { Proposal } from "@/lib/proposal/types";
 
@@ -59,28 +61,30 @@ export default async function DashboardPage() {
       ) : (
         <div className="card divide-y divide-border overflow-hidden">
           {list.map((p) => (
-            <Link
+            <div
               key={p.id}
-              href={`/proposals/${p.id}/edit`}
-              className="flex items-center justify-between gap-4 px-6 py-4 transition-colors hover:bg-surface-2"
+              className="group flex items-center justify-between gap-4 px-6 py-4 transition-colors hover:bg-surface-2"
             >
-              <div className="min-w-0">
-                <p className="truncate font-medium text-fg">
-                  {p.client_company || "Untitled client"}
-                </p>
-                <p className="truncate text-sm text-text-2">
-                  {p.project_title || "Untitled proposal"}
-                </p>
-              </div>
-              <div className="flex shrink-0 items-center gap-4">
-                <span className="text-sm tabular-nums text-text-2">
-                  {formatMoney(p.total_cents, p.currency)}
-                </span>
-                <span className="rounded-pill border border-border bg-surface-2 px-3 py-1 text-xs font-medium text-text-2">
-                  {STATUS_LABEL[p.status]}
-                </span>
-              </div>
-            </Link>
+              <Link href={`/proposals/${p.id}/edit`} className="flex min-w-0 flex-1 items-center justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="truncate font-medium text-fg">
+                    {p.client_company || "Untitled client"}
+                  </p>
+                  <p className="truncate text-sm text-text-2">
+                    {p.project_title || "Untitled proposal"}
+                  </p>
+                </div>
+                <div className="flex shrink-0 items-center gap-4">
+                  <span className="text-sm tabular-nums text-text-2">
+                    {formatMoney(p.total_cents, p.currency)}
+                  </span>
+                  <span className="rounded-pill border border-border bg-surface-2 px-3 py-1 text-xs font-medium text-text-2">
+                    {STATUS_LABEL[p.status]}
+                  </span>
+                </div>
+              </Link>
+              <DeleteProposalButton action={deleteProposal.bind(null, p.id)} />
+            </div>
           ))}
         </div>
       )}
