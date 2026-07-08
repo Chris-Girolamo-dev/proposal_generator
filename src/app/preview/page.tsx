@@ -1,4 +1,4 @@
-import { ProposalDocument } from "@/components/proposal/ProposalDocument";
+import { ProposalDocument, type ProposalVariant } from "@/components/proposal/ProposalDocument";
 import { DEFAULT_PROPOSAL } from "@/lib/proposal/defaults";
 import { subtotalCents, type Proposal } from "@/lib/proposal/types";
 
@@ -23,6 +23,14 @@ const mockProposal: Proposal = {
   updated_at: new Date().toISOString(),
 };
 
-export default function PreviewPage() {
-  return <ProposalDocument proposal={mockProposal} />;
+const VARIANTS: ProposalVariant[] = ["atlas", "instrument", "plate", "poster", "serif"];
+
+export default async function PreviewPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ v?: string }>;
+}) {
+  const { v } = await searchParams;
+  const variant = VARIANTS.find((name) => name === v) ?? VARIANTS[Number(v) - 1] ?? "atlas";
+  return <ProposalDocument proposal={mockProposal} variant={variant} />;
 }

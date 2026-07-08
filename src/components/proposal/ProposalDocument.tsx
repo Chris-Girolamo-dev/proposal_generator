@@ -16,12 +16,21 @@ import { ServicesAgreementSection } from "./sections/ServicesAgreementSection";
  * mono instrument labels, red as rule-accent only) into the PDF. This is the
  * exact component rendered to PDF (P4). Do not reuse app-shell styling in here.
  */
-export function ProposalDocument({ proposal }: { proposal: Proposal }) {
+/** Visual variants — same layout system, different design temperature (see globals.css). */
+export type ProposalVariant = "atlas" | "instrument" | "plate" | "poster" | "serif";
+
+export function ProposalDocument({
+  proposal,
+  variant = "atlas",
+}: {
+  proposal: Proposal;
+  variant?: ProposalVariant;
+}) {
   const clientCompany = proposal.client_company;
   const clientLogoUrl = proposal.client_logo_url;
 
   return (
-    <div className="proposal-doc">
+    <div className="proposal-doc" data-variant={variant}>
       <CoverSection proposal={proposal} />
 
       <NumberedSection

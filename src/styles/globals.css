@@ -238,6 +238,47 @@ body {
   color: var(--color-text-3);
 }
 
+/* ── Proposal variants — same layout system, different design temperature.
+   Selected via data-variant on .proposal-doc ("atlas" is the unstyled baseline). ── */
+
+/* instrument — the site's red instrument text: indices, week tags, and deliverable
+   readouts inside every ruled head go red, like the site's .shead .num / .pk labels. */
+.proposal-doc[data-variant="instrument"] .pd-shead .pd-meta {
+  color: #E5192B;
+}
+
+/* plate — cartographic plate: a hairline frame inset on every page, so each page
+   reads as a numbered survey plate. */
+.proposal-doc[data-variant="plate"] > section {
+  position: relative;
+}
+.proposal-doc[data-variant="plate"] > section::after {
+  content: "";
+  position: absolute;
+  inset: 26px;
+  border: 1px solid var(--pd-line-strong);
+  pointer-events: none;
+}
+
+/* poster — Swiss poster weight: uppercase 700 section titles, heavier headline scale. */
+.proposal-doc[data-variant="poster"] .pd-shead h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 31px;
+  letter-spacing: -0.02em;
+}
+.proposal-doc[data-variant="poster"] h1 {
+  font-size: 72px;
+}
+
+/* serif — Fraunces display for section titles (the earlier LCA taste carried onto
+   the atlas system); cover keeps the Space Grotesk wordmark treatment. */
+.proposal-doc[data-variant="serif"] .pd-shead h2 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
 /* Print — proposal document exports to PDF via a server-rendered route in this same app.
    Keep pages white regardless of light/dark viewer theme. */
 @media print {
