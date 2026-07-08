@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { formatMoney, subtotalCents, type Proposal } from "@/lib/proposal/types";
+import { PageHeader } from "./PageHeader";
 
 const STATUS_LABEL: Record<Proposal["status"], string> = {
   draft: "Draft",
@@ -28,29 +28,18 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
 
   return (
     <section className="flex min-h-[11in] flex-col p-20">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          {/* Logo is a glow-on-dark wordmark; a dark chip gives it the contrast it's designed for. */}
-          <div className="inline-flex w-fit items-center rounded-md bg-[#0a0a0a] px-3 py-2">
-            <Image
-              src="/brand/logo/OPFOR_LOGO_NEW_2026.png"
-              alt="OPFOR"
-              width={1536}
-              height={1024}
-              className="h-5 w-auto"
-            />
-          </div>
-          <span className="text-[#c5c5c5]">×</span>
-          <span className="font-heading text-sm font-semibold text-[#4a4a4a]">
-            {proposal.client_company}
-          </span>
-        </div>
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-[#9a9a9a]">
-          Proposal / {proposalDate}
-        </p>
-      </div>
+      <PageHeader
+        clientCompany={proposal.client_company}
+        clientLogoUrl={proposal.client_logo_url}
+        size="cover"
+        trailing={
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-[#9a9a9a]">
+            Proposal / {proposalDate}
+          </p>
+        }
+      />
 
-      <div className="flex flex-1 flex-col justify-center">
+      <div className="mt-16">
         <h1 className="font-heading text-5xl font-extrabold leading-[1.1] text-[#1a1a1a]">
           {proposal.client_company}:{" "}
           <em className="font-serif italic font-normal">{proposal.project_title}</em>
@@ -60,7 +49,7 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
         )}
       </div>
 
-      <div className="grid grid-cols-4 gap-6 border-t border-[#e5e5e5] pt-6">
+      <div className="mt-auto grid grid-cols-4 gap-6 border-t border-[#e5e5e5] pt-6">
         {meta.map((m) => (
           <div key={m.label}>
             <p className="text-[10px] font-semibold uppercase tracking-wider text-[#9a9a9a]">

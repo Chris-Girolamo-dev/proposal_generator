@@ -96,6 +96,7 @@ export const DEFAULT_TEAM: TeamMember[] = [
 
 export const DEFAULT_PROPOSAL: ProposalDraft = {
   client_company: "[Client Company]",
+  client_logo_url: null,
   project_title: "Clinical Supply Forecasting System",
   subtitle: "A purpose-built demand forecasting and scenario-planning engine for your program.",
 

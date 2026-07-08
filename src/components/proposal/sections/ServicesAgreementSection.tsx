@@ -1,4 +1,5 @@
 import type { AgreementClause } from "@/lib/proposal/types";
+import { PageHeader } from "./PageHeader";
 
 // Generic services-agreement boilerplate, not legal advice — the client's own legal/procurement
 // reviews and finalizes this off-platform (see PLAN decision: no in-app signing). Name/date lines
@@ -6,10 +7,12 @@ import type { AgreementClause } from "@/lib/proposal/types";
 export function ServicesAgreementSection({
   clauses,
   clientCompany,
+  clientLogoUrl,
   providerName = "OPFOR",
 }: {
   clauses: AgreementClause[];
   clientCompany: string;
+  clientLogoUrl: string | null;
   providerName?: string;
 }) {
   const effectiveDate = new Date().toLocaleDateString("en-US", {
@@ -21,6 +24,7 @@ export function ServicesAgreementSection({
   return (
     <section className="min-h-[11in] bg-[#f2ede3] p-16">
       <div className="mx-auto max-w-3xl rounded-2xl bg-white p-12 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+        <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
         <p className="eyebrow mb-3">09 | SERVICES AGREEMENT</p>
         <h2 className="font-serif text-3xl uppercase tracking-tight text-[#1a1a1a]">
           Services Agreement

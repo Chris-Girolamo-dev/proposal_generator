@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { updateProposal } from "@/lib/proposal/actions";
+import { LogoUpload } from "./LogoUpload";
 import { lineTotalCents, subtotalCents, formatMoney, type CostItem, type Proposal } from "@/lib/proposal/types";
 
 export function ProposalEditor({ proposal }: { proposal: Proposal }) {
@@ -60,6 +61,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
       </div>
 
       <div className="card space-y-5 p-6">
+        <LogoUpload proposalId={proposal.id} initialUrl={proposal.client_logo_url} />
         <div>
           <label className="label">Client company</label>
           <input

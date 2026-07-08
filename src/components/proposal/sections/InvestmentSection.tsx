@@ -1,9 +1,21 @@
 import { lineTotalCents, subtotalCents, formatMoney, type CostItem } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
+import { PageHeader } from "./PageHeader";
 
-export function InvestmentSection({ items, currency }: { items: CostItem[]; currency: string }) {
+export function InvestmentSection({
+  items,
+  currency,
+  clientCompany,
+  clientLogoUrl,
+}: {
+  items: CostItem[];
+  currency: string;
+  clientCompany: string;
+  clientLogoUrl: string | null;
+}) {
   return (
     <section className="min-h-[11in] p-20">
+      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <SectionHeading number="07" eyebrow="THE INVESTMENT" boldText="What you're" accentText="investing." />
       <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">
         A one-time investment covering the full build, described below.

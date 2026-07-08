@@ -1,14 +1,20 @@
 import { SectionHeading } from "./SectionHeading";
+import { PageHeader } from "./PageHeader";
 
 export function NextStepsSection({
   steps,
   guarantee,
+  clientCompany,
+  clientLogoUrl,
 }: {
   steps: { step: string }[];
   guarantee: string;
+  clientCompany: string;
+  clientLogoUrl: string | null;
 }) {
   return (
     <section className="section-tint min-h-[11in] p-20">
+      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <SectionHeading number="08" eyebrow="NEXT STEPS" boldText="Next" accentText="steps." />
 
       <ol className="mt-16 max-w-xl space-y-6">

@@ -16,6 +16,9 @@ import { ServicesAgreementSection } from "./sections/ServicesAgreementSection";
  * red accents. Do not reuse app-shell (dashboard/editor) styling in here.
  */
 export function ProposalDocument({ proposal }: { proposal: Proposal }) {
+  const clientCompany = proposal.client_company;
+  const clientLogoUrl = proposal.client_logo_url;
+
   return (
     <div className="proposal-doc bg-white font-heading text-[#1a1a1a]">
       <CoverSection proposal={proposal} />
@@ -27,6 +30,8 @@ export function ProposalDocument({ proposal }: { proposal: Proposal }) {
         accentText="opportunity."
         intro={SECTION_INTROS.opportunity}
         items={proposal.problems}
+        clientCompany={clientCompany}
+        clientLogoUrl={clientLogoUrl}
       />
 
       <NumberedSection
@@ -37,17 +42,43 @@ export function ProposalDocument({ proposal }: { proposal: Proposal }) {
         intro={SECTION_INTROS.solution}
         items={proposal.benefits}
         tint
+        clientCompany={clientCompany}
+        clientLogoUrl={clientLogoUrl}
       />
 
-      <DeliverablesSection items={proposal.deliverables} />
-      <TimelineSection phases={proposal.timeline} />
-      <EngagementSection members={proposal.team} phases={proposal.timeline} />
-      <WhyUsSection whyUs={proposal.why_us} />
-      <InvestmentSection items={proposal.cost_items} currency={proposal.currency} />
-      <NextStepsSection steps={proposal.next_steps} guarantee={proposal.guarantee} />
+      <DeliverablesSection
+        items={proposal.deliverables}
+        clientCompany={clientCompany}
+        clientLogoUrl={clientLogoUrl}
+      />
+      <TimelineSection
+        phases={proposal.timeline}
+        clientCompany={clientCompany}
+        clientLogoUrl={clientLogoUrl}
+      />
+      <EngagementSection
+        members={proposal.team}
+        phases={proposal.timeline}
+        clientCompany={clientCompany}
+        clientLogoUrl={clientLogoUrl}
+      />
+      <WhyUsSection whyUs={proposal.why_us} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
+      <InvestmentSection
+        items={proposal.cost_items}
+        currency={proposal.currency}
+        clientCompany={clientCompany}
+        clientLogoUrl={clientLogoUrl}
+      />
+      <NextStepsSection
+        steps={proposal.next_steps}
+        guarantee={proposal.guarantee}
+        clientCompany={clientCompany}
+        clientLogoUrl={clientLogoUrl}
+      />
       <ServicesAgreementSection
         clauses={proposal.services_agreement}
-        clientCompany={proposal.client_company}
+        clientCompany={clientCompany}
+        clientLogoUrl={clientLogoUrl}
       />
     </div>
   );

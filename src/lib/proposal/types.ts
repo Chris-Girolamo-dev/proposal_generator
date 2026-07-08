@@ -53,6 +53,7 @@ export interface Proposal {
   slug: string;
 
   client_company: string;
+  client_logo_url: string | null;
   project_title: string;
   subtitle: string;
 

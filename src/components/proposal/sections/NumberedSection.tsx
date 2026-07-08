@@ -1,5 +1,6 @@
 import type { NumberedItem } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
+import { PageHeader } from "./PageHeader";
 
 export function NumberedSection({
   number,
@@ -9,6 +10,8 @@ export function NumberedSection({
   intro,
   items,
   tint = false,
+  clientCompany,
+  clientLogoUrl,
 }: {
   number: string;
   eyebrow: string;
@@ -17,9 +20,12 @@ export function NumberedSection({
   intro: string;
   items: NumberedItem[];
   tint?: boolean;
+  clientCompany: string;
+  clientLogoUrl: string | null;
 }) {
   return (
     <section className={`min-h-[11in] p-20 ${tint ? "section-tint" : ""}`}>
+      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <SectionHeading number={number} eyebrow={eyebrow} boldText={boldText} accentText={accentText} />
       <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">{intro}</p>
 

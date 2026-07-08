@@ -1,9 +1,19 @@
 import type { WhyUs } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
+import { PageHeader } from "./PageHeader";
 
-export function WhyUsSection({ whyUs }: { whyUs: WhyUs }) {
+export function WhyUsSection({
+  whyUs,
+  clientCompany,
+  clientLogoUrl,
+}: {
+  whyUs: WhyUs;
+  clientCompany: string;
+  clientLogoUrl: string | null;
+}) {
   return (
     <section className="min-h-[11in] p-20">
+      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <SectionHeading number="06" eyebrow="WHY US" boldText="Why" accentText="us." />
 
       {whyUs.capabilities && whyUs.capabilities.length > 0 && (

@@ -1,18 +1,24 @@
 import { numberWord, weeksLabelFromPhases, type TeamMember, type TimelinePhase } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
+import { PageHeader } from "./PageHeader";
 
 export function EngagementSection({
   members,
   phases,
+  clientCompany,
+  clientLogoUrl,
 }: {
   members: TeamMember[];
   phases: TimelinePhase[];
+  clientCompany: string;
+  clientLogoUrl: string | null;
 }) {
   const weeksLabel = weeksLabelFromPhases(phases).toLowerCase();
   const operatorsLabel = `${numberWord(members.length)} operator${members.length === 1 ? "" : "s"}`;
 
   return (
     <section className="min-h-[11in] p-20">
+      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <SectionHeading
         number="05"
         eyebrow="THE ENGAGEMENT"

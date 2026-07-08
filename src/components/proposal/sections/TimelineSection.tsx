@@ -1,11 +1,21 @@
 import { weeksLabelFromPhases, type TimelinePhase } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
+import { PageHeader } from "./PageHeader";
 
-export function TimelineSection({ phases }: { phases: TimelinePhase[] }) {
+export function TimelineSection({
+  phases,
+  clientCompany,
+  clientLogoUrl,
+}: {
+  phases: TimelinePhase[];
+  clientCompany: string;
+  clientLogoUrl: string | null;
+}) {
   const weeksLabel = weeksLabelFromPhases(phases);
 
   return (
     <section className="section-tint min-h-[11in] p-20">
+      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <SectionHeading
         number="04"
         eyebrow="THE PLAN"

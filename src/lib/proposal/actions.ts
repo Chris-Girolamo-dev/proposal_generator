@@ -46,6 +46,19 @@ export async function updateProposal(id: string, update: ProposalHeaderUpdate) {
   if (error) throw new Error(error.message);
 }
 
+export async function updateClientLogo(id: string, url: string | null) {
+  const supabase = await createClient();
+
+  const { error } = await supabase
+    .from("proposals")
+    .update({ client_logo_url: url })
+    .eq("id", id);
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath(`/proposals/${id}/edit`);
+}
+
 export async function deleteProposal(id: string) {
   const supabase = await createClient();
 
