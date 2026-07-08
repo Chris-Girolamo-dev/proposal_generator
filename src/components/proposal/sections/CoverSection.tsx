@@ -31,7 +31,7 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
       <PageHeader
         clientCompany={proposal.client_company}
         clientLogoUrl={proposal.client_logo_url}
-        size="cover"
+        noBorder
         trailing={
           <p className="text-[10px] font-semibold uppercase tracking-wider text-[#9a9a9a]">
             Proposal / {proposalDate}
