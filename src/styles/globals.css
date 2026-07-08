@@ -47,6 +47,7 @@
   --font-serif: var(--font-fraunces), Georgia, serif;
   --font-ocr-a: "OCR A Extended", ui-monospace, monospace;
   --font-heading: var(--font-jakarta), var(--font-geist-sans), sans-serif;
+  --font-body: var(--font-inter), var(--font-geist-sans), sans-serif;
 }
 
 /* `@theme inline` only feeds Tailwind's own utility generator (bg-red, text-fg, ...) — it does

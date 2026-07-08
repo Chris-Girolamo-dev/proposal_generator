@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Mono, Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Mono, Fraunces, Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "@/styles/globals.css";
 
@@ -22,13 +22,21 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-// Proposal document typeface (headings + body) — distinct from the app shell's Space Grotesk
-// (too quirky/indie) and Geist (too generic-SaaS); used at 400/500 for body copy and 700/800
-// for headline treatments.
+// Proposal document headline typeface — the bold half of "Your areas of *opportunity.*" style
+// treatments only. Distinct from the app shell's Space Grotesk (too quirky/indie).
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["700", "800"],
   variable: "--font-jakarta",
+  display: "swap",
+});
+
+// Proposal document body typeface — paragraphs, meta labels/values, list items. Plain and
+// neutral to match the reference (was mistakenly inheriting the bold headline font, which
+// reads heavier/rounder in paragraph form than intended).
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -42,7 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-theme="light"
-      className={`${GeistSans.variable} ${spaceGrotesk.variable} ${plexMono.variable} ${fraunces.variable} ${plusJakarta.variable}`}
+      className={`${GeistSans.variable} ${spaceGrotesk.variable} ${plexMono.variable} ${fraunces.variable} ${plusJakarta.variable} ${inter.variable}`}
     >
       <body>{children}</body>
     </html>
