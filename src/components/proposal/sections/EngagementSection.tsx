@@ -34,14 +34,14 @@ export function EngagementSection({
 
       <ul className="mt-10 max-w-2xl space-y-4">
         {members.map((m, i) => (
-          <li key={i} className="flex gap-4 text-[#2a2a2a]">
+          <li key={i} className="no-break flex gap-4 text-[#2a2a2a]">
             <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-red" />
             <span className="text-sm">
               <span className="font-semibold text-[#1a1a1a]">{m.role}</span> — {m.description}
             </span>
           </li>
         ))}
-        <li className="flex gap-4 text-[#2a2a2a]">
+        <li className="no-break flex gap-4 text-[#2a2a2a]">
           <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-red" />
           <span className="text-sm">
             <span className="font-semibold text-[#1a1a1a]">Fixed scope</span> — {phases.length}{" "}

@@ -183,4 +183,22 @@ body {
   @page { margin: 0; size: letter portrait; }
   body { background: white !important; }
   * { box-shadow: none !important; }
+
+  /* Every top-level section starts on its own fresh page — without this, a section that
+     runs long (Services Agreement, a Timeline with lots of copy) just flows onto the next
+     page wherever it happens to end, so the *next* section starts mid-page instead of
+     cleanly at the top. min-h-[11in] alone only sets a visual floor; it doesn't force an
+     actual page boundary in the printed/PDF output. */
+  .proposal-doc > section {
+    break-before: page;
+  }
+  .proposal-doc > section:first-child {
+    break-before: avoid;
+  }
+
+  /* Atomic content blocks — never slice these across a page boundary. If one doesn't fit
+     on the remaining space, it moves to the next page as a whole instead of splitting. */
+  .no-break {
+    break-inside: avoid;
+  }
 }

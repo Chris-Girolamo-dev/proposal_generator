@@ -18,7 +18,7 @@ export function TimelineSection({ phases }: { phases: TimelinePhase[] }) {
 
       <div className="mt-16 divide-y divide-[#e5e5e5]">
         {phases.map((phase) => (
-          <div key={phase.phase} className="grid grid-cols-[3.5rem_1fr] gap-6 py-8 first:pt-0">
+          <div key={phase.phase} className="no-break grid grid-cols-[3.5rem_1fr] gap-6 py-8 first:pt-0">
             <span className="font-heading text-3xl font-extrabold text-[#1a1a1a]">{phase.phase}.</span>
             <div>
               <div className="flex items-baseline justify-between gap-6">

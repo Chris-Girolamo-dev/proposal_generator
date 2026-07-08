@@ -41,7 +41,7 @@ export function ServicesAgreementSection({
 
         <div className="mt-10 space-y-6">
           {clauses.map((clause) => (
-            <div key={clause.number}>
+            <div key={clause.number} className="no-break">
               {clause.bullets ? (
                 <>
                   <p className="text-sm font-semibold text-[#1a1a1a]">
@@ -69,36 +69,38 @@ export function ServicesAgreementSection({
           ))}
         </div>
 
-        <p className="mt-10 border-t border-[#e5e5e5] pt-6 text-sm text-[#4a4a4a]">
-          IN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.
-        </p>
+        <div className="no-break mt-10">
+          <p className="border-t border-[#e5e5e5] pt-6 text-sm text-[#4a4a4a]">
+            IN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.
+          </p>
 
-        <div className="mt-8 grid grid-cols-2 gap-12">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-[#1a1a1a]">Client</p>
-            <p className="mt-4 text-sm text-[#4a4a4a]">
-              <span className="font-medium text-[#1a1a1a]">Company:</span> {clientCompany}
-            </p>
-            <p className="mt-2 text-sm text-[#4a4a4a]">
-              <span className="font-medium text-[#1a1a1a]">Name:</span> ______________________
-            </p>
-            <p className="mt-2 text-sm text-[#4a4a4a]">
-              <span className="font-medium text-[#1a1a1a]">Date:</span> ______________________
-            </p>
-          </div>
-          <div>
-            <p className="text-sm font-bold uppercase tracking-wide text-[#1a1a1a]">
-              Service Provider
-            </p>
-            <p className="mt-4 text-sm text-[#4a4a4a]">
-              <span className="font-medium text-[#1a1a1a]">Company:</span> {providerName}
-            </p>
-            <p className="mt-2 text-sm text-[#4a4a4a]">
-              <span className="font-medium text-[#1a1a1a]">Name:</span> ______________________
-            </p>
-            <p className="mt-2 text-sm text-[#4a4a4a]">
-              <span className="font-medium text-[#1a1a1a]">Date:</span> ______________________
-            </p>
+          <div className="mt-8 grid grid-cols-2 gap-12">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-wide text-[#1a1a1a]">Client</p>
+              <p className="mt-4 text-sm text-[#4a4a4a]">
+                <span className="font-medium text-[#1a1a1a]">Company:</span> {clientCompany}
+              </p>
+              <p className="mt-2 text-sm text-[#4a4a4a]">
+                <span className="font-medium text-[#1a1a1a]">Name:</span> ______________________
+              </p>
+              <p className="mt-2 text-sm text-[#4a4a4a]">
+                <span className="font-medium text-[#1a1a1a]">Date:</span> ______________________
+              </p>
+            </div>
+            <div>
+              <p className="text-sm font-bold uppercase tracking-wide text-[#1a1a1a]">
+                Service Provider
+              </p>
+              <p className="mt-4 text-sm text-[#4a4a4a]">
+                <span className="font-medium text-[#1a1a1a]">Company:</span> {providerName}
+              </p>
+              <p className="mt-2 text-sm text-[#4a4a4a]">
+                <span className="font-medium text-[#1a1a1a]">Name:</span> ______________________
+              </p>
+              <p className="mt-2 text-sm text-[#4a4a4a]">
+                <span className="font-medium text-[#1a1a1a]">Date:</span> ______________________
+              </p>
+            </div>
           </div>
         </div>
       </div>

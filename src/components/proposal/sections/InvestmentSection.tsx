@@ -9,7 +9,7 @@ export function InvestmentSection({ items, currency }: { items: CostItem[]; curr
         A one-time investment covering the full build, described below.
       </p>
 
-      <div className="mt-12 max-w-sm rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+      <div className="no-break mt-12 max-w-sm rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
         {items.map((item, i) => (
           <div
             key={i}
