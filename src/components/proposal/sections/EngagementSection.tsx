@@ -1,7 +1,10 @@
 import { numberWord, weeksLabelFromPhases, type TeamMember, type TimelinePhase } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
-import { PageHeader } from "./PageHeader";
+import { PageShell } from "./PageShell";
 
+// The engagement — narrative statement plus heroside-style ruled rows for who is
+// on the work. "Partnered with your team" deliberately, not "embedded" (we are
+// not on-site).
 export function EngagementSection({
   members,
   phases,
@@ -17,46 +20,50 @@ export function EngagementSection({
   const operatorsLabel = `${numberWord(members.length)} operator${members.length === 1 ? "" : "s"}`;
 
   return (
-    <section className="min-h-[11in] p-20">
-      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
+    <PageShell number="05" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
       <SectionHeading
         number="05"
-        eyebrow="THE ENGAGEMENT"
-        boldText={`${operatorsLabel},`}
-        accentText={`partnered with your team, ${weeksLabel}.`}
+        title="The engagement"
+        say={<>Senior team.<br />Narrow focus.</>}
       />
 
-      <p className="eyebrow mt-10 mb-2">THE CORE ENGAGEMENT</p>
-      <h3 className="font-heading text-2xl font-bold text-[#1a1a1a]">
-        Audit, model, <em className="font-serif italic font-normal">and a working dashboard.</em>
+      <h3 className="mt-12 max-w-[24ch] pd-display text-[30px] font-semibold leading-[1.12] tracking-[-0.02em] text-[#0E1420]">
+        {operatorsLabel.charAt(0).toUpperCase() + operatorsLabel.slice(1)}, partnered with your
+        team, <span className="text-[rgba(14,20,32,.4)]">{weeksLabel}.</span>
       </h3>
 
-      <p className="mt-4 max-w-2xl text-[#5a5a5a]">
+      <p className="mt-6 max-w-[52ch] text-[13.5px] leading-[1.65] text-[rgba(14,20,32,.72)]">
         {operatorsLabel} work directly with your team for {weeksLabel} — one leads the engagement
         end to end, the other builds the forecasting model and integrates it against your live
         data. We run this with you, not for you: one question, {weeksLabel}, and it is the only
         thing we work on.
       </p>
 
-      <ul className="mt-10 max-w-2xl space-y-4">
+      <div className="mt-12 max-w-xl">
         {members.map((m, i) => (
-          <li key={i} className="no-break flex gap-4 text-[#2a2a2a]">
-            <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-red" />
-            <span className="text-sm">
-              <span className="font-semibold text-[#1a1a1a]">{m.role}</span> — {m.description}
-            </span>
-          </li>
+          <div
+            key={i}
+            className="no-break grid grid-cols-12 gap-4 border-t border-[rgba(14,20,32,.16)] py-4"
+          >
+            <span className="pd-meta col-span-3 pt-0.5">{m.badge}</span>
+            <div className="col-span-9">
+              <p className="pd-display text-[15px] font-semibold text-[#0E1420]">{m.role}</p>
+              <p className="mt-1 text-[12.5px] leading-[1.6] text-[rgba(14,20,32,.56)]">
+                {m.description}
+              </p>
+            </div>
+          </div>
         ))}
-        <li className="no-break flex gap-4 text-[#2a2a2a]">
-          <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-red" />
-          <span className="text-sm">
-            <span className="font-semibold text-[#1a1a1a]">Fixed scope</span> — {phases.length}{" "}
-            build phases over {weeksLabel}, described in full above.
-          </span>
-        </li>
-      </ul>
-
-      <div className="mt-16 h-1.5 w-full bg-red" />
-    </section>
+        <div className="no-break grid grid-cols-12 gap-4 border-y border-[rgba(14,20,32,.16)] py-4">
+          <span className="pd-meta col-span-3 pt-0.5">Scope</span>
+          <div className="col-span-9">
+            <p className="pd-display text-[15px] font-semibold text-[#0E1420]">Fixed scope</p>
+            <p className="mt-1 text-[12.5px] leading-[1.6] text-[rgba(14,20,32,.56)]">
+              {phases.length} build phases over {weeksLabel}, described in full in the plan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </PageShell>
   );
 }

@@ -1,7 +1,9 @@
-import { Check } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
-import { PageHeader } from "./PageHeader";
+import { PageShell } from "./PageShell";
 
+// Scope page — a lanerow-style manifest: every deliverable is a hairline-ruled row
+// with a mono index and a mono "INCLUDED" stamp on the right, so the list reads as
+// a shipping manifest rather than a marketing bullet list.
 export function DeliverablesSection({
   items,
   clientCompany,
@@ -12,23 +14,35 @@ export function DeliverablesSection({
   clientLogoUrl: string | null;
 }) {
   return (
-    <section className="min-h-[11in] p-20">
-      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
-      <SectionHeading number="03" eyebrow="WHAT YOU GET" boldText="What" accentText="you get." />
-      <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">
-        A complete, working system, not a slide deck. Here is exactly what ships.
+    <PageShell number="03" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+      <SectionHeading
+        number="03"
+        title="What ships"
+        say={<>A working system,<br />not a slide deck.</>}
+      />
+      <p className="mt-8 max-w-[52ch] text-[13.5px] leading-[1.65] text-[rgba(14,20,32,.72)]">
+        Everything below is included in the engagement and itemized here exactly as it will be
+        delivered.
       </p>
 
-      <ul className="mt-12 grid max-w-3xl grid-cols-2 gap-x-10 gap-y-3">
+      <div className="mt-12 border border-[rgba(14,20,32,.5)]">
         {items.map((item, i) => (
-          <li key={i} className="no-break flex items-start gap-2.5 text-sm text-[#2a2a2a]">
-            <Check size={15} className="mt-0.5 shrink-0 text-red" strokeWidth={2.5} />
-            {item.text}
-          </li>
+          <div
+            key={i}
+            className={`no-break grid grid-cols-12 items-baseline gap-4 px-5 py-4 ${
+              i > 0 ? "border-t border-[rgba(14,20,32,.16)]" : ""
+            }`}
+          >
+            <span className="pd-meta col-span-1">{String(i + 1).padStart(2, "0")}</span>
+            <p className="col-span-9 text-[13.5px] leading-[1.5] text-[#0E1420]">{item.text}</p>
+            <span className="pd-meta col-span-2 text-right">Included</span>
+          </div>
         ))}
-      </ul>
-
-      <div className="mt-16 h-1.5 w-full bg-red" />
-    </section>
+      </div>
+      <div className="pd-meta mt-3 flex justify-between">
+        <span>Scope manifest · {items.length} line items</span>
+        <span>Fixed scope</span>
+      </div>
+    </PageShell>
   );
 }

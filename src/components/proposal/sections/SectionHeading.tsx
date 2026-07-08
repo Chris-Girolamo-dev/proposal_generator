@@ -1,26 +1,26 @@
-// Shared heading treatment across proposal sections, styled after the LCA reference deck:
-// numbered eyebrow ("01 | AREAS OF OPPORTUNITY") + bold headline with an italic serif accent
-// phrase. Kept monochrome (not their green/our red) — the proposal document only uses red as
-// a thin rule/logo accent, never in body or heading text.
+// Section head in the site's .shead pattern: strong top hairline with a 56px red
+// index bar, mono "0X / 09" index, Space Grotesk title, and an optional right-aligned
+// two-line aside. All text stays monochrome — red appears only as the rule bar.
 export function SectionHeading({
   number,
-  eyebrow,
-  boldText,
-  accentText,
+  title,
+  say,
 }: {
   number: string;
-  eyebrow: string;
-  boldText: string;
-  accentText: string;
+  title: React.ReactNode;
+  say?: React.ReactNode;
 }) {
   return (
-    <div>
-      <p className="eyebrow mb-3">
-        {number} | {eyebrow}
-      </p>
-      <h2 className="font-heading text-4xl font-extrabold tracking-tight text-[#1a1a1a]">
-        {boldText} <em className="font-serif italic font-normal text-[#1a1a1a]">{accentText}</em>
+    <div className="pd-shead grid grid-cols-12 items-baseline gap-4 pt-5">
+      <span className="pd-meta col-span-2">{number} / 09</span>
+      <h2 className="col-span-7 pd-display text-[34px] font-semibold leading-none tracking-[-0.02em] text-[#0E1420]">
+        {title}
       </h2>
+      {say && (
+        <p className="col-span-3 text-right text-[11.5px] leading-[1.55] text-[rgba(14,20,32,.56)]">
+          {say}
+        </p>
+      )}
     </div>
   );
 }

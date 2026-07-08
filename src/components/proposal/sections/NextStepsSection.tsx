@@ -1,6 +1,9 @@
 import { SectionHeading } from "./SectionHeading";
-import { PageHeader } from "./PageHeader";
+import { PageShell } from "./PageShell";
 
+// Next steps + guarantee — numbered faint-numeral steps, the guarantee framed as a
+// ruled instrument block with a red top bar, and the site's oversized CTA line
+// closing the page.
 export function NextStepsSection({
   steps,
   guarantee,
@@ -13,25 +16,40 @@ export function NextStepsSection({
   clientLogoUrl: string | null;
 }) {
   return (
-    <section className="section-tint min-h-[11in] p-20">
-      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
-      <SectionHeading number="08" eyebrow="NEXT STEPS" boldText="Next" accentText="steps." />
+    <PageShell number="08" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+      <SectionHeading
+        number="08"
+        title="Next steps"
+        say={<>Three moves.<br />Then we build.</>}
+      />
 
-      <ol className="mt-16 max-w-xl space-y-6">
+      <div className="mt-12 grid grid-cols-3 gap-8">
         {steps.map((s, i) => (
-          <li key={i} className="no-break flex gap-6">
-            <span className="font-serif text-3xl text-[#c4c4c4]">{String(i + 1).padStart(2, "0")}</span>
-            <span className="pt-1.5 text-[#2a2a2a]">{s.step}</span>
-          </li>
+          <div key={i} className="no-break pd-shead pd-shead--sm pt-4">
+            <span className="pd-display text-[44px] font-bold leading-none tracking-[-0.04em] text-[rgba(14,20,32,.12)]">
+              {i + 1}
+            </span>
+            <p className="mt-3 max-w-[30ch] text-[13px] leading-[1.6] text-[#0E1420]">{s.step}</p>
+          </div>
         ))}
-      </ol>
+      </div>
 
       {guarantee && (
-        <div className="no-break mt-16 max-w-xl border-l-2 border-red bg-[#faf9f6] p-6">
-          <p className="eyebrow mb-2">Guarantee</p>
-          <p className="text-[#2a2a2a]">{guarantee}</p>
+        <div className="no-break pd-shead mt-14 max-w-2xl pt-5">
+          <p className="pd-meta">The guarantee</p>
+          <p className="mt-3 max-w-[54ch] pd-display text-[19px] font-medium leading-[1.4] tracking-[-0.01em] text-[#0E1420]">
+            {guarantee}
+          </p>
         </div>
       )}
-    </section>
+
+      <div className="mt-16">
+        <p className="pd-meta">Ready when you are</p>
+        <p className="mt-3 pd-display text-[56px] font-bold uppercase leading-[0.9] tracking-[-0.045em] text-[#0E1420]">
+          See it run<span className="text-[#E5192B]">.</span>
+        </p>
+        <p className="pd-meta mt-4">info@opforsupply.com · opfor.ai</p>
+      </div>
+    </PageShell>
   );
 }

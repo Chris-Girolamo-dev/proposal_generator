@@ -1,7 +1,10 @@
 import { weeksLabelFromPhases, type TimelinePhase } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
-import { PageHeader } from "./PageHeader";
+import { PageShell } from "./PageShell";
 
+// The plan — the site's "Method" phases: each phase opens with a strong hairline,
+// a short red bar, an oversized faint Space Grotesk numeral, then title, copy, and
+// a mono deliverables readout. 2×2 grid so four weeks land on one page.
 export function TimelineSection({
   phases,
   clientCompany,
@@ -14,54 +17,40 @@ export function TimelineSection({
   const weeksLabel = weeksLabelFromPhases(phases);
 
   return (
-    <section className="section-tint min-h-[11in] p-20">
-      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
+    <PageShell number="04" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
       <SectionHeading
         number="04"
-        eyebrow="THE PLAN"
-        boldText={`${weeksLabel},`}
-        accentText="week by week."
+        title={`${weeksLabel}, week by week`}
+        say={<>A phased build.<br />The timetable holds.</>}
       />
-      <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">
-        A phased build, so you see progress every step of the way.
-      </p>
 
-      <div className="mt-16 divide-y divide-[#e5e5e5]">
+      <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-7">
         {phases.map((phase) => (
-          <div key={phase.phase} className="no-break grid grid-cols-[3.5rem_1fr] gap-6 py-8 first:pt-0">
-            <span className="font-heading text-3xl font-extrabold text-[#1a1a1a]">{phase.phase}.</span>
-            <div>
-              <div className="flex items-baseline justify-between gap-6">
-                <p className="font-heading text-lg font-bold text-[#1a1a1a]">
-                  {phase.label}{" "}
-                  {phase.tagline && (
-                    <em className="font-serif italic font-normal">{phase.tagline}</em>
-                  )}
-                </p>
-                {phase.duration && (
-                  <span className="eyebrow shrink-0 whitespace-nowrap">{phase.duration}</span>
-                )}
-              </div>
-
-              <p className="mt-3 max-w-2xl text-sm text-[#4a4a4a]">{phase.detail}</p>
-              {phase.whyItMatters && (
-                <p className="mt-2 max-w-2xl text-sm text-[#4a4a4a]">{phase.whyItMatters}</p>
-              )}
-
-              {phase.deliverables && phase.deliverables.length > 0 && (
-                <p className="mt-4 text-xs text-[#8a8a8a]">
-                  <span className="font-semibold uppercase tracking-wide text-[#1a1a1a]">
-                    Deliverables{" "}
-                  </span>
-                  {phase.deliverables.join(" / ")}
-                </p>
-              )}
+          <div key={phase.phase} className="no-break pd-shead pd-shead--sm pt-3">
+            <div className="flex items-start justify-between">
+              <span className="pd-display text-[44px] font-bold leading-none tracking-[-0.04em] text-[rgba(14,20,32,.12)]">
+                {Number(phase.phase)}
+              </span>
+              {phase.duration && <span className="pd-meta pt-1">{phase.duration}</span>}
             </div>
+            <h3 className="mt-2 pd-display text-[18px] font-semibold tracking-[-0.01em] text-[#0E1420]">
+              {phase.label.replace(/\.$/, "")}
+            </h3>
+            {phase.tagline && <p className="pd-meta mt-1">{phase.tagline.replace(/\.$/, "")}</p>}
+            <p className="mt-2.5 max-w-[46ch] text-[12px] leading-[1.55] text-[rgba(14,20,32,.72)]">
+              {phase.detail}
+            </p>
+            {phase.whyItMatters && (
+              <p className="mt-1.5 max-w-[46ch] text-[12px] leading-[1.55] text-[rgba(14,20,32,.56)]">
+                {phase.whyItMatters}
+              </p>
+            )}
+            {phase.deliverables && phase.deliverables.length > 0 && (
+              <p className="pd-meta mt-3">{phase.deliverables.join(" · ")}</p>
+            )}
           </div>
         ))}
       </div>
-
-      <div className="mt-16 h-1.5 w-full bg-red" />
-    </section>
+    </PageShell>
   );
 }

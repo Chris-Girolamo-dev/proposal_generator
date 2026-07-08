@@ -1,7 +1,10 @@
 import type { WhyUs } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
-import { PageHeader } from "./PageHeader";
+import { PageShell } from "./PageShell";
 
+// Why us — bigstats up top (the site's .bstat), the blurb, a 2-col numbered reason
+// grid, then capabilities as a static print version of the site's marquee: a
+// bordered mono strip.
 export function WhyUsSection({
   whyUs,
   clientCompany,
@@ -12,51 +15,58 @@ export function WhyUsSection({
   clientLogoUrl: string | null;
 }) {
   return (
-    <section className="min-h-[11in] p-20">
-      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
-      <SectionHeading number="06" eyebrow="WHY US" boldText="Why" accentText="us." />
+    <PageShell number="06" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+      <SectionHeading
+        number="06"
+        title="Why OPFOR"
+        say={<>Modeling depth,<br />operational SOPs.</>}
+      />
 
-      {whyUs.capabilities && whyUs.capabilities.length > 0 && (
-        <div className="mt-6 flex flex-wrap gap-2">
-          {whyUs.capabilities.map((c, i) => (
-            <span
-              key={i}
-              className="rounded-full border border-[#e5e5e5] px-3 py-1 text-xs text-[#4a4a4a]"
-            >
-              {c}
-            </span>
-          ))}
-        </div>
-      )}
+      <div className="mt-7 grid grid-cols-3 gap-5">
+        {whyUs.stats.map((stat, i) => (
+          <div key={i} className="no-break border-t border-[rgba(14,20,32,.5)] pt-2.5">
+            <p className="pd-display text-[26px] font-bold leading-none tracking-[-0.03em] text-[#0E1420]">
+              {stat.value}
+            </p>
+            <p className="pd-meta mt-1.5 normal-case tracking-[.04em]">{stat.label}</p>
+          </div>
+        ))}
+      </div>
 
-      <p className="mt-8 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">
+      <p className="mt-7 max-w-[58ch] text-[12.5px] leading-[1.6] text-[rgba(14,20,32,.72)]">
         {whyUs.blurb}
       </p>
 
       {whyUs.points && whyUs.points.length > 0 && (
-        <div className="mt-12 grid grid-cols-2 gap-x-12">
+        <div className="mt-6 grid grid-cols-2 gap-x-8">
           {whyUs.points.map((point, i) => (
-            <div key={i} className="no-break border-t border-[#e5e5e5] py-6">
-              <p className="text-[10px] font-semibold text-[#9a9a9a]">
-                {String(i + 1).padStart(2, "0")}
+            <div key={i} className="no-break border-t border-[rgba(14,20,32,.16)] py-2.5">
+              <span className="pd-meta">{String(i + 1).padStart(2, "0")}</span>
+              <p className="mt-1 pd-display text-[14px] font-semibold text-[#0E1420]">
+                {point.title}
               </p>
-              <p className="mt-2 font-heading font-bold text-[#1a1a1a]">{point.title}</p>
-              <p className="mt-1 text-sm text-[#5a5a5a]">{point.description}</p>
+              <p className="mt-0.5 text-[11.5px] leading-[1.5] text-[rgba(14,20,32,.56)]">
+                {point.description}
+              </p>
             </div>
           ))}
         </div>
       )}
 
-      <div className="mt-8 grid grid-cols-3 gap-4">
-        {whyUs.stats.map((stat, i) => (
-          <div key={i} className="no-break stat-card">
-            <p className="font-serif text-3xl text-white">{stat.value}</p>
-            <p className="mt-2 text-sm text-[#b5b5b5]">{stat.label}</p>
+      {whyUs.capabilities && whyUs.capabilities.length > 0 && (
+        <div className="mt-5 border-y border-[rgba(14,20,32,.5)]">
+          <div className="flex flex-wrap">
+            {whyUs.capabilities.map((c, i) => (
+              <span
+                key={i}
+                className="pd-meta border-r border-[rgba(14,20,32,.16)] px-3.5 py-1.5 last:border-r-0"
+              >
+                {c}
+              </span>
+            ))}
           </div>
-        ))}
-      </div>
-
-      <div className="mt-16 h-1.5 w-full bg-red" />
-    </section>
+        </div>
+      )}
+    </PageShell>
   );
 }

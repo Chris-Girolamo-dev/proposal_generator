@@ -11,23 +11,23 @@ import { NextStepsSection } from "./sections/NextStepsSection";
 import { ServicesAgreementSection } from "./sections/ServicesAgreementSection";
 
 /**
- * The LeftClick-structured, OPFOR-skinned proposal document. This is the exact
- * component rendered to PDF (P4) — white pages, serif display headings, OPFOR
- * red accents. Do not reuse app-shell (dashboard/editor) styling in here.
+ * The proposal document — "Swiss Atlas" print edition, carrying the OPFOR.ai
+ * website design language (paper ground, hairline rules, Space Grotesk display,
+ * mono instrument labels, red as rule-accent only) into the PDF. This is the
+ * exact component rendered to PDF (P4). Do not reuse app-shell styling in here.
  */
 export function ProposalDocument({ proposal }: { proposal: Proposal }) {
   const clientCompany = proposal.client_company;
   const clientLogoUrl = proposal.client_logo_url;
 
   return (
-    <div className="proposal-doc bg-white font-heading text-[#1a1a1a]">
+    <div className="proposal-doc">
       <CoverSection proposal={proposal} />
 
       <NumberedSection
         number="01"
-        eyebrow="AREAS OF OPPORTUNITY"
-        boldText="Your areas of"
-        accentText="opportunity."
+        title="Areas of opportunity"
+        say={<>Where accuracy and speed<br />are being capped today.</>}
         intro={SECTION_INTROS.opportunity}
         items={proposal.problems}
         clientCompany={clientCompany}
@@ -36,12 +36,10 @@ export function ProposalDocument({ proposal }: { proposal: Proposal }) {
 
       <NumberedSection
         number="02"
-        eyebrow="YOUR SOLUTION"
-        boldText="Your"
-        accentText="solution."
+        title="Your solution"
+        say={<>Clean pipelines, probabilistic<br />modeling, repeatable SOPs.</>}
         intro={SECTION_INTROS.solution}
         items={proposal.benefits}
-        tint
         clientCompany={clientCompany}
         clientLogoUrl={clientLogoUrl}
       />

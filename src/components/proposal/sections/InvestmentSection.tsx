@@ -1,7 +1,9 @@
 import { lineTotalCents, subtotalCents, formatMoney, type CostItem } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
-import { PageHeader } from "./PageHeader";
+import { PageShell } from "./PageShell";
 
+// Investment — clean heroside-style ruled rows (no card chrome), mono tabular
+// figures, and the total set large in Space Grotesk on a strong rule.
 export function InvestmentSection({
   items,
   currency,
@@ -14,35 +16,45 @@ export function InvestmentSection({
   clientLogoUrl: string | null;
 }) {
   return (
-    <section className="min-h-[11in] p-20">
-      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
-      <SectionHeading number="07" eyebrow="THE INVESTMENT" boldText="What you're" accentText="investing." />
-      <p className="mt-6 max-w-2xl border-t border-[#e5e5e5] pt-6 text-[#5a5a5a]">
-        A one-time investment covering the full build, described below.
+    <PageShell number="07" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+      <SectionHeading
+        number="07"
+        title="The investment"
+        say={<>One-time build.<br />Fixed price.</>}
+      />
+      <p className="mt-8 max-w-[52ch] text-[13.5px] leading-[1.65] text-[rgba(14,20,32,.72)]">
+        A one-time investment covering the full build described in this proposal.
       </p>
 
-      <div className="no-break mt-12 max-w-sm rounded-lg border border-[#e5e5e5] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+      <div className="no-break mt-12 max-w-md">
         {items.map((item, i) => (
           <div
             key={i}
-            className={`flex items-baseline justify-between gap-6 py-3 ${i > 0 ? "border-t border-[#eee]" : ""}`}
+            className={`flex items-baseline justify-between gap-6 py-3.5 ${
+              i > 0 ? "border-t border-[rgba(14,20,32,.16)]" : ""
+            }`}
           >
-            <span className="text-sm text-[#4a4a4a]">{item.label}</span>
-            <span className="shrink-0 font-semibold tabular-nums text-[#1a1a1a]">
+            <div>
+              <p className="text-[13.5px] text-[#0E1420]">{item.label}</p>
+              {item.qty > 1 && <p className="pd-meta mt-0.5">Qty {item.qty}</p>}
+            </div>
+            <span className="pd-meta shrink-0 text-[12px] normal-case text-[#0E1420]">
               {formatMoney(lineTotalCents(item), currency)}
             </span>
           </div>
         ))}
 
-        <div className="mt-2 flex items-baseline justify-between border-t border-[#eee] pt-3">
-          <span className="text-sm text-[#4a4a4a]">Total</span>
-          <span className="font-semibold tabular-nums text-[#1a1a1a]">
+        <div className="mt-1 flex items-baseline justify-between border-t border-[rgba(14,20,32,.5)] pt-4">
+          <span className="pd-meta">Total investment</span>
+          <span className="pd-display text-[26px] font-bold tracking-[-0.02em] text-[#0E1420]">
             {formatMoney(subtotalCents(items), currency)}
           </span>
         </div>
       </div>
 
-      <div className="mt-16 h-1.5 w-full bg-red" />
-    </section>
+      <p className="pd-meta mt-10">
+        Invoiced by milestone · Net 15 · Full terms in the services agreement
+      </p>
+    </PageShell>
   );
 }

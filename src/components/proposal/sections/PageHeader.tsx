@@ -1,9 +1,11 @@
 import Image from "next/image";
 
-// Repeated on EVERY page, cover included — one consistent size throughout, matching the
-// reference (its brand row stays modest-sized even on the cover; the "big" feeling there
-// comes from the bold headline below it, not from oversized logos). `noBorder` drops the
-// bottom rule for the cover, which has its own meta-row rhythm at the bottom of the page.
+// Repeated on EVERY page, cover included — one consistent modest size throughout;
+// the "big" feeling on the cover comes from the headline below it, never the logos.
+// Uses the flat cropped wordmark (the glow variant bakes a radial haze into its
+// alpha channel that smears on this light paper ground — same reason the website
+// switched). `noBorder` drops the bottom hairline for the cover, which has its own
+// meta-row rhythm.
 export function PageHeader({
   clientCompany,
   clientLogoUrl,
@@ -16,34 +18,37 @@ export function PageHeader({
   trailing?: React.ReactNode;
 }) {
   return (
-    <div className={`flex items-center justify-between ${noBorder ? "" : "mb-10 border-b border-[#e5e5e5] pb-6"}`}>
+    <div
+      className={`flex items-center justify-between ${
+        noBorder ? "" : "mb-12 border-b border-[rgba(14,20,32,.16)] pb-5"
+      }`}
+    >
       <div className="flex items-center gap-4">
-        {/* Logo PNG is genuinely transparent — no card/chip needed, it reads clean on white. */}
         <Image
-          src="/brand/logo/OPFOR_LOGO_NEW_2026.png"
-          alt="OPFOR"
-          width={1536}
-          height={1024}
-          className="h-10 w-auto max-w-[160px]"
+          src="/brand/logo/OPFOR_LOGO_NEW_CROPPED.png"
+          alt="OPFOR.ai"
+          width={1066}
+          height={268}
+          className="h-7 w-auto"
         />
-        <span className="text-xl text-[#c5c5c5]">×</span>
+        <span className="text-lg text-[rgba(14,20,32,.3)]">×</span>
         {clientLogoUrl ? (
-          // Unlike OPFOR's asset (confirmed transparent, legible on white with no backdrop),
-          // an uploaded client logo's colors are unknown — some brands' marks are designed for
-          // a dark background and have near-white elements that vanish here. A light neutral
-          // card gives every logo a contrast floor regardless of its own palette. Bounding box
-          // (not just a fixed height) so any aspect ratio — wide wordmark, tall stacked
-          // icon+text lockup — scales down to fit without ballooning the other axis.
-          <div className="rounded-md bg-[#f2f2f2] px-3 py-2">
+          // An uploaded client logo's colors are unknown — some marks are designed
+          // for a dark ground and have near-white elements that vanish on paper. A
+          // light neutral card gives every logo a contrast floor. Bounding box (not
+          // fixed height) so any aspect ratio scales without ballooning the other axis.
+          <div className="bg-[rgba(14,20,32,.05)] px-3 py-1.5">
             {/* eslint-disable-next-line @next/next/no-img-element -- external Supabase Storage URL */}
             <img
               src={clientLogoUrl}
               alt={clientCompany}
-              className="max-h-10 max-w-[140px] w-auto object-contain"
+              className="max-h-8 max-w-[130px] w-auto object-contain"
             />
           </div>
         ) : (
-          <span className="font-heading text-lg font-semibold text-[#4a4a4a]">{clientCompany}</span>
+          <span className="pd-display text-base font-semibold tracking-tight text-[#0E1420]">
+            {clientCompany}
+          </span>
         )}
       </div>
       {trailing}

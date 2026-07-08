@@ -1,9 +1,11 @@
 import type { AgreementClause } from "@/lib/proposal/types";
 import { PageHeader } from "./PageHeader";
+import { SectionHeading } from "./SectionHeading";
 
 // Generic services-agreement boilerplate, not legal advice — the client's own legal/procurement
 // reviews and finalizes this off-platform (see PLAN decision: no in-app signing). Name/date lines
-// are blank for signing outside this app.
+// are blank for signing outside this app. Set on the same paper ground as the rest of the
+// document: mono clause indices, hairline rules, ruled signature lines.
 export function ServicesAgreementSection({
   clauses,
   clientCompany,
@@ -22,91 +24,88 @@ export function ServicesAgreementSection({
   });
 
   return (
-    <section className="min-h-[11in] bg-[#f2ede3] p-16">
-      <div className="mx-auto max-w-3xl rounded-2xl bg-white p-12 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-        <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
-        <p className="eyebrow mb-3">09 | SERVICES AGREEMENT</p>
-        <h2 className="font-serif text-3xl uppercase tracking-tight text-[#1a1a1a]">
-          Services Agreement
-        </h2>
+    <section className="flex min-h-[11in] flex-col p-16">
+      <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
+      <SectionHeading
+        number="09"
+        title="Services agreement"
+        say={<>Executed off-platform<br />by client legal.</>}
+      />
 
-        <p className="mt-6 text-sm text-[#4a4a4a]">
-          This Agreement is entered into as of {effectiveDate} (the &ldquo;Effective Date&rdquo;) by
-          and between:
-        </p>
-        <p className="mt-3 text-sm text-[#4a4a4a]">
-          <span className="font-semibold text-[#1a1a1a]">Service Provider:</span> {providerName}{" "}
-          (&ldquo;Provider&rdquo;), and
-        </p>
-        <p className="mt-1 text-sm text-[#4a4a4a]">
-          <span className="font-semibold text-[#1a1a1a]">Client:</span> {clientCompany}{" "}
+      <div className="mt-8 max-w-[68ch]">
+        <p className="text-[12px] leading-[1.6] text-[rgba(14,20,32,.72)]">
+          This Agreement is entered into as of {effectiveDate} (the &ldquo;Effective Date&rdquo;)
+          by and between{" "}
+          <span className="font-medium text-[#0E1420]">{providerName}</span> (&ldquo;Provider&rdquo;)
+          and <span className="font-medium text-[#0E1420]">{clientCompany}</span>{" "}
           (&ldquo;Client&rdquo;), together the &ldquo;Parties.&rdquo;
         </p>
 
-        <div className="mt-10 space-y-6">
+        <div className="mt-8 space-y-4">
           {clauses.map((clause) => (
-            <div key={clause.number} className="no-break">
-              {clause.bullets ? (
-                <>
-                  <p className="text-sm font-semibold text-[#1a1a1a]">
-                    {clause.number} {clause.title}
-                  </p>
-                  <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-[#4a4a4a]">
-                    {clause.body.map((b, i) => (
-                      <li key={i}>{b}</li>
-                    ))}
-                  </ul>
-                </>
-              ) : (
-                clause.body.map((p, i) => (
-                  <p key={i} className={`text-sm text-[#4a4a4a] ${i > 0 ? "mt-2" : ""}`}>
-                    {i === 0 && (
-                      <span className="font-semibold text-[#1a1a1a]">
-                        {clause.number} {clause.title}:{" "}
-                      </span>
-                    )}
-                    {p}
-                  </p>
-                ))
-              )}
+            <div key={clause.number} className="no-break grid grid-cols-12 gap-4">
+              <span className="pd-meta col-span-1 pt-0.5">{clause.number}</span>
+              <div className="col-span-11">
+                {clause.bullets ? (
+                  <>
+                    <p className="text-[12px] font-semibold text-[#0E1420]">{clause.title}</p>
+                    <ul className="mt-1.5 space-y-1 text-[12px] leading-[1.55] text-[rgba(14,20,32,.72)]">
+                      {clause.body.map((b, i) => (
+                        <li key={i} className="flex gap-2.5">
+                          <span className="mt-[7px] h-px w-3 shrink-0 bg-[rgba(14,20,32,.5)]" />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  clause.body.map((p, i) => (
+                    <p
+                      key={i}
+                      className={`text-[12px] leading-[1.55] text-[rgba(14,20,32,.72)] ${i > 0 ? "mt-1.5" : ""}`}
+                    >
+                      {i === 0 && (
+                        <span className="font-semibold text-[#0E1420]">{clause.title}: </span>
+                      )}
+                      {p}
+                    </p>
+                  ))
+                )}
+              </div>
             </div>
           ))}
         </div>
+      </div>
 
-        <div className="no-break mt-10">
-          <p className="border-t border-[#e5e5e5] pt-6 text-sm text-[#4a4a4a]">
-            IN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.
-          </p>
+      <div className="no-break mt-12">
+        <p className="border-t border-[rgba(14,20,32,.5)] pt-5 text-[12px] text-[rgba(14,20,32,.72)]">
+          IN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.
+        </p>
 
-          <div className="mt-8 grid grid-cols-2 gap-12">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-wide text-[#1a1a1a]">Client</p>
-              <p className="mt-4 text-sm text-[#4a4a4a]">
-                <span className="font-medium text-[#1a1a1a]">Company:</span> {clientCompany}
+        <div className="mt-8 grid max-w-2xl grid-cols-2 gap-12">
+          {[
+            { party: "Client", company: clientCompany },
+            { party: "Service provider", company: providerName },
+          ].map((sig) => (
+            <div key={sig.party}>
+              <p className="pd-meta">{sig.party}</p>
+              <p className="mt-2 pd-display text-[14px] font-semibold text-[#0E1420]">
+                {sig.company}
               </p>
-              <p className="mt-2 text-sm text-[#4a4a4a]">
-                <span className="font-medium text-[#1a1a1a]">Name:</span> ______________________
-              </p>
-              <p className="mt-2 text-sm text-[#4a4a4a]">
-                <span className="font-medium text-[#1a1a1a]">Date:</span> ______________________
-              </p>
+              <div className="mt-10 border-t border-[rgba(14,20,32,.5)] pt-1.5">
+                <p className="pd-meta">Name / Signature</p>
+              </div>
+              <div className="mt-8 border-t border-[rgba(14,20,32,.5)] pt-1.5">
+                <p className="pd-meta">Date</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-bold uppercase tracking-wide text-[#1a1a1a]">
-                Service Provider
-              </p>
-              <p className="mt-4 text-sm text-[#4a4a4a]">
-                <span className="font-medium text-[#1a1a1a]">Company:</span> {providerName}
-              </p>
-              <p className="mt-2 text-sm text-[#4a4a4a]">
-                <span className="font-medium text-[#1a1a1a]">Name:</span> ______________________
-              </p>
-              <p className="mt-2 text-sm text-[#4a4a4a]">
-                <span className="font-medium text-[#1a1a1a]">Date:</span> ______________________
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
+      </div>
+
+      <div className="pd-meta mt-12 flex justify-between border-t border-[rgba(14,20,32,.16)] pt-4">
+        <span>OPFOR.AI · CLINICAL SUPPLY FORECASTING</span>
+        <span>09 / 09</span>
       </div>
     </section>
   );
