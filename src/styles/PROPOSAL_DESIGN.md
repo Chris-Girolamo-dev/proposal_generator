@@ -51,9 +51,8 @@ project — see the `:root` font mirror note in `globals.css`):
 
 ## Logos
 
-- Light: `OPFOR_LOGO_NEW_CROPPED.png` (flat crop — the glow asset smears on paper)
-- Dark: `OPFOR_LOGO_GLOW.png` (designed glow, dark grounds only)
-- Both render in `PageHeader`; CSS (`.pd-logo-light`/`.pd-logo-dark`) shows one per variant.
+- One wordmark everywhere: `OPFOR_LOGO_NEW_CROPPED.png` (flat crop) on light AND dark grounds,
+  per user direction. The glow variant is retired from the document.
 
 ## Variants
 

@@ -97,7 +97,7 @@ export const DEFAULT_TEAM: TeamMember[] = [
 export const DEFAULT_PROPOSAL: ProposalDraft = {
   client_company: "[Client Company]",
   client_logo_url: null,
-  project_title: "Clinical Supply Forecasting System",
+  project_title: "Clinical Supply Forecasting Simulator",
   subtitle: "A purpose-built demand forecasting and scenario-planning engine for your program.",
 
   // Areas of opportunity (was "problems")
@@ -261,7 +261,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     "If the delivered model does not hold to the agreed service-level target on validation data, we keep working at no additional cost until it does.",
 
   cost_items: [
-    { label: "Clinical Supply Forecasting System", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 0 },
+    { label: "Clinical Supply Forecasting Simulator", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 0 },
   ],
   currency: "usd",
 

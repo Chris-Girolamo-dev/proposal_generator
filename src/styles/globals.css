@@ -321,18 +321,6 @@ body {
   --pd-chip: rgba(14, 20, 32, .05);
 }
 
-/* Wordmark swap — light pages use the flat crop, dark uses the glow variant.
-   The agreement pages flip back to the flat crop with their paper ground. */
-.pd-logo-dark { display: none; }
-.proposal-doc[data-variant="dark"] .pd-logo-light,
-.proposal-doc[data-variant="dark-globe"] .pd-logo-light { display: none; }
-.proposal-doc[data-variant="dark"] .pd-logo-dark,
-.proposal-doc[data-variant="dark-globe"] .pd-logo-dark { display: block; }
-.proposal-doc[data-variant="dark"] .pd-agreement .pd-logo-light,
-.proposal-doc[data-variant="dark-globe"] .pd-agreement .pd-logo-light { display: block; }
-.proposal-doc[data-variant="dark"] .pd-agreement .pd-logo-dark,
-.proposal-doc[data-variant="dark-globe"] .pd-agreement .pd-logo-dark { display: none; }
-
 /* globe — the site's red-ink orthographic globe sitting subtly behind the right
    half of the cover; headline text may overlap it. dark-globe = dark mode with
    the same backdrop, no other positional changes. */

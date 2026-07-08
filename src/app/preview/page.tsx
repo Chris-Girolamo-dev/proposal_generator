@@ -5,7 +5,7 @@ import { subtotalCents, type Proposal } from "@/lib/proposal/types";
 // No-auth, no-DB route: renders the LeftClick-structured / OPFOR-skinned template
 // against DEFAULT_PROPOSAL so the design can be checked before Supabase is wired up.
 const demoCostItems = [
-  { label: "Clinical Supply Forecasting System", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 4_500_000 },
+  { label: "Clinical Supply Forecasting Simulator", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 4_500_000 },
   { label: "White-glove onboarding", description: "Hands-on setup with your team.", qty: 3, unit_cents: 150_000 },
   { label: "Training hours", description: "Live working sessions post-launch.", qty: 5, unit_cents: 40_000 },
 ];

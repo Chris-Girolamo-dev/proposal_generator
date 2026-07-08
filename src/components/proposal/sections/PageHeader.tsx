@@ -24,23 +24,14 @@ export function PageHeader({
       }`}
     >
       <div className="flex items-center gap-4">
-        {/* Both wordmarks render; CSS shows one per variant (flat crop on light
-            grounds, glow variant on dark — each smears/vanishes on the other). */}
+        {/* One wordmark everywhere — the same flat crop on light and dark grounds
+            (per user direction; the glow variant is retired from the doc). */}
         <Image
           src="/brand/logo/OPFOR_LOGO_NEW_CROPPED.png"
           alt="OPFOR.ai"
           width={1066}
           height={268}
-          className="pd-logo-light h-7 w-auto"
-        />
-        <Image
-          src="/brand/logo/OPFOR_LOGO_GLOW.png"
-          alt="OPFOR.ai"
-          width={1536}
-          height={1024}
-          // The glow asset carries generous transparent padding around the wordmark,
-          // so its box is taller than the flat crop's to land at the same visual size.
-          className="pd-logo-dark h-[72px] w-auto my-[-22px]"
+          className="h-7 w-auto"
         />
         <span className="text-lg text-[var(--pd-mid)]">×</span>
         {clientLogoUrl ? (
