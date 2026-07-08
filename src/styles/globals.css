@@ -181,7 +181,7 @@ body {
   --pd-dim: rgba(14, 20, 32, .56);
   --pd-tag: rgba(14, 20, 32, .72);
   --pd-faint: rgba(14, 20, 32, .12);
-  --pd-mid: rgba(14, 20, 32, .38);
+  --pd-mid: #9EA2A8; /* .38 ink flattened onto paper — opaque so the globe can't show through text */
   --pd-line: rgba(14, 20, 32, .16);
   --pd-line-strong: rgba(14, 20, 32, .5);
   --pd-chip: rgba(14, 20, 32, .05);
@@ -299,7 +299,7 @@ body {
   --pd-dim: rgba(231, 236, 244, .56);
   --pd-tag: rgba(231, 236, 244, .72);
   --pd-faint: rgba(231, 236, 244, .12);
-  --pd-mid: rgba(231, 236, 244, .38);
+  --pd-mid: #5E636C; /* .38 slate-white flattened onto the dark ground — opaque, see light note */
   --pd-line: rgba(255, 255, 255, .10);
   --pd-line-strong: rgba(255, 255, 255, .34);
   --pd-chip: rgba(255, 255, 255, .07);
@@ -315,7 +315,7 @@ body {
   --pd-dim: rgba(14, 20, 32, .56);
   --pd-tag: rgba(14, 20, 32, .72);
   --pd-faint: rgba(14, 20, 32, .12);
-  --pd-mid: rgba(14, 20, 32, .38);
+  --pd-mid: #9EA2A8; /* .38 ink flattened onto paper — opaque so the globe can't show through text */
   --pd-line: rgba(14, 20, 32, .16);
   --pd-line-strong: rgba(14, 20, 32, .5);
   --pd-chip: rgba(14, 20, 32, .05);

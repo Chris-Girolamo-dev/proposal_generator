@@ -28,7 +28,9 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
         trailing={<p className="pd-meta">Proposal / {proposalDate}</p>}
       />
 
-      <div className="mt-14 flex items-start justify-between border-t border-[var(--pd-line-strong)] pt-5">
+      {/* mt-2 (was mt-14): the rule sits ~1/2in higher, tight under the brand row,
+          so the globe's linework never runs into it. */}
+      <div className="mt-2 flex items-start justify-between border-t border-[var(--pd-line-strong)] pt-5">
         <div className="pd-meta leading-[1.7]">
           <p className="font-medium text-[var(--pd-ink)]">Clinical supply forecasting</p>
           <p>Demand · Simulation · Distribution</p>
