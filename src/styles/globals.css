@@ -292,7 +292,8 @@ body {
    Every component reads color through the --pd-* vars, so the whole document
    flips here; red rule accents stay red. The wordmark swaps to the glow variant
    (designed for dark grounds — its alpha-channel glow smears on paper). */
-.proposal-doc[data-variant="dark"] {
+.proposal-doc[data-variant="dark"],
+.proposal-doc[data-variant="dark-globe"] {
   --pd-paper: #0B0F17;
   --pd-ink: #E7ECF4;
   --pd-dim: rgba(231, 236, 244, .56);
@@ -304,15 +305,40 @@ body {
   --pd-chip: rgba(255, 255, 255, .07);
 }
 
-/* Wordmark swap — light pages use the flat crop, dark uses the glow variant. */
-.pd-logo-dark { display: none; }
-.proposal-doc[data-variant="dark"] .pd-logo-light { display: none; }
-.proposal-doc[data-variant="dark"] .pd-logo-dark { display: block; }
+/* Dark mode exception: the services agreement + signature pages stay on paper —
+   clients e-sign these (DocuSign etc.), and signatures don't work on a dark
+   ground. Redefining the tokens on the section resets every descendant. */
+.proposal-doc[data-variant="dark"] .pd-agreement,
+.proposal-doc[data-variant="dark-globe"] .pd-agreement {
+  --pd-paper: #F7F8FA;
+  --pd-ink: #0E1420;
+  --pd-dim: rgba(14, 20, 32, .56);
+  --pd-tag: rgba(14, 20, 32, .72);
+  --pd-faint: rgba(14, 20, 32, .12);
+  --pd-mid: rgba(14, 20, 32, .38);
+  --pd-line: rgba(14, 20, 32, .16);
+  --pd-line-strong: rgba(14, 20, 32, .5);
+  --pd-chip: rgba(14, 20, 32, .05);
+}
 
-/* globe — light mode with the site's red-ink orthographic globe sitting subtly
-   behind the right half of the cover; headline text may overlap it. */
+/* Wordmark swap — light pages use the flat crop, dark uses the glow variant.
+   The agreement pages flip back to the flat crop with their paper ground. */
+.pd-logo-dark { display: none; }
+.proposal-doc[data-variant="dark"] .pd-logo-light,
+.proposal-doc[data-variant="dark-globe"] .pd-logo-light { display: none; }
+.proposal-doc[data-variant="dark"] .pd-logo-dark,
+.proposal-doc[data-variant="dark-globe"] .pd-logo-dark { display: block; }
+.proposal-doc[data-variant="dark"] .pd-agreement .pd-logo-light,
+.proposal-doc[data-variant="dark-globe"] .pd-agreement .pd-logo-light { display: block; }
+.proposal-doc[data-variant="dark"] .pd-agreement .pd-logo-dark,
+.proposal-doc[data-variant="dark-globe"] .pd-agreement .pd-logo-dark { display: none; }
+
+/* globe — the site's red-ink orthographic globe sitting subtly behind the right
+   half of the cover; headline text may overlap it. dark-globe = dark mode with
+   the same backdrop, no other positional changes. */
 .pd-globe { display: none; }
-.proposal-doc[data-variant="globe"] .pd-globe { display: block; }
+.proposal-doc[data-variant="globe"] .pd-globe,
+.proposal-doc[data-variant="dark-globe"] .pd-globe { display: block; }
 
 /* Print — proposal document exports to PDF via a server-rendered route in this same app.
    Keep pages white regardless of light/dark viewer theme. */

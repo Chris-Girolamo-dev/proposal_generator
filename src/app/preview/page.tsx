@@ -23,7 +23,7 @@ const mockProposal: Proposal = {
   updated_at: new Date().toISOString(),
 };
 
-const VARIANTS: ProposalVariant[] = ["atlas", "instrument", "plate", "poster", "serif", "dark", "globe"];
+const VARIANTS: ProposalVariant[] = ["atlas", "instrument", "plate", "poster", "serif", "dark", "globe", "dark-globe"];
 
 export default async function PreviewPage({
   searchParams,

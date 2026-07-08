@@ -57,12 +57,16 @@ project — see the `:root` font mirror note in `globals.css`):
 
 ## Variants
 
-`data-variant` on `ProposalDocument`, previewable at `/preview?v=<name|1-7>`:
+`data-variant` on `ProposalDocument`, previewable at `/preview?v=<name|1-8>`:
 `atlas` (default) · `instrument` (red instrument labels) · `plate` (framed pages) ·
 `poster` (uppercase bold titles) · `serif` (Fraunces titles) · `dark` · `globe`
-(red-ink orthographic globe behind the cover's right half, `CoverGlobe.tsx`).
+(red-ink orthographic globe behind the cover's right half, `CoverGlobe.tsx`) ·
+`dark-globe` (dark + the globe backdrop).
 
-Example PDFs: `proposal_examples/OPFOR_Proposal_V1..V7_*.pdf`.
+Dark-mode exception: the services agreement + signature pages (`.pd-agreement`) always stay on
+paper — clients e-sign them (DocuSign), which doesn't work on a dark ground.
+
+Example PDFs: `proposal_examples/OPFOR_Proposal_V1..V8_*.pdf`.
 
 ## Print rules
 

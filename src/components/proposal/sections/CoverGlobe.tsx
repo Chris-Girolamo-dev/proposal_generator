@@ -52,7 +52,7 @@ export function CoverGlobe() {
           textAnchor={d.anchor ?? "start"}
           fontSize="8.5"
           letterSpacing=".08em"
-          fill="rgba(14,20,32,.55)"
+          fill="var(--pd-dim)"
           style={{ fontFamily: "var(--font-plex-mono), monospace" }}
         >
           {d.label}

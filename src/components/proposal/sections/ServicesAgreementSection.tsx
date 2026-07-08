@@ -24,7 +24,9 @@ export function ServicesAgreementSection({
   });
 
   return (
-    <section className="flex min-h-[11in] flex-col p-16">
+    // pd-agreement: in dark variants these pages reset to paper (see globals.css) —
+    // clients e-sign here, and signatures need a light ground.
+    <section className="pd-agreement flex min-h-[11in] flex-col p-16">
       <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <SectionHeading
         number="09"

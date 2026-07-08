@@ -17,7 +17,7 @@ import { ServicesAgreementSection } from "./sections/ServicesAgreementSection";
  * exact component rendered to PDF (P4). Do not reuse app-shell styling in here.
  */
 /** Visual variants — same layout system, different design temperature (see globals.css). */
-export type ProposalVariant = "atlas" | "instrument" | "plate" | "poster" | "serif" | "dark" | "globe";
+export type ProposalVariant = "atlas" | "instrument" | "plate" | "poster" | "serif" | "dark" | "globe" | "dark-globe";
 
 export function ProposalDocument({
   proposal,
