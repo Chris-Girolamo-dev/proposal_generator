@@ -20,24 +20,35 @@ export function PageHeader({
   return (
     <div
       className={`flex items-center justify-between ${
-        noBorder ? "" : "mb-12 border-b border-[rgba(14,20,32,.16)] pb-5"
+        noBorder ? "" : "mb-12 border-b border-[var(--pd-line)] pb-5"
       }`}
     >
       <div className="flex items-center gap-4">
+        {/* Both wordmarks render; CSS shows one per variant (flat crop on light
+            grounds, glow variant on dark — each smears/vanishes on the other). */}
         <Image
           src="/brand/logo/OPFOR_LOGO_NEW_CROPPED.png"
           alt="OPFOR.ai"
           width={1066}
           height={268}
-          className="h-7 w-auto"
+          className="pd-logo-light h-7 w-auto"
         />
-        <span className="text-lg text-[rgba(14,20,32,.3)]">×</span>
+        <Image
+          src="/brand/logo/OPFOR_LOGO_GLOW.png"
+          alt="OPFOR.ai"
+          width={1536}
+          height={1024}
+          // The glow asset carries generous transparent padding around the wordmark,
+          // so its box is taller than the flat crop's to land at the same visual size.
+          className="pd-logo-dark h-[72px] w-auto my-[-22px]"
+        />
+        <span className="text-lg text-[var(--pd-mid)]">×</span>
         {clientLogoUrl ? (
           // An uploaded client logo's colors are unknown — some marks are designed
           // for a dark ground and have near-white elements that vanish on paper. A
           // light neutral card gives every logo a contrast floor. Bounding box (not
           // fixed height) so any aspect ratio scales without ballooning the other axis.
-          <div className="bg-[rgba(14,20,32,.05)] px-3 py-1.5">
+          <div className="bg-[var(--pd-chip)] px-3 py-1.5">
             {/* eslint-disable-next-line @next/next/no-img-element -- external Supabase Storage URL */}
             <img
               src={clientLogoUrl}
@@ -46,7 +57,7 @@ export function PageHeader({
             />
           </div>
         ) : (
-          <span className="pd-display text-base font-semibold tracking-tight text-[#0E1420]">
+          <span className="pd-display text-base font-semibold tracking-tight text-[var(--pd-ink)]">
             {clientCompany}
           </span>
         )}

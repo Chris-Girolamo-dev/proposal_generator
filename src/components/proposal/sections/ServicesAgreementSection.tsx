@@ -33,11 +33,11 @@ export function ServicesAgreementSection({
       />
 
       <div className="mt-8 max-w-[68ch]">
-        <p className="text-[12px] leading-[1.6] text-[rgba(14,20,32,.72)]">
+        <p className="text-[12px] leading-[1.6] text-[var(--pd-tag)]">
           This Agreement is entered into as of {effectiveDate} (the &ldquo;Effective Date&rdquo;)
           by and between{" "}
-          <span className="font-medium text-[#0E1420]">{providerName}</span> (&ldquo;Provider&rdquo;)
-          and <span className="font-medium text-[#0E1420]">{clientCompany}</span>{" "}
+          <span className="font-medium text-[var(--pd-ink)]">{providerName}</span> (&ldquo;Provider&rdquo;)
+          and <span className="font-medium text-[var(--pd-ink)]">{clientCompany}</span>{" "}
           (&ldquo;Client&rdquo;), together the &ldquo;Parties.&rdquo;
         </p>
 
@@ -48,11 +48,11 @@ export function ServicesAgreementSection({
               <div className="col-span-11">
                 {clause.bullets ? (
                   <>
-                    <p className="text-[12px] font-semibold text-[#0E1420]">{clause.title}</p>
-                    <ul className="mt-1.5 space-y-1 text-[12px] leading-[1.55] text-[rgba(14,20,32,.72)]">
+                    <p className="text-[12px] font-semibold text-[var(--pd-ink)]">{clause.title}</p>
+                    <ul className="mt-1.5 space-y-1 text-[12px] leading-[1.55] text-[var(--pd-tag)]">
                       {clause.body.map((b, i) => (
                         <li key={i} className="flex gap-2.5">
-                          <span className="mt-[7px] h-px w-3 shrink-0 bg-[rgba(14,20,32,.5)]" />
+                          <span className="mt-[7px] h-px w-3 shrink-0 bg-[var(--pd-line-strong)]" />
                           {b}
                         </li>
                       ))}
@@ -62,10 +62,10 @@ export function ServicesAgreementSection({
                   clause.body.map((p, i) => (
                     <p
                       key={i}
-                      className={`text-[12px] leading-[1.55] text-[rgba(14,20,32,.72)] ${i > 0 ? "mt-1.5" : ""}`}
+                      className={`text-[12px] leading-[1.55] text-[var(--pd-tag)] ${i > 0 ? "mt-1.5" : ""}`}
                     >
                       {i === 0 && (
-                        <span className="font-semibold text-[#0E1420]">{clause.title}: </span>
+                        <span className="font-semibold text-[var(--pd-ink)]">{clause.title}: </span>
                       )}
                       {p}
                     </p>
@@ -78,7 +78,7 @@ export function ServicesAgreementSection({
       </div>
 
       <div className="no-break mt-12">
-        <p className="border-t border-[rgba(14,20,32,.5)] pt-5 text-[12px] text-[rgba(14,20,32,.72)]">
+        <p className="border-t border-[var(--pd-line-strong)] pt-5 text-[12px] text-[var(--pd-tag)]">
           IN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.
         </p>
 
@@ -89,13 +89,13 @@ export function ServicesAgreementSection({
           ].map((sig) => (
             <div key={sig.party}>
               <p className="pd-meta">{sig.party}</p>
-              <p className="mt-2 pd-display text-[14px] font-semibold text-[#0E1420]">
+              <p className="mt-2 pd-display text-[14px] font-semibold text-[var(--pd-ink)]">
                 {sig.company}
               </p>
-              <div className="mt-10 border-t border-[rgba(14,20,32,.5)] pt-1.5">
+              <div className="mt-10 border-t border-[var(--pd-line-strong)] pt-1.5">
                 <p className="pd-meta">Name / Signature</p>
               </div>
-              <div className="mt-8 border-t border-[rgba(14,20,32,.5)] pt-1.5">
+              <div className="mt-8 border-t border-[var(--pd-line-strong)] pt-1.5">
                 <p className="pd-meta">Date</p>
               </div>
             </div>
@@ -103,7 +103,7 @@ export function ServicesAgreementSection({
         </div>
       </div>
 
-      <div className="pd-meta mt-12 flex justify-between border-t border-[rgba(14,20,32,.16)] pt-4">
+      <div className="pd-meta mt-12 flex justify-between border-t border-[var(--pd-line)] pt-4">
         <span>OPFOR.AI · CLINICAL SUPPLY FORECASTING</span>
         <span>09 / 09</span>
       </div>

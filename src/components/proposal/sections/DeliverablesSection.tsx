@@ -20,21 +20,21 @@ export function DeliverablesSection({
         title="What ships"
         say={<>A working system,<br />not a slide deck.</>}
       />
-      <p className="mt-8 max-w-[52ch] text-[13.5px] leading-[1.65] text-[rgba(14,20,32,.72)]">
+      <p className="mt-8 max-w-[52ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         Everything below is included in the engagement and itemized here exactly as it will be
         delivered.
       </p>
 
-      <div className="mt-12 border border-[rgba(14,20,32,.5)]">
+      <div className="mt-12 border border-[var(--pd-line-strong)]">
         {items.map((item, i) => (
           <div
             key={i}
             className={`no-break grid grid-cols-12 items-baseline gap-4 px-5 py-4 ${
-              i > 0 ? "border-t border-[rgba(14,20,32,.16)]" : ""
+              i > 0 ? "border-t border-[var(--pd-line)]" : ""
             }`}
           >
             <span className="pd-meta col-span-1">{String(i + 1).padStart(2, "0")}</span>
-            <p className="col-span-9 text-[13.5px] leading-[1.5] text-[#0E1420]">{item.text}</p>
+            <p className="col-span-9 text-[13.5px] leading-[1.5] text-[var(--pd-ink)]">{item.text}</p>
             <span className="pd-meta col-span-2 text-right">Included</span>
           </div>
         ))}

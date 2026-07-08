@@ -13,11 +13,11 @@ export function SectionHeading({
   return (
     <div className="pd-shead grid grid-cols-12 items-baseline gap-4 pt-5">
       <span className="pd-meta col-span-2">{number} / 09</span>
-      <h2 className="col-span-7 pd-display text-[34px] font-semibold leading-none tracking-[-0.02em] text-[#0E1420]">
+      <h2 className="col-span-7 pd-display text-[34px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
         {title}
       </h2>
       {say && (
-        <p className="col-span-3 text-right text-[11.5px] leading-[1.55] text-[rgba(14,20,32,.56)]">
+        <p className="col-span-3 text-right text-[11.5px] leading-[1.55] text-[var(--pd-dim)]">
           {say}
         </p>
       )}

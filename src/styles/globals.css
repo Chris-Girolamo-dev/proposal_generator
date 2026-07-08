@@ -181,13 +181,21 @@ body {
   --pd-dim: rgba(14, 20, 32, .56);
   --pd-tag: rgba(14, 20, 32, .72);
   --pd-faint: rgba(14, 20, 32, .12);
+  --pd-mid: rgba(14, 20, 32, .38);
   --pd-line: rgba(14, 20, 32, .16);
   --pd-line-strong: rgba(14, 20, 32, .5);
+  --pd-chip: rgba(14, 20, 32, .05);
   background: var(--pd-paper);
   color: var(--pd-ink);
   font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
   print-color-adjust: exact;
   -webkit-print-color-adjust: exact;
+}
+/* The ground must sit on each section, not only the wrapper — Chromium's print
+   engine drops a tall ancestor's background on pages after the first, which left
+   dark-variant pages 2+ white in the exported PDF. */
+.proposal-doc > section {
+  background: var(--pd-paper);
 }
 
 /* Space Grotesk display — direct next/font var; the font-display Tailwind utility is
@@ -278,6 +286,33 @@ body {
   font-weight: 500;
   letter-spacing: -0.01em;
 }
+
+/* dark — the same system on the dark site's ground (OPFOR Website Copy 2 Dark
+   spinoff_2 tokens: ground #0B0F17, slate-white ink #E7ECF4, white hairlines).
+   Every component reads color through the --pd-* vars, so the whole document
+   flips here; red rule accents stay red. The wordmark swaps to the glow variant
+   (designed for dark grounds — its alpha-channel glow smears on paper). */
+.proposal-doc[data-variant="dark"] {
+  --pd-paper: #0B0F17;
+  --pd-ink: #E7ECF4;
+  --pd-dim: rgba(231, 236, 244, .56);
+  --pd-tag: rgba(231, 236, 244, .72);
+  --pd-faint: rgba(231, 236, 244, .12);
+  --pd-mid: rgba(231, 236, 244, .38);
+  --pd-line: rgba(255, 255, 255, .10);
+  --pd-line-strong: rgba(255, 255, 255, .34);
+  --pd-chip: rgba(255, 255, 255, .07);
+}
+
+/* Wordmark swap — light pages use the flat crop, dark uses the glow variant. */
+.pd-logo-dark { display: none; }
+.proposal-doc[data-variant="dark"] .pd-logo-light { display: none; }
+.proposal-doc[data-variant="dark"] .pd-logo-dark { display: block; }
+
+/* globe — light mode with the site's red-ink orthographic globe sitting subtly
+   behind the right half of the cover; headline text may overlap it. */
+.pd-globe { display: none; }
+.proposal-doc[data-variant="globe"] .pd-globe { display: block; }
 
 /* Print — proposal document exports to PDF via a server-rendered route in this same app.
    Keep pages white regardless of light/dark viewer theme. */

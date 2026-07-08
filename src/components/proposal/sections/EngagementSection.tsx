@@ -27,12 +27,12 @@ export function EngagementSection({
         say={<>Senior team.<br />Narrow focus.</>}
       />
 
-      <h3 className="mt-12 max-w-[24ch] pd-display text-[30px] font-semibold leading-[1.12] tracking-[-0.02em] text-[#0E1420]">
+      <h3 className="mt-12 max-w-[24ch] pd-display text-[30px] font-semibold leading-[1.12] tracking-[-0.02em] text-[var(--pd-ink)]">
         {operatorsLabel.charAt(0).toUpperCase() + operatorsLabel.slice(1)}, partnered with your
-        team, <span className="text-[rgba(14,20,32,.4)]">{weeksLabel}.</span>
+        team, <span className="text-[var(--pd-mid)]">{weeksLabel}.</span>
       </h3>
 
-      <p className="mt-6 max-w-[52ch] text-[13.5px] leading-[1.65] text-[rgba(14,20,32,.72)]">
+      <p className="mt-6 max-w-[52ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         {operatorsLabel} work directly with your team for {weeksLabel} — one leads the engagement
         end to end, the other builds the forecasting model and integrates it against your live
         data. We run this with you, not for you: one question, {weeksLabel}, and it is the only
@@ -43,22 +43,22 @@ export function EngagementSection({
         {members.map((m, i) => (
           <div
             key={i}
-            className="no-break grid grid-cols-12 gap-4 border-t border-[rgba(14,20,32,.16)] py-4"
+            className="no-break grid grid-cols-12 gap-4 border-t border-[var(--pd-line)] py-4"
           >
             <span className="pd-meta col-span-3 pt-0.5">{m.badge}</span>
             <div className="col-span-9">
-              <p className="pd-display text-[15px] font-semibold text-[#0E1420]">{m.role}</p>
-              <p className="mt-1 text-[12.5px] leading-[1.6] text-[rgba(14,20,32,.56)]">
+              <p className="pd-display text-[15px] font-semibold text-[var(--pd-ink)]">{m.role}</p>
+              <p className="mt-1 text-[12.5px] leading-[1.6] text-[var(--pd-dim)]">
                 {m.description}
               </p>
             </div>
           </div>
         ))}
-        <div className="no-break grid grid-cols-12 gap-4 border-y border-[rgba(14,20,32,.16)] py-4">
+        <div className="no-break grid grid-cols-12 gap-4 border-y border-[var(--pd-line)] py-4">
           <span className="pd-meta col-span-3 pt-0.5">Scope</span>
           <div className="col-span-9">
-            <p className="pd-display text-[15px] font-semibold text-[#0E1420]">Fixed scope</p>
-            <p className="mt-1 text-[12.5px] leading-[1.6] text-[rgba(14,20,32,.56)]">
+            <p className="pd-display text-[15px] font-semibold text-[var(--pd-ink)]">Fixed scope</p>
+            <p className="mt-1 text-[12.5px] leading-[1.6] text-[var(--pd-dim)]">
               {phases.length} build phases over {weeksLabel}, described in full in the plan.
             </p>
           </div>

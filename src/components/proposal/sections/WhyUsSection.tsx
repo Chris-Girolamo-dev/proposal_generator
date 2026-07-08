@@ -24,8 +24,8 @@ export function WhyUsSection({
 
       <div className="mt-7 grid grid-cols-3 gap-5">
         {whyUs.stats.map((stat, i) => (
-          <div key={i} className="no-break border-t border-[rgba(14,20,32,.5)] pt-2.5">
-            <p className="pd-display text-[26px] font-bold leading-none tracking-[-0.03em] text-[#0E1420]">
+          <div key={i} className="no-break border-t border-[var(--pd-line-strong)] pt-2.5">
+            <p className="pd-display text-[26px] font-bold leading-none tracking-[-0.03em] text-[var(--pd-ink)]">
               {stat.value}
             </p>
             <p className="pd-meta mt-1.5 normal-case tracking-[.04em]">{stat.label}</p>
@@ -33,19 +33,19 @@ export function WhyUsSection({
         ))}
       </div>
 
-      <p className="mt-7 max-w-[58ch] text-[12.5px] leading-[1.6] text-[rgba(14,20,32,.72)]">
+      <p className="mt-7 max-w-[58ch] text-[12.5px] leading-[1.6] text-[var(--pd-tag)]">
         {whyUs.blurb}
       </p>
 
       {whyUs.points && whyUs.points.length > 0 && (
         <div className="mt-6 grid grid-cols-2 gap-x-8">
           {whyUs.points.map((point, i) => (
-            <div key={i} className="no-break border-t border-[rgba(14,20,32,.16)] py-2.5">
+            <div key={i} className="no-break border-t border-[var(--pd-line)] py-2.5">
               <span className="pd-meta">{String(i + 1).padStart(2, "0")}</span>
-              <p className="mt-1 pd-display text-[14px] font-semibold text-[#0E1420]">
+              <p className="mt-1 pd-display text-[14px] font-semibold text-[var(--pd-ink)]">
                 {point.title}
               </p>
-              <p className="mt-0.5 text-[11.5px] leading-[1.5] text-[rgba(14,20,32,.56)]">
+              <p className="mt-0.5 text-[11.5px] leading-[1.5] text-[var(--pd-dim)]">
                 {point.description}
               </p>
             </div>
@@ -54,12 +54,12 @@ export function WhyUsSection({
       )}
 
       {whyUs.capabilities && whyUs.capabilities.length > 0 && (
-        <div className="mt-5 border-y border-[rgba(14,20,32,.5)]">
+        <div className="mt-5 border-y border-[var(--pd-line-strong)]">
           <div className="flex flex-wrap">
             {whyUs.capabilities.map((c, i) => (
               <span
                 key={i}
-                className="pd-meta border-r border-[rgba(14,20,32,.16)] px-3.5 py-1.5 last:border-r-0"
+                className="pd-meta border-r border-[var(--pd-line)] px-3.5 py-1.5 last:border-r-0"
               >
                 {c}
               </span>
