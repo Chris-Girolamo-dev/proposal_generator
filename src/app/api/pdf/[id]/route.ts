@@ -48,7 +48,8 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
     const filename = `${(proposal.client_company || proposal.slug || "proposal").replace(/[^a-z0-9]+/gi, "-")}.pdf`;
 
-    return new NextResponse(pdf, {
+    // page.pdf() returns a Uint8Array; Buffer is an accepted BodyInit for the response.
+    return new NextResponse(Buffer.from(pdf), {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="${filename}"`,
