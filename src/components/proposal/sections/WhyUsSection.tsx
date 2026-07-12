@@ -43,12 +43,14 @@ export function WhyUsSection({
       {whyUs.points && whyUs.points.length > 0 && (
         <div className="mt-5 grid grid-cols-2 gap-x-8">
           {whyUs.points.map((point, i) => (
-            <div key={i} className="no-break border-t border-[var(--pd-line)] py-2">
-              <span className="pd-meta">{String(i + 1).padStart(2, "0")}</span>
-              <p className="mt-1 pd-display text-[14px] font-semibold text-[var(--pd-ink)]">
-                {point.title}
-              </p>
-              <p className="mt-0.5 text-[11.5px] leading-[1.5] text-[var(--pd-dim)]">
+            <div key={i} className="no-break border-t border-[var(--pd-line)] py-2.5">
+              <div className="flex items-baseline gap-3">
+                <span className="pd-meta w-6 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                <p className="pd-display text-[14px] font-semibold text-[var(--pd-ink)]">
+                  {point.title}
+                </p>
+              </div>
+              <p className="mt-0.5 pl-9 text-[11.5px] leading-[1.5] text-[var(--pd-dim)]">
                 {point.description}
               </p>
             </div>
@@ -56,13 +58,16 @@ export function WhyUsSection({
         </div>
       )}
 
+      {/* Balanced gaps: the space above the marquee equals the space below it
+          (bottom = spacer + the footer's mt-8, so the top spacer starts at basis-8). */}
+      <div className="flex-1 basis-7" />
       {whyUs.capabilities && whyUs.capabilities.length > 0 && (
-        <div className="mt-4 border-y border-[var(--pd-line-strong)]">
+        <div className="border-y border-[var(--pd-line-strong)]">
           <div className="flex flex-wrap">
             {whyUs.capabilities.map((c, i) => (
               <span
                 key={i}
-                className="pd-meta border-r border-[var(--pd-line)] px-3.5 py-1 tracking-[.10em] last:border-r-0"
+                className="pd-meta border-r border-[var(--pd-line)] px-1.5 py-1 text-[10px] tracking-[.05em] last:border-r-0"
               >
                 {c.split("*").map((part, j) =>
                   j % 2 === 1 ? (
@@ -76,6 +81,9 @@ export function WhyUsSection({
           </div>
         </div>
       )}
+      {/* Bottom spacer: grows equally with the top one (whose basis-8 offsets the
+          folio margin), splitting the leftover space evenly around the marquee. */}
+      <div className="flex-1 basis-0" />
     </PageShell>
   );
 }

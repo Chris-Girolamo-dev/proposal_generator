@@ -83,7 +83,7 @@ export function InvestmentSection({
       </div>
 
       {bonuses.length > 0 && (
-        <div className="pd-shead mt-5 pt-3">
+        <div className="pd-shead mt-4 pt-3">
           <h3 className="pd-display text-[34px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
             The bonuses<span className="text-[var(--pd-mid)]">, yours with the build.</span>
           </h3>
@@ -97,13 +97,11 @@ export function InvestmentSection({
                 }`}
               >
                 <p className="text-[11.5px] leading-[1.4] text-[var(--pd-ink)]">{b.label}</p>
-                <p className="pd-meta shrink-0 text-right">
-                  {b.value_cents != null && (
-                    <span className="normal-case text-[var(--pd-ink)]">
-                      {formatMoney(b.value_cents, currency)}
-                    </span>
-                  )}
-                  <span className={b.value_cents != null ? "ml-3" : ""}>{b.tag ?? "Included"}</span>
+                <p className="pd-meta flex shrink-0 items-baseline">
+                  <span className="w-16 text-right normal-case text-[var(--pd-ink)]">
+                    {b.value_cents != null ? formatMoney(b.value_cents, currency) : ""}
+                  </span>
+                  <span className="w-24 text-right">{b.tag ?? "Included"}</span>
                 </p>
               </div>
             ))}
@@ -113,7 +111,7 @@ export function InvestmentSection({
             <div className="no-break mt-1 flex items-baseline justify-between border-y border-[var(--pd-line-strong)] py-1.5">
               <span className="pd-meta">Total bonus value</span>
               <span className="flex items-baseline gap-4">
-                <span className="pd-display text-[20px] font-bold tracking-[-0.02em] text-[var(--pd-ink)] line-through decoration-[#E5192B] decoration-[2.5px]">
+                <span className="pd-display text-[20px] font-bold tracking-[-0.02em] text-[var(--pd-ink)] line-through decoration-[rgba(229,25,43,.55)] decoration-[1.5px]">
                   {formatMoney(bonusTotal, currency)}
                 </span>
                 <span className="pd-display text-[22px] font-bold uppercase tracking-[-0.02em] text-[#E5192B]">
@@ -126,7 +124,7 @@ export function InvestmentSection({
       )}
 
       <p className="pd-meta mt-2">
-        Invoiced by milestone · Net 30 · Full terms in the services agreement
+        50% at signature · balance across Q3 and Q4 · quarterly thereafter · Net 30
       </p>
     </PageShell>
   );

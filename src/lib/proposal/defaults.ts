@@ -36,7 +36,7 @@ export const DEFAULT_SERVICES_AGREEMENT: AgreementClause[] = [
     "Client will pay the fees set out in the Investment section above.",
   ] },
   { number: "2.2", title: "Invoicing", body: [
-    "Provider will invoice Client upon completion of each milestone; payment is due within thirty (30) days of the invoice date.",
+    "Provider will invoice fifty percent (50%) of first-year fees upon execution of this Agreement, and the remainder in two equal installments invoiced in the third and fourth calendar quarters of the first year. Thereafter, fees are invoiced quarterly in advance. Payment is due within thirty (30) days of the invoice date.",
   ] },
   { number: "3.1", title: "Payment Terms", body: [
     "Late payments accrue interest at 1.5% per month, or the maximum allowed by law, whichever is lower.",
@@ -322,16 +322,17 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   // The value stack shown under the price: real values on the right, an
   // Included/credited stamp instead of a charge. Order = punch order.
   bonuses: [
-    // Price-lock value = 3% of the demo build price ($51,500 × .03).
-    { label: "Locked-for-life price guarantee: your annual investment never increases", value_cents: 154_500, tag: "Guaranteed" },
+    // Price-lock value per user.
+    { label: "Locked-for-life price guarantee: your annual investment never increases", value_cents: 325_000, tag: "Guaranteed" },
     { label: "Testimonial credit off your next renewal", value_cents: 700_000, tag: "On renewal" },
     { label: "Unlimited scenario breakdown videos", value_cents: 295_000 },
-    { label: "Weekly working call, one hour a week ($270/hr × 52)", value_cents: 1_404_000 },
+    { label: "Weekly working call, one hour a week", value_cents: 1_404_000 },
     { label: "SOC 2-compliant host-for-you", value_cents: 74_900 },
-    { label: "(2) RTSM/IRT integration fee waivers ($6,755 each)", value_cents: 1_351_000, tag: "Credited on renewal" },
+    { label: "(2) RTSM/IRT integration fee waivers ($5,680 each)", value_cents: 1_136_000, tag: "On renewal" },
     { label: "Unlimited Anthropic API usage", value_cents: 120_000 },
     { label: "Step-by-step study build master manual", value_cents: 79_000 },
     { label: "Long Range Planning module", value_cents: 479_500 },
+    { label: "Drug Product DOM Alignment module", value_cents: 379_600 },
     { label: "24/7 customer service access", tag: "Included" },
     { label: "(21) Master-builder training video guides", value_cents: 522_900 },
     { label: "(11) Do-it-for-you white glove study builds", value_cents: 821_700 },

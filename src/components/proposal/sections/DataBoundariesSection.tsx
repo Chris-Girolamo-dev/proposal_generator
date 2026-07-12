@@ -10,8 +10,8 @@ import { PageShell } from "./PageShell";
 // safe phrasing ("out of GxP scope by design", never "GxP compliant").
 const CLAIMS = [
   {
-    title: "No access to your systems",
-    body: "No OPFOR account, credential, or permission exists in your IRT or any validated system. Your team exports the reports it already receives and uploads them. That is the entire data path.",
+    title: "Zero access to your systems",
+    body: "Zero OPFOR accounts, credentials, or permissions exist in your IRT or any validated system. Your team exports the reports it already receives and uploads them. That is the entire data path.",
   },
   {
     title: "Your protocol never enters the product",
@@ -26,20 +26,6 @@ const CLAIMS = [
     body: "The parser never reads arm, stratum, or randomization columns. The forecast runs on kit-type demand, so blinding stays intact by construction, not by policy.",
   },
 ];
-
-function FlowBox({ label, sub, seal }: { label: string; sub: string; seal?: string }) {
-  return (
-    <div className="relative flex-1 border border-[var(--pd-line-strong)] px-4 py-3">
-      <p className="pd-meta font-medium text-[var(--pd-ink)]">{label}</p>
-      <p className="pd-meta mt-0.5 text-[9.5px]">{sub}</p>
-      {seal && (
-        <span className="pd-meta absolute right-2 top-[-9px] border border-[#E5192B] bg-[var(--pd-paper)] px-1.5 text-[8.5px] text-[#E5192B]">
-          {seal}
-        </span>
-      )}
-    </div>
-  );
-}
 
 export function DataBoundariesSection({
   number = "07",
@@ -60,39 +46,15 @@ export function DataBoundariesSection({
         title="Data boundaries"
         say={<>What we hold.<br />What we never touch.</>}
       />
-      <p className="mt-6 max-w-[56ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
+      <p className="mt-8 max-w-[56ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         OPFOR is planning and decision support. The boundary below is architectural, not policy.
       </p>
 
-      {/* One-way data flow: the IRT is sealed; the only path is the client's own
-          manual upload of reports they already receive. */}
-      <div className="mt-7">
-        <p className="pd-meta">The entire data path</p>
-        <div className="mt-3 flex items-stretch gap-0">
-          <FlowBox label={`Your IRT / RTSM`} sub="Validated system" seal="No OPFOR access" />
-          <div className="flex flex-col items-center justify-center px-3">
-            <span className="pd-meta text-[9.5px]">reports you</span>
-            <span className="text-[var(--pd-line-strong)]">⟶</span>
-            <span className="pd-meta text-[9.5px]">already receive</span>
-          </div>
-          <FlowBox label="Your team" sub="Exports, reviews" />
-          <div className="flex flex-col items-center justify-center px-3">
-            <span className="pd-meta text-[9.5px]">manual upload</span>
-            <span className="text-[var(--pd-line-strong)]">⟶</span>
-            <span className="pd-meta text-[9.5px]">minutes per cycle</span>
-          </div>
-          <FlowBox label="OPFOR" sub="Engine runs in your browser" />
-        </div>
-        <p className="pd-meta mt-2 text-[9.5px]">
-          One direction, initiated by you. No integration, no credentials, nothing to security-review.
-        </p>
-      </div>
-
-      <div className="mt-6">
+      <div className="mt-10">
         {CLAIMS.map((c, i) => (
           <div
             key={i}
-            className={`no-break grid grid-cols-12 gap-4 border-t border-[var(--pd-line)] py-2 ${
+            className={`no-break grid grid-cols-12 gap-4 border-t border-[var(--pd-line)] py-4 ${
               i === CLAIMS.length - 1 ? "border-b" : ""
             }`}
           >
@@ -105,13 +67,13 @@ export function DataBoundariesSection({
         ))}
       </div>
 
-      <div className="no-break pd-shead pd-shead--sm mt-6 pt-3">
+      <div className="no-break pd-shead pd-shead--sm mt-10 pt-4">
         <p className="pd-display text-[15px] font-semibold text-[var(--pd-ink)]">
           Out of GxP scope by design
         </p>
         <p className="mt-1.5 max-w-[62ch] text-[12px] leading-[1.55] text-[var(--pd-tag)]">
           OPFOR is never a system of record and performs no GxP activity. It ingests only
-          decision-support exports your team already receives — no source documents. Adoption does
+          decision-support exports your team already receives. No source documents. Adoption does
           not wait on a computerized-system validation project.
         </p>
       </div>

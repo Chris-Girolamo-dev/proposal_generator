@@ -20,7 +20,7 @@ export function PageHeader({
   return (
     <div
       className={`flex items-center justify-between ${
-        noBorder ? "" : "mb-12 border-b border-[var(--pd-line)] pb-5"
+        noBorder ? "" : "mb-10 border-b border-[var(--pd-line)] pb-5"
       }`}
     >
       <div className="flex items-center gap-4">

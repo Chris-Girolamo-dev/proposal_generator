@@ -36,8 +36,8 @@ export function EngagementSection({
       </h3>
 
       <p className="mt-6 max-w-[52ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
-        {operatorsLabel} work directly with your team for {weeksLabel} — one leads the engagement
-        end to end, the other builds the forecasting model and integrates it against your live
+        {operatorsLabel} work directly with your team for {weeksLabel}: one leads the engagement
+        end to end; the other builds the forecasting model and integrates it against your live
         data. We run this with you, not for you: one question, {weeksLabel}, and it is the only
         thing we work on.
       </p>

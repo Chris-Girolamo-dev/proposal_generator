@@ -26,8 +26,8 @@ export function PageShell({
     <section className="isolate relative flex min-h-[11in] flex-col p-16">
       <CornerGlobe />
       <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
-      <div className="flex-1">{children}</div>
-      <div className="pd-meta mt-8 flex justify-between border-t border-[var(--pd-line)] pt-4">
+      <div className="flex flex-1 flex-col">{children}</div>
+      <div className="pd-meta mt-7 flex justify-between border-t border-[var(--pd-line)] pt-4">
         <span>OPFOR.AI · CLINICAL SUPPLY FORECASTING</span>
         <span>{number} / {total}</span>
       </div>

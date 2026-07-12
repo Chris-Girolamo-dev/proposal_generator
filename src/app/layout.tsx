@@ -42,7 +42,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Proposal Generator",
-  description: "OPFOR proposal generator — build and export client proposals.",
+  description: "OPFOR proposal generator: build and export client proposals.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
