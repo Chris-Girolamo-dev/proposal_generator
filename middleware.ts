@@ -63,4 +63,8 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico|brand/).*)"],
+  // Node.js runtime (stable since Next.js 15.5) instead of Edge: Edge lacks __dirname,
+  // which something in the @supabase/ssr import graph references, crashing every
+  // request in prod (MIDDLEWARE_INVOCATION_FAILED). Node runtime has it natively.
+  runtime: "nodejs",
 };
