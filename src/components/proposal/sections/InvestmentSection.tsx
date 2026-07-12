@@ -112,7 +112,7 @@ export function InvestmentSection({
           // discount the thing the eye lands on.
           <div className="mt-1 border-t border-[var(--pd-line-strong)] pt-2">
             <div className="flex items-baseline justify-between gap-6">
-              <span className="pd-meta">Year one</span>
+              <span className="pd-meta font-bold">Year one</span>
               <span className="pd-display text-[22px] font-bold leading-tight tracking-[-0.02em] text-[var(--pd-ink)]">
                 {formatMoney(yearOne, currency)}
               </span>
@@ -123,12 +123,12 @@ export function InvestmentSection({
               </p>
             )}
             <div className="mt-2 flex items-baseline justify-between gap-6 border-t border-[var(--pd-line)] pt-2">
-              <span className="pd-meta">Annual renewal · year two on</span>
+              <span className="pd-meta font-bold">Annual renewal · year two on</span>
               <span className="pd-display text-[22px] font-bold leading-tight tracking-[-0.02em] text-[var(--pd-ink)]">
                 {formatMoney(renewalCents, currency)}
               </span>
             </div>
-            <p className="pd-meta mt-0.5 tracking-[.04em] text-right" style={{ color: "#E5192B" }}>
+            <p className="pd-meta mt-0.5 tracking-[.04em] text-right font-bold" style={{ color: "#E5192B" }}>
               {renewalTag}, locked for life
             </p>
           </div>

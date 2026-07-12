@@ -51,7 +51,7 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
           <span className="block text-[var(--pd-mid)]">{proposal.project_title}</span>
         </h1>
         <div className="pd-meta mt-5 flex justify-between border-t border-[var(--pd-line)] pt-3">
-          <span>
+          <span style={{ color: "var(--pd-ink)" }}>
             Proposal <span className="text-[15px]">{proposal.proposal_number ?? 928801}</span>{" "}
             {stampRest}
           </span>
