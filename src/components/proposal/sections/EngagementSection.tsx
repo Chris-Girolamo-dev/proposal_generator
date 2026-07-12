@@ -39,14 +39,16 @@ export function EngagementSection({
         thing we work on.
       </p>
 
-      <div className="mt-12 max-w-xl">
+      {/* Rules run the full content width (matching the section head above); only
+          the text inside stays at a readable measure. */}
+      <div className="mt-12">
         {members.map((m, i) => (
           <div
             key={i}
             className="no-break grid grid-cols-12 gap-4 border-t border-[var(--pd-line)] py-4"
           >
-            <span className="pd-meta col-span-3 pt-0.5">{m.badge}</span>
-            <div className="col-span-9">
+            <span className="pd-meta col-span-2 pt-0.5">{m.badge}</span>
+            <div className="col-span-10 max-w-[62ch]">
               <p className="pd-display text-[15px] font-semibold text-[var(--pd-ink)]">{m.role}</p>
               <p className="mt-1 text-[12.5px] leading-[1.6] text-[var(--pd-dim)]">
                 {m.description}
@@ -55,8 +57,8 @@ export function EngagementSection({
           </div>
         ))}
         <div className="no-break grid grid-cols-12 gap-4 border-y border-[var(--pd-line)] py-4">
-          <span className="pd-meta col-span-3 pt-0.5">Scope</span>
-          <div className="col-span-9">
+          <span className="pd-meta col-span-2 pt-0.5">Scope</span>
+          <div className="col-span-10 max-w-[62ch]">
             <p className="pd-display text-[15px] font-semibold text-[var(--pd-ink)]">Fixed scope</p>
             <p className="mt-1 text-[12.5px] leading-[1.6] text-[var(--pd-dim)]">
               {phases.length} build phases over {weeksLabel}, described in full in the plan.
