@@ -50,8 +50,8 @@ export function NextStepsSection({
 
       <div className="mt-16">
         <p className="pd-meta">Ready when you are</p>
-        <p className="mt-3 pd-display text-[56px] font-bold uppercase leading-[0.9] tracking-[-0.045em] text-[var(--pd-ink)]">
-          See it run<span className="text-[#E5192B]">.</span>
+        <p className="mt-3 pd-display text-[40px] font-bold uppercase leading-[0.9] tracking-[-0.045em] text-[var(--pd-ink)]">
+          See it run<span className="text-[#E5192B]">.</span><span className="text-[var(--pd-mid)]">Supply the world</span>
         </p>
         <p className="pd-meta mt-4">info@opforsupply.com · opfor.ai</p>
       </div>

@@ -193,7 +193,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   timeline: [
     {
       phase: "01",
-      label: "Discovery & Data Audit.",
+      label: "Discovery.",
       tagline: "map the terrain before you build.",
       detail:
         "We read your current forecasting workflow end to end: existing spreadsheets, data sources, and the assumptions baked into each. Then we map exactly where the manual rework happens and where uncertainty is being dropped on the floor.",
