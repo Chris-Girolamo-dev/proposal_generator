@@ -226,6 +226,12 @@ body {
   color: var(--pd-tag);
 }
 
+/* OCR-A face for selected instrument text (footers). Declared after .pd-meta so
+   it overrides the mono family when both classes are on one element. */
+.pd-ocr {
+  font-family: "OCR A Extended", var(--font-plex-mono), ui-monospace, monospace;
+}
+
 /* Section head — strong top hairline with a 56px red index bar (the site's .shead). */
 .pd-shead {
   position: relative;

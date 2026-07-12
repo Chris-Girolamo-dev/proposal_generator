@@ -27,7 +27,7 @@ export function PageShell({
       <CornerGlobe />
       <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <div className="flex flex-1 flex-col">{children}</div>
-      <div className="pd-meta mt-7 flex justify-between border-t border-[var(--pd-line)] pt-4">
+      <div className="pd-meta pd-ocr mt-7 flex justify-between border-t border-[var(--pd-line)] pt-4">
         <span>OPFOR.AI · CLINICAL SUPPLY FORECASTING</span>
         <span>{number} / {total}</span>
       </div>
