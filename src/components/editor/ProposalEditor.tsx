@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Sparkles, Trash2 } from "lucide-react";
 import { updateProposal } from "@/lib/proposal/actions";
+import { generateOpportunities } from "@/lib/proposal/ai";
 import { LogoUpload } from "./LogoUpload";
 import {
   lineTotalCents,
@@ -11,6 +12,7 @@ import {
   formatMoney,
   type BonusItem,
   type CostItem,
+  type NumberedItem,
   type Proposal,
 } from "@/lib/proposal/types";
 
@@ -32,10 +34,45 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   const [renewalCents, setRenewalCents] = useState(proposal.renewal_cents ?? 0);
   const [discountPct, setDiscountPct] = useState(proposal.discount_pct ?? 0);
   const [bonuses, setBonuses] = useState<BonusItem[]>(proposal.bonuses ?? []);
+  const [problems, setProblems] = useState<NumberedItem[]>(proposal.problems ?? []);
   const [variant, setVariant] = useState(proposal.variant ?? "plate-globe");
   const [moat, setMoat] = useState(proposal.moat ?? true);
   const [isPending, startTransition] = useTransition();
   const [savedAt, setSavedAt] = useState<Date | null>(null);
+
+  // Areas-of-Opportunity generation from a pasted sales-call transcript.
+  const [transcript, setTranscript] = useState("");
+  const [generating, setGenerating] = useState(false);
+  const [genError, setGenError] = useState<string | null>(null);
+
+  function renumber(items: NumberedItem[]): NumberedItem[] {
+    return items.map((it, i) => ({ ...it, n: String(i + 1).padStart(2, "0") }));
+  }
+  function updateProblem(index: number, text: string) {
+    setProblems((list) => list.map((it, i) => (i === index ? { ...it, text } : it)));
+  }
+  function addProblem() {
+    setProblems((list) => renumber([...list, { n: "", text: "" }]));
+  }
+  function removeProblem(index: number) {
+    setProblems((list) => renumber(list.filter((_, i) => i !== index)));
+  }
+  async function handleGenerate() {
+    setGenError(null);
+    setGenerating(true);
+    try {
+      const items = await generateOpportunities(transcript, clientCompany);
+      if (items.length === 0) {
+        setGenError("Nothing usable could be drafted from that transcript. Add more detail and retry.");
+      } else {
+        setProblems(items);
+      }
+    } catch (e) {
+      setGenError(e instanceof Error ? e.message : "Generation failed.");
+    } finally {
+      setGenerating(false);
+    }
+  }
 
   function updateCostItem(index: number, patch: Partial<CostItem>) {
     setCostItems((items) => items.map((it, i) => (i === index ? { ...it, ...patch } : it)));
@@ -70,6 +107,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         renewal_cents: renewalCents,
         discount_pct: discountPct,
         bonuses,
+        problems: renumber(problems),
         variant,
         moat,
       });
@@ -189,6 +227,61 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
             value={guarantee}
             onChange={(e) => setGuarantee(e.target.value)}
           />
+        </div>
+      </div>
+
+      {/* ── Areas of opportunity (custom, from call transcript) ──────── */}
+      <div className="card mt-6 p-6">
+        <h2 className="font-display text-base font-semibold text-fg">Areas of opportunity</h2>
+        <p className="mb-4 mt-1 text-xs text-text-3">
+          Paste a sales-call transcript and generate four custom points grounded in what the
+          prospect actually said, or edit the points directly. Keep patient or blinded data out of
+          the transcript.
+        </p>
+
+        <textarea
+          className="input-field"
+          rows={5}
+          placeholder="Paste the call transcript here…"
+          value={transcript}
+          onChange={(e) => setTranscript(e.target.value)}
+        />
+        <div className="mt-2 flex items-center gap-3">
+          <button
+            onClick={handleGenerate}
+            disabled={generating || transcript.trim().length < 60}
+            className="btn-primary"
+          >
+            <Sparkles size={14} /> {generating ? "Generating…" : "Generate from transcript"}
+          </button>
+          <button onClick={addProblem} className="btn-secondary">
+            <Plus size={14} /> Add point
+          </button>
+        </div>
+        {genError && <p className="mt-2 text-xs text-crit">{genError}</p>}
+
+        <div className="mt-4 space-y-3">
+          {problems.map((item, i) => (
+            <div key={i} className="flex items-start gap-3">
+              <span className="mt-2.5 w-6 shrink-0 font-mono text-sm text-text-3">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <textarea
+                className="input-field"
+                rows={2}
+                value={item.text}
+                onChange={(e) => updateProblem(i, e.target.value)}
+              />
+              <button
+                onClick={() => removeProblem(i)}
+                className="btn-secondary mt-1 px-2"
+                aria-label="Remove point"
+                title="Remove point"
+              >
+                <Trash2 size={14} />
+              </button>
+            </div>
+          ))}
         </div>
       </div>
 
