@@ -36,13 +36,16 @@ export interface ProposalHeaderUpdate {
   cost_items: CostItem[];
   bonuses: BonusItem[];
   renewal_cents: number;
+  discount_pct: number;
   variant: string;
   moat: boolean;
 }
 
 export async function updateProposal(id: string, update: ProposalHeaderUpdate) {
   const supabase = await createClient();
-  const total_cents = subtotalCents(update.cost_items);
+  // Stored total reflects the net year-one price (after any discount).
+  const gross = subtotalCents(update.cost_items);
+  const total_cents = gross - Math.round(gross * ((update.discount_pct ?? 0) / 100));
 
   const { error } = await supabase
     .from("proposals")

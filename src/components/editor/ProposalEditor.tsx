@@ -30,6 +30,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   const [guarantee, setGuarantee] = useState(proposal.guarantee);
   const [costItems, setCostItems] = useState<CostItem[]>(proposal.cost_items);
   const [renewalCents, setRenewalCents] = useState(proposal.renewal_cents ?? 0);
+  const [discountPct, setDiscountPct] = useState(proposal.discount_pct ?? 0);
   const [bonuses, setBonuses] = useState<BonusItem[]>(proposal.bonuses ?? []);
   const [variant, setVariant] = useState(proposal.variant ?? "plate-globe");
   const [moat, setMoat] = useState(proposal.moat ?? true);
@@ -67,6 +68,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         guarantee,
         cost_items: costItems,
         renewal_cents: renewalCents,
+        discount_pct: discountPct,
         bonuses,
         variant,
         moat,
@@ -74,6 +76,10 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
       setSavedAt(new Date());
     });
   }
+
+  const grossYearOne = subtotalCents(costItems);
+  const discountCents = discountPct > 0 ? Math.round(grossYearOne * (discountPct / 100)) : 0;
+  const netYearOne = grossYearOne - discountCents;
 
   const previewHref = `/preview?v=${variant}${moat ? "&m=1" : ""}`;
 
@@ -264,8 +270,8 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
           ))}
         </div>
 
-        <div className="mt-4 border-t border-border pt-4">
-          <div className="flex items-end justify-between gap-6">
+        <div className="mt-4 space-y-4 border-t border-border pt-4">
+          <div className="flex flex-wrap items-end gap-6">
             <div>
               <label className="label">Annual renewal — year 2 onward ($)</label>
               <div className="flex items-center gap-2">
@@ -282,21 +288,46 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
                 />
                 <button
                   type="button"
-                  onClick={() => setRenewalCents(Math.round(subtotalCents(costItems) / 2))}
+                  onClick={() => setRenewalCents(Math.round(netYearOne / 2))}
                   className="btn-secondary whitespace-nowrap text-xs"
                 >
                   ½ of year one
                 </button>
               </div>
               <p className="mt-1 text-xs text-text-3">
-                {renewalCents > 0 && subtotalCents(costItems) > 0
-                  ? `${Math.round((renewalCents / subtotalCents(costItems)) * 100)}% of year one, locked for life`
+                {renewalCents > 0 && netYearOne > 0
+                  ? `${Math.round((renewalCents / netYearOne) * 100)}% of year one, locked for life`
                   : "Leave 0 for a single flat price (no renewal tier)."}
               </p>
             </div>
+            <div>
+              <label className="label">Year-one discount (%)</label>
+              <input
+                type="number"
+                min={0}
+                max={100}
+                step={0.1}
+                className="input-field w-28"
+                placeholder="0 = none"
+                value={discountPct ? discountPct : ""}
+                onChange={(e) => setDiscountPct(e.target.value === "" ? 0 : Number(e.target.value))}
+              />
+              <p className="mt-1 text-xs text-text-3">
+                {discountPct > 0 && grossYearOne > 0
+                  ? `Save ${formatMoney(discountCents, proposal.currency)} · shows on the PDF`
+                  : "Blank = no discount on the PDF (the usual case)."}
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-end">
             <span className="font-display text-lg font-semibold text-fg">
               {renewalCents > 0 ? "Year one: " : "Total: "}
-              {formatMoney(subtotalCents(costItems), proposal.currency)}
+              {formatMoney(netYearOne, proposal.currency)}
+              {discountPct > 0 && (
+                <span className="ml-2 text-sm font-normal text-text-3 line-through">
+                  {formatMoney(grossYearOne, proposal.currency)}
+                </span>
+              )}
             </span>
           </div>
         </div>

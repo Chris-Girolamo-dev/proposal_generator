@@ -28,6 +28,7 @@ const mockProposal: Proposal = {
   cost_items: demoCostItems,
   total_cents: subtotalCents(demoCostItems),
   renewal_cents: 3_400_000, // $34,000 — half of the $68,000 year one, locked
+  discount_pct: 0, // overridden by ?d= in preview for testing
   status: "draft",
   // variant/moat here only satisfy the type; the actual edition comes from the
   // ?v= and ?m= query params below.
@@ -42,15 +43,18 @@ const VARIANTS: ProposalVariant[] = ["atlas", "instrument", "plate", "poster", "
 export default async function PreviewPage({
   searchParams,
 }: {
-  searchParams: Promise<{ v?: string; m?: string }>;
+  searchParams: Promise<{ v?: string; m?: string; d?: string }>;
 }) {
-  const { v, m } = await searchParams;
+  const { v, m, d } = await searchParams;
   const variant = VARIANTS.find((name) => name === v) ?? VARIANTS[Number(v) - 1] ?? "atlas";
   // ?m=1 — moat edition: Data boundaries page + moat-backed Why-OPFOR points +
   // roadmap line. Separate from the base edition so both stay reviewable.
   const moat = m === "1";
+  // ?d=15 — preview a year-one discount (blank in real defaults).
+  const discount_pct = d ? Number(d) : 0;
+  const base = { ...mockProposal, discount_pct };
   const proposal = moat
-    ? { ...mockProposal, why_us: { ...mockProposal.why_us, points: MOAT_WHY_US_POINTS } }
-    : mockProposal;
+    ? { ...base, why_us: { ...base.why_us, points: MOAT_WHY_US_POINTS } }
+    : base;
   return <ProposalDocument proposal={proposal} variant={variant} moat={moat} />;
 }

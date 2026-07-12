@@ -18,6 +18,7 @@ export function InvestmentSection({
   bonuses,
   currency,
   renewalCents = 0,
+  discountPct = 0,
   say,
   number = "07",
   total,
@@ -28,6 +29,7 @@ export function InvestmentSection({
   bonuses: BonusItem[];
   currency: string;
   renewalCents?: number;
+  discountPct?: number;
   say?: React.ReactNode;
   number?: string;
   total?: string;
@@ -35,10 +37,17 @@ export function InvestmentSection({
   clientLogoUrl: string | null;
 }) {
   const bonusTotal = bonusTotalCents(bonuses);
-  const yearOne = subtotalCents(items);
+  const yearOneGross = subtotalCents(items);
+  const hasDiscount = discountPct > 0 && yearOneGross > 0;
+  const discountCents = hasDiscount ? Math.round(yearOneGross * (discountPct / 100)) : 0;
+  const yearOne = yearOneGross - discountCents; // net year-one price
   const hasRenewal = renewalCents > 0 && yearOne > 0;
   const renewalPct = hasRenewal ? Math.round((renewalCents / yearOne) * 100) : 0;
   const renewalTag = renewalPct === 50 ? "Half of year one" : `${renewalPct}% of year one`;
+  // Discount stated in both percent and dollars; only rendered when set.
+  const discountLine = hasDiscount
+    ? `${discountPct % 1 === 0 ? discountPct : discountPct.toFixed(1)}% off · save ${formatMoney(discountCents, currency)}`
+    : null;
 
   return (
     <PageShell number={number} total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
@@ -105,6 +114,9 @@ export function InvestmentSection({
               <p className="pd-display text-[22px] font-bold leading-tight tracking-[-0.02em] text-[var(--pd-ink)]">
                 {formatMoney(yearOne, currency)}
               </p>
+              {discountLine && (
+                <p className="pd-meta mt-0.5 normal-case tracking-[.04em] text-[#E5192B]">{discountLine}</p>
+              )}
             </div>
             <div>
               <span className="pd-meta">Annual renewal · year two on</span>
@@ -118,7 +130,12 @@ export function InvestmentSection({
           </div>
         ) : (
           <div className="mt-1 flex items-baseline justify-between border-t border-[var(--pd-line-strong)] pt-2">
-            <span className="pd-meta">Total investment</span>
+            <div>
+              <span className="pd-meta">Total investment</span>
+              {discountLine && (
+                <p className="pd-meta mt-0.5 normal-case tracking-[.04em] text-[#E5192B]">{discountLine}</p>
+              )}
+            </div>
             <span className="pd-display text-[24px] font-bold tracking-[-0.02em] text-[var(--pd-ink)]">
               {formatMoney(yearOne, currency)}
             </span>

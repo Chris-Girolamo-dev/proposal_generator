@@ -90,6 +90,8 @@ export interface Proposal {
   total_cents: number;
   /** Annual renewal price (year two on). 0 = flat annual (no separate renewal tier). */
   renewal_cents: number;
+  /** Year-one discount as a percentage (e.g. 15 = 15% off). 0 = no discount shown. */
+  discount_pct: number;
 
   /** Visual edition of the exported PDF. Editor offers Light ("plate-globe") /
       Dark ("plate-globe-dark"); any ProposalVariant string is accepted. */

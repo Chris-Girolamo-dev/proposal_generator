@@ -137,6 +137,7 @@ export const MOAT_WHY_US_POINTS = [
 export const DEFAULT_PROPOSAL: ProposalDraft = {
   proposal_version: "V1.0",
   renewal_cents: 0, // set per client in the editor (½ of year one, locked)
+  discount_pct: 0, // optional year-one discount; blank hides it on the PDF
   client_company: "[Client Company]",
   client_logo_url: null,
   project_title: "Clinical Supply Forecasting Simulator",
