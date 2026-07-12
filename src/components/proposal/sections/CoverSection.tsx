@@ -47,10 +47,10 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
           {proposal.client_company}
           <span className="block text-[var(--pd-mid)]">{proposal.project_title}</span>
         </h1>
-        <div className="pd-meta pd-ocr mt-5 flex justify-between border-t border-[var(--pd-line)] pt-3">
+        <div className="pd-meta mt-5 flex justify-between border-t border-[var(--pd-line)] pt-3">
           <span>
-            <span className="text-[15px]">{proposal.proposal_number ?? 928801}</span> {stampRest}{" "}
-            Proposal / {proposal.client_company}
+            Proposal <span className="text-[15px]">{proposal.proposal_number ?? 928801}</span>{" "}
+            {stampRest} / {proposal.client_company}
           </span>
           <span>OPFOR SUPPLY</span>
         </div>
