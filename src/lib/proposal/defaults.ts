@@ -20,7 +20,7 @@ export const SECTION_INTROS = {
   opportunity:
     "Forecasting is innately high-leverage. Done well it compounds in your favor; done manually it compounds against you. In your current workflow, a few persistent, high-impact areas are quietly capping accuracy and speed:",
   solution:
-    "Closing these gaps is straightforward, and we have done it many times before. In practice the fix is almost always a combination of clean data pipelines, probabilistic modeling, and repeatable SOPs. Here is what that looks like for you:",
+    "These gaps close the same way every time. Clean inputs, a model that shows its uncertainty, and a process your team owns. Here is what that looks like.",
 } as const;
 
 /**
@@ -166,7 +166,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   benefits: [
     {
       n: "01",
-      text: "A parameterized forecasting model that recomputes instantly when any assumption changes.",
+      text: "A forecasting model that recomputes instantly when any assumption changes.",
     },
     {
       n: "02",
@@ -186,8 +186,8 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     { text: "Custom demand forecasting model calibrated to your protocol & historical data." },
     { text: "Monte Carlo risk engine with configurable service-level and buffer targets." },
     { text: "Interactive scenario-planning dashboard (web-based, access-controlled)." },
-    { text: "Data pipeline connecting your enrollment and inventory sources." },
-    { text: "Documented SOPs so your team can run and update forecasts without us." },
+    { text: "A clean intake for the reports you already export." },
+    { text: "Documentation so your team runs and updates forecasts without us." },
     { text: "Handover training and 30 days of post-launch support." },
   ],
 
@@ -208,7 +208,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       label: "Model Build.",
       tagline: "the forecasting engine, calibrated to you.",
       detail:
-        "We stand up the parameterized forecasting model and Monte Carlo risk engine directly against your historical data, not a generic template.",
+        "We build the forecasting model and Monte Carlo risk engine against your historical data, not a generic template.",
       whyItMatters:
         "Calibrating against your real data means the risk numbers you see are the risk numbers you'll actually face, not generic benchmarks.",
       deliverables: ["Forecasting model", "Monte Carlo risk engine", "Day-4 working review"],
@@ -222,7 +222,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
         "We ship the interactive dashboard, wire up one-click scenario planning, and connect the whole thing to your enrollment and inventory sources.",
       whyItMatters:
         "A one-click scenario tool means you can defend supply decisions in the room, not after the meeting.",
-      deliverables: ["Interactive dashboard", "Scenario planner", "Data pipeline connected"],
+      deliverables: ["Interactive dashboard", "Scenario planner", "Sources connected"],
       duration: "Week 3",
     },
     {
@@ -230,10 +230,10 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       label: "Signal & Warm Handoff.",
       tagline: "proof it holds, then a clean handoff.",
       detail:
-        "We run the model against known outcomes so you see real signal that it holds, not performance we claim on our own docs. Then we document the SOPs your team needs and walk them through owning it.",
+        "We run the model against known outcomes so you see real signal that it holds, not performance we claim on our own docs. Then we document what your team needs and walk them through owning it.",
       whyItMatters:
         "Seeing the model checked against known outcomes before handoff means you inherit a proven system, not an unproven black box.",
-      deliverables: ["Signal report", "Documented SOPs", "Team training", "30-day support"],
+      deliverables: ["Signal report", "Documentation", "Team training", "30-day support"],
       duration: "Week 4",
     },
   ],
@@ -243,11 +243,11 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   why_us: {
     headline: "Why us",
     blurb:
-      "We build AI and forecasting systems for supply-constrained operations. Our work has driven measurable reductions in overage and stockout risk across clinical and commercial supply programs. We pair modeling depth with practical SOPs, so the system keeps working after we leave.",
+      "We build forecasting systems for supply-constrained operations. Our work has driven measurable reductions in overage and stockout risk across clinical and commercial supply programs. We pair modeling depth with a process your team owns, so it keeps working after we leave.",
     stats: [
       { value: "6+ yrs", label: "applying AI to supply and forecasting" },
       { value: "95%+", label: "target service levels engineered into every model" },
-      { value: "End-to-end", label: "from data pipeline to boardroom dashboard" },
+      { value: "End-to-end", label: "from first report to boardroom dashboard" },
     ],
     capabilities: [
       "Demand per *protocol*",

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Upload, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { updateClientLogo } from "@/lib/proposal/actions";
+import { removeLogoBackground } from "@/lib/proposal/remove-logo-bg";
 
 export function LogoUpload({
   proposalId,
@@ -25,13 +26,16 @@ export function LogoUpload({
     setError(null);
     setUploading(true);
 
+    // Auto-strip a baked-in solid background so the mark reads clean on the page.
+    // Falls back to the original file if there's no solid background to remove.
+    const processed = await removeLogoBackground(file);
+
     const supabase = createClient();
-    const ext = file.name.split(".").pop() ?? "png";
-    const path = `${proposalId}/${Date.now()}.${ext}`;
+    const path = `${proposalId}/${Date.now()}.png`;
 
     const { error: uploadError } = await supabase.storage
       .from("client-logos")
-      .upload(path, file, { upsert: true });
+      .upload(path, processed, { upsert: true, contentType: "image/png" });
 
     if (uploadError) {
       setError(uploadError.message);

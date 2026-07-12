@@ -22,7 +22,7 @@ export function WhyUsSection({
         number="06"
         total={total}
         title="Why OPFOR"
-        say={<>Modeling depth,<br />operational SOPs.</>}
+        say={<>Modeling depth.<br />Your process.</>}
       />
 
       <div className="mt-6 grid grid-cols-3 gap-5">
