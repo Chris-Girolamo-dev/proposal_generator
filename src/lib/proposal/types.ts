@@ -64,6 +64,11 @@ export interface Proposal {
   owner_id: string;
   slug: string;
 
+  /** Sequential, never-repeating (DB sequence from 928801). Server-assigned on create. */
+  proposal_number: number;
+  /** Shown beside the number on the cover stamp, e.g. "V1.0". */
+  proposal_version: string;
+
   client_company: string;
   client_logo_url: string | null;
   project_title: string;
@@ -92,7 +97,7 @@ export interface Proposal {
 /** Editable subset used by the proposal editor (excludes server-managed fields). */
 export type ProposalDraft = Omit<
   Proposal,
-  "id" | "owner_id" | "slug" | "total_cents" | "status" | "created_at" | "updated_at"
+  "id" | "owner_id" | "slug" | "proposal_number" | "total_cents" | "status" | "created_at" | "updated_at"
 >;
 
 export const lineTotalCents = (i: CostItem): number => Math.round(i.qty * i.unit_cents);

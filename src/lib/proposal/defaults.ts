@@ -135,6 +135,7 @@ export const MOAT_WHY_US_POINTS = [
 ];
 
 export const DEFAULT_PROPOSAL: ProposalDraft = {
+  proposal_version: "V1.0",
   client_company: "[Client Company]",
   client_logo_url: null,
   project_title: "Clinical Supply Forecasting Simulator",

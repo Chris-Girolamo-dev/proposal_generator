@@ -7,6 +7,8 @@ import { LogoUpload } from "./LogoUpload";
 import { lineTotalCents, subtotalCents, formatMoney, type CostItem, type Proposal } from "@/lib/proposal/types";
 
 export function ProposalEditor({ proposal }: { proposal: Proposal }) {
+  const [proposalNumber, setProposalNumber] = useState(proposal.proposal_number ?? 928801);
+  const [proposalVersion, setProposalVersion] = useState(proposal.proposal_version ?? "V1.0");
   const [clientCompany, setClientCompany] = useState(proposal.client_company);
   const [projectTitle, setProjectTitle] = useState(proposal.project_title);
   const [subtitle, setSubtitle] = useState(proposal.subtitle);
@@ -30,6 +32,8 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   function handleSave() {
     startTransition(async () => {
       await updateProposal(proposal.id, {
+        proposal_number: proposalNumber,
+        proposal_version: proposalVersion,
         client_company: clientCompany,
         project_title: projectTitle,
         subtitle,
@@ -62,6 +66,27 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
 
       <div className="card space-y-5 p-6">
         <LogoUpload proposalId={proposal.id} initialUrl={proposal.client_logo_url} />
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="label">Proposal number</label>
+            {/* Auto-assigned sequentially from 928801 on create; editable, but the DB
+                unique constraint rejects any number already used. */}
+            <input
+              type="number"
+              className="input-field"
+              value={proposalNumber}
+              onChange={(e) => setProposalNumber(Number(e.target.value))}
+            />
+          </div>
+          <div>
+            <label className="label">Version</label>
+            <input
+              className="input-field"
+              value={proposalVersion}
+              onChange={(e) => setProposalVersion(e.target.value)}
+            />
+          </div>
+        </div>
         <div>
           <label className="label">Client company</label>
           <input

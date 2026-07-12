@@ -27,6 +27,8 @@ export async function createProposal() {
 }
 
 export interface ProposalHeaderUpdate {
+  proposal_number: number;
+  proposal_version: string;
   client_company: string;
   project_title: string;
   subtitle: string;

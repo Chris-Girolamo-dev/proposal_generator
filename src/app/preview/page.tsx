@@ -19,6 +19,7 @@ const demoCostItems = [
 
 const mockProposal: Proposal = {
   ...DEFAULT_PROPOSAL,
+  proposal_number: 928801,
   client_company: "Acme Biotech",
   id: "preview",
   owner_id: "preview",
