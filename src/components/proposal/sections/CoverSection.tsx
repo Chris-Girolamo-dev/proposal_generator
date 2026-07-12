@@ -1,18 +1,16 @@
-import { formatMoney, subtotalCents, weeksLabelFromPhases, type Proposal } from "@/lib/proposal/types";
+import type { Proposal } from "@/lib/proposal/types";
 import { PageHeader } from "./PageHeader";
 import { CoverGlobe } from "./CoverGlobe";
 
 // The site's hero, set for print: mono meta blocks top-left/right, an oversized
 // uppercase Space Grotesk headline with a dim second line, an OCR-A tagline, and
-// a bstat-style meta strip pinned to the bottom edge.
+// a bstat-style meta strip pinned to the bottom edge. Deliberately no investment
+// or timeline here — the cost reveal is saved for the Investment page.
 export function CoverSection({ proposal }: { proposal: Proposal }) {
   const proposalDate = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" });
-  const weeksLabel = weeksLabelFromPhases(proposal.timeline);
 
   const meta = [
     { label: "Prepared for", value: proposal.client_company },
-    { label: "Investment", value: formatMoney(subtotalCents(proposal.cost_items), proposal.currency) },
-    { label: "Timeline", value: weeksLabel },
     { label: "Issued", value: proposalDate },
   ];
 
