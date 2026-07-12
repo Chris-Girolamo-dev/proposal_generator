@@ -9,11 +9,13 @@ import { CornerGlobe } from "./CoverGlobe";
  */
 export function PageShell({
   number,
+  total = "09",
   clientCompany,
   clientLogoUrl,
   children,
 }: {
   number: string;
+  total?: string;
   clientCompany: string;
   clientLogoUrl: string | null;
   children: React.ReactNode;
@@ -27,7 +29,7 @@ export function PageShell({
       <div className="flex-1">{children}</div>
       <div className="pd-meta mt-8 flex justify-between border-t border-[var(--pd-line)] pt-4">
         <span>OPFOR.AI · CLINICAL SUPPLY FORECASTING</span>
-        <span>{number} / 09</span>
+        <span>{number} / {total}</span>
       </div>
     </section>
   );

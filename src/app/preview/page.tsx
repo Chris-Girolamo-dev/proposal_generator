@@ -1,5 +1,5 @@
 import { ProposalDocument, type ProposalVariant } from "@/components/proposal/ProposalDocument";
-import { DEFAULT_PROPOSAL } from "@/lib/proposal/defaults";
+import { DEFAULT_PROPOSAL, MOAT_WHY_US_POINTS } from "@/lib/proposal/defaults";
 import { subtotalCents, type Proposal } from "@/lib/proposal/types";
 
 // No-auth, no-DB route: renders the LeftClick-structured / OPFOR-skinned template
@@ -35,9 +35,15 @@ const VARIANTS: ProposalVariant[] = ["atlas", "instrument", "plate", "poster", "
 export default async function PreviewPage({
   searchParams,
 }: {
-  searchParams: Promise<{ v?: string }>;
+  searchParams: Promise<{ v?: string; m?: string }>;
 }) {
-  const { v } = await searchParams;
+  const { v, m } = await searchParams;
   const variant = VARIANTS.find((name) => name === v) ?? VARIANTS[Number(v) - 1] ?? "atlas";
-  return <ProposalDocument proposal={mockProposal} variant={variant} />;
+  // ?m=1 — moat edition: Data boundaries page + moat-backed Why-OPFOR points +
+  // roadmap line. Separate from the base edition so both stay reviewable.
+  const moat = m === "1";
+  const proposal = moat
+    ? { ...mockProposal, why_us: { ...mockProposal.why_us, points: MOAT_WHY_US_POINTS } }
+    : mockProposal;
+  return <ProposalDocument proposal={proposal} variant={variant} moat={moat} />;
 }

@@ -8,11 +8,13 @@ import { PageShell } from "./PageShell";
 export function EngagementSection({
   members,
   phases,
+  total,
   clientCompany,
   clientLogoUrl,
 }: {
   members: TeamMember[];
   phases: TimelinePhase[];
+  total?: string;
   clientCompany: string;
   clientLogoUrl: string | null;
 }) {
@@ -20,9 +22,10 @@ export function EngagementSection({
   const operatorsLabel = `${numberWord(members.length)} operator${members.length === 1 ? "" : "s"}`;
 
   return (
-    <PageShell number="05" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+    <PageShell number="05" total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
       <SectionHeading
         number="05"
+        total={total}
         title="The engagement"
         say={<>Senior team.<br />Narrow focus.</>}
       />

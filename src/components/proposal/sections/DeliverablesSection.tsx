@@ -6,17 +6,20 @@ import { PageShell } from "./PageShell";
 // a shipping manifest rather than a marketing bullet list.
 export function DeliverablesSection({
   items,
+  total,
   clientCompany,
   clientLogoUrl,
 }: {
   items: { text: string }[];
+  total?: string;
   clientCompany: string;
   clientLogoUrl: string | null;
 }) {
   return (
-    <PageShell number="03" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+    <PageShell number="03" total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
       <SectionHeading
         number="03"
+        total={total}
         title="What ships"
         say={<>A working system,<br />not a slide deck.</>}
       />

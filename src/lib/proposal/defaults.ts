@@ -94,6 +94,50 @@ export const DEFAULT_TEAM: TeamMember[] = [
   },
 ];
 
+/**
+ * Moat-edition Why-OPFOR points (docs/OPFOR_Marketing_Soundbites_and_Moat_Analysis
+ * .md.docx). Three architecture-backed points (S2, S3, S9) replace the three most
+ * generic defaults; tone stays matter-of-fact. All claims are status-gated USABLE
+ * NOW; the IRT point uses the doc's cautious phrasing (Medidata live, others
+ * onboarding) and deliberately avoids the "Switzerland" tagline.
+ */
+export const MOAT_WHY_US_POINTS = [
+  {
+    title: "An assumption change becomes an answer in seconds.",
+    description:
+      "Any assumption change re-forecasts in seconds, in your browser. Self-serve, unlimited, no analyst queue.",
+  },
+  {
+    title: "IRT-agnostic by architecture.",
+    description:
+      "A neutral layer over whatever randomization system each study runs. Medidata live today; other formats onboard per study.",
+  },
+  {
+    title: "Calibrated to your data, not a benchmark.",
+    description:
+      "Every model ships trained against your actual historical and protocol data, not a generic industry template.",
+  },
+  {
+    title: "Every forecast is reproducible.",
+    description:
+      "Deterministic engine: any forecast re-derives exactly from its configuration snapshot. Every change is versioned.",
+  },
+  {
+    title: "Decision-ready, or we say so.",
+    description:
+      "If the data can't support a confident forecast at your target service level, we tell you before you pay for a model that can't deliver it.",
+  },
+  {
+    title: "Done with you, not for you.",
+    description:
+      "Your team owns the model, the pipeline, and the documentation when we're done, not us.",
+  },
+];
+
+/** Vision-voiced roadmap line (S1) — "in build", never claimed as shipped. */
+export const MOAT_ROADMAP_NOTE =
+  "What-if copilot: plain-English questions, engine-run answers in seconds. In build now.";
+
 export const DEFAULT_PROPOSAL: ProposalDraft = {
   client_company: "[Client Company]",
   client_logo_url: null,

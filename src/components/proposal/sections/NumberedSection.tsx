@@ -6,6 +6,7 @@ import { PageShell } from "./PageShell";
 // with a mono index number and the item text set large enough to carry the page.
 export function NumberedSection({
   number,
+  total,
   title,
   say,
   intro,
@@ -14,6 +15,7 @@ export function NumberedSection({
   clientLogoUrl,
 }: {
   number: string;
+  total?: string;
   title: React.ReactNode;
   say?: React.ReactNode;
   intro: string;
@@ -22,8 +24,8 @@ export function NumberedSection({
   clientLogoUrl: string | null;
 }) {
   return (
-    <PageShell number={number} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
-      <SectionHeading number={number} title={title} say={say} />
+    <PageShell number={number} total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+      <SectionHeading number={number} total={total} title={title} say={say} />
       <p className="mt-8 max-w-[52ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         {intro}
       </p>

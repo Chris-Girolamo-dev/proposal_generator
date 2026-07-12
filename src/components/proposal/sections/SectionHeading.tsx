@@ -3,16 +3,18 @@
 // two-line aside. All text stays monochrome — red appears only as the rule bar.
 export function SectionHeading({
   number,
+  total = "09",
   title,
   say,
 }: {
   number: string;
+  total?: string;
   title: React.ReactNode;
   say?: React.ReactNode;
 }) {
   return (
     <div className="pd-shead grid grid-cols-12 items-baseline gap-4 pt-5">
-      <span className="pd-meta col-span-2">{number} / 09</span>
+      <span className="pd-meta col-span-2">{number} / {total}</span>
       <h2 className="col-span-7 pd-display text-[34px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
         {title}
       </h2>

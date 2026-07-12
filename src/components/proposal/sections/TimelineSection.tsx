@@ -7,19 +7,22 @@ import { PageShell } from "./PageShell";
 // a mono deliverables readout. 2×2 grid so four weeks land on one page.
 export function TimelineSection({
   phases,
+  total,
   clientCompany,
   clientLogoUrl,
 }: {
   phases: TimelinePhase[];
+  total?: string;
   clientCompany: string;
   clientLogoUrl: string | null;
 }) {
   const weeksLabel = weeksLabelFromPhases(phases);
 
   return (
-    <PageShell number="04" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+    <PageShell number="04" total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
       <SectionHeading
         number="04"
+        total={total}
         title={`${weeksLabel}, week by week`}
         say={<>A phased build.<br />The timetable holds.</>}
       />

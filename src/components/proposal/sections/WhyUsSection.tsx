@@ -7,40 +7,45 @@ import { PageShell } from "./PageShell";
 // bordered mono strip.
 export function WhyUsSection({
   whyUs,
+  total,
+  roadmapNote,
   clientCompany,
   clientLogoUrl,
 }: {
   whyUs: WhyUs;
+  total?: string;
+  roadmapNote?: string;
   clientCompany: string;
   clientLogoUrl: string | null;
 }) {
   return (
-    <PageShell number="06" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+    <PageShell number="06" total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
       <SectionHeading
         number="06"
+        total={total}
         title="Why OPFOR"
         say={<>Modeling depth,<br />operational SOPs.</>}
       />
 
-      <div className="mt-7 grid grid-cols-3 gap-5">
+      <div className="mt-6 grid grid-cols-3 gap-5">
         {whyUs.stats.map((stat, i) => (
-          <div key={i} className="no-break border-t border-[var(--pd-line-strong)] pt-2.5">
+          <div key={i} className="no-break border-t border-[var(--pd-line-strong)] pt-2">
             <p className="pd-display text-[26px] font-bold leading-none tracking-[-0.03em] text-[var(--pd-ink)]">
               {stat.value}
             </p>
-            <p className="pd-meta mt-1.5 normal-case tracking-[.04em]">{stat.label}</p>
+            <p className="pd-meta mt-1 normal-case tracking-[.04em]">{stat.label}</p>
           </div>
         ))}
       </div>
 
-      <p className="mt-7 max-w-[58ch] text-[12.5px] leading-[1.6] text-[var(--pd-tag)]">
+      <p className="mt-6 max-w-[58ch] text-[12.5px] leading-[1.6] text-[var(--pd-tag)]">
         {whyUs.blurb}
       </p>
 
       {whyUs.points && whyUs.points.length > 0 && (
-        <div className="mt-6 grid grid-cols-2 gap-x-8">
+        <div className="mt-5 grid grid-cols-2 gap-x-8">
           {whyUs.points.map((point, i) => (
-            <div key={i} className="no-break border-t border-[var(--pd-line)] py-2.5">
+            <div key={i} className="no-break border-t border-[var(--pd-line)] py-2">
               <span className="pd-meta">{String(i + 1).padStart(2, "0")}</span>
               <p className="mt-1 pd-display text-[14px] font-semibold text-[var(--pd-ink)]">
                 {point.title}
@@ -54,18 +59,24 @@ export function WhyUsSection({
       )}
 
       {whyUs.capabilities && whyUs.capabilities.length > 0 && (
-        <div className="mt-5 border-y border-[var(--pd-line-strong)]">
+        <div className="mt-4 border-y border-[var(--pd-line-strong)]">
           <div className="flex flex-wrap">
             {whyUs.capabilities.map((c, i) => (
               <span
                 key={i}
-                className="pd-meta border-r border-[var(--pd-line)] px-3.5 py-1.5 last:border-r-0"
+                className="pd-meta border-r border-[var(--pd-line)] px-3.5 py-1 last:border-r-0"
               >
                 {c}
               </span>
             ))}
           </div>
         </div>
+      )}
+
+      {roadmapNote && (
+        <p className="pd-meta mt-2.5 normal-case tracking-[.04em]">
+          <span className="uppercase tracking-[.08em]">On the roadmap</span> · {roadmapNote}
+        </p>
       )}
     </PageShell>
   );

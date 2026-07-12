@@ -7,18 +7,23 @@ import { PageShell } from "./PageShell";
 export function NextStepsSection({
   steps,
   guarantee,
+  number = "08",
+  total,
   clientCompany,
   clientLogoUrl,
 }: {
   steps: { step: string }[];
   guarantee: string;
+  number?: string;
+  total?: string;
   clientCompany: string;
   clientLogoUrl: string | null;
 }) {
   return (
-    <PageShell number="08" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+    <PageShell number={number} total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
       <SectionHeading
-        number="08"
+        number={number}
+        total={total}
         title="Next steps"
         say={<>Three moves.<br />Then we build.</>}
       />

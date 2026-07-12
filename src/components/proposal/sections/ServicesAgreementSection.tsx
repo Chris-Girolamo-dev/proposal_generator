@@ -9,11 +9,15 @@ import { CornerGlobe } from "./CoverGlobe";
 // document: mono clause indices, hairline rules, ruled signature lines.
 export function ServicesAgreementSection({
   clauses,
+  number = "09",
+  total = "09",
   clientCompany,
   clientLogoUrl,
   providerName = "OPFOR",
 }: {
   clauses: AgreementClause[];
+  number?: string;
+  total?: string;
   clientCompany: string;
   clientLogoUrl: string | null;
   providerName?: string;
@@ -31,7 +35,8 @@ export function ServicesAgreementSection({
       <CornerGlobe />
       <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <SectionHeading
-        number="09"
+        number={number}
+        total={total}
         title="Services agreement"
         say={<>Executed off-platform<br />by client legal.</>}
       />
@@ -109,7 +114,7 @@ export function ServicesAgreementSection({
 
       <div className="pd-meta mt-12 flex justify-between border-t border-[var(--pd-line)] pt-4">
         <span>OPFOR.AI · CLINICAL SUPPLY FORECASTING</span>
-        <span>09 / 09</span>
+        <span>{number} / {total}</span>
       </div>
     </section>
   );

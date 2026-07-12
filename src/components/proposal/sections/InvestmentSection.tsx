@@ -17,21 +17,26 @@ export function InvestmentSection({
   items,
   bonuses,
   currency,
+  number = "07",
+  total,
   clientCompany,
   clientLogoUrl,
 }: {
   items: CostItem[];
   bonuses: BonusItem[];
   currency: string;
+  number?: string;
+  total?: string;
   clientCompany: string;
   clientLogoUrl: string | null;
 }) {
   const bonusTotal = bonusTotalCents(bonuses);
 
   return (
-    <PageShell number="07" clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
+    <PageShell number={number} total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
       <SectionHeading
-        number="07"
+        number={number}
+        total={total}
         title="The investment"
         say={<>One-time build.<br />Fixed price.</>}
       />
