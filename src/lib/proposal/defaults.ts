@@ -98,7 +98,8 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   client_company: "[Client Company]",
   client_logo_url: null,
   project_title: "Clinical Supply Forecasting Simulator",
-  subtitle: "A purpose-built demand forecasting and scenario-planning engine for your program.",
+  subtitle:
+    "A purpose-built demand forecasting and scenario-planning engine that grows with your team, and your clinical programs.",
 
   // Areas of opportunity (was "problems")
   problems: [
@@ -136,7 +137,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     },
     {
       n: "04",
-      text: "A shared, auditable dashboard that gives supply, clinical, and finance one aligned number.",
+      text: "A shared, auditable dashboard that gives supply, clinical, and finance one aligned number, in demand and dollars.",
     },
   ],
 
