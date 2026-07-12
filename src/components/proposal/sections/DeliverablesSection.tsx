@@ -23,7 +23,7 @@ export function DeliverablesSection({
         title="What ships"
         say={<>A working system,<br />not a slide deck.</>}
       />
-      <p className="mt-8 max-w-[52ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
+      <p className="mt-8 text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         Everything below is included in the engagement and itemized here exactly as it will be
         delivered.
       </p>

@@ -335,6 +335,8 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     { label: "Testimonial credit off your next renewal", value_cents: 700_000, tag: "On renewal" },
     { label: "Unlimited scenario breakdown videos", value_cents: 295_000 },
     { label: "Weekly working call, one hour a week", value_cents: 1_404_000 },
+    { label: "White-glove onboarding", value_cents: 450_000 },
+    { label: "(5) Live training sessions", value_cents: 200_000 },
     { label: "SOC 2-compliant host-for-you", value_cents: 74_900 },
     { label: "(2) RTSM/IRT integration fee waivers ($5,680 each)", value_cents: 1_136_000, tag: "On renewal" },
     { label: "Unlimited Anthropic API usage", value_cents: 120_000 },

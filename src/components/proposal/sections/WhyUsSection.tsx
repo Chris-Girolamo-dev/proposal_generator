@@ -36,7 +36,7 @@ export function WhyUsSection({
         ))}
       </div>
 
-      <p className="mt-6 max-w-[58ch] text-[12.5px] leading-[1.6] text-[var(--pd-tag)]">
+      <p className="mt-6 text-[12.5px] leading-[1.6] text-[var(--pd-tag)]">
         {whyUs.blurb}
       </p>
 

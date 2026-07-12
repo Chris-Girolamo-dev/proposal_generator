@@ -359,6 +359,25 @@ body {
 .proposal-doc[data-variant="plate-globe"] > section:first-child .pd-globe-corner,
 .proposal-doc[data-variant="plate-globe-dark"] > section:first-child .pd-globe-corner { display: none; }
 
+/* Cover tagline. On plate-globe covers a right-floated shape makes the tagline
+   wrap as a right-leaning staircase around the globe's lower-left arc (each lower
+   line ends further right), kept ~1in clear of the linework. The polygon is tuned
+   to the measured globe geometry (disc centered ~617,365 on the page, r~219; the
+   tagline top at y~547 sits in the lower-left arc). Other variants keep a plain
+   readable measure. */
+.pd-tagline { max-width: 42ch; }
+.pd-tagline-shape { display: none; }
+.proposal-doc[data-variant="plate-globe"] .pd-tagline,
+.proposal-doc[data-variant="plate-globe-dark"] .pd-tagline { max-width: none; }
+.proposal-doc[data-variant="plate-globe"] .pd-tagline-shape,
+.proposal-doc[data-variant="plate-globe-dark"] .pd-tagline-shape {
+  display: block;
+  float: right;
+  width: 353px;
+  height: 138px;
+  shape-outside: polygon(0 0, 353px 0, 353px 138px, 205px 138px);
+}
+
 /* Print — proposal document exports to PDF via a server-rendered route in this same app.
    Keep pages white regardless of light/dark viewer theme. */
 @media print {

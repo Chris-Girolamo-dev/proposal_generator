@@ -26,7 +26,7 @@ export function NumberedSection({
   return (
     <PageShell number={number} total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
       <SectionHeading number={number} total={total} title={title} say={say} />
-      <p className="mt-8 max-w-[52ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
+      <p className="mt-8 text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         {intro}
       </p>
 
@@ -39,7 +39,7 @@ export function NumberedSection({
             }`}
           >
             <span className="pd-meta col-span-1 pt-1">{item.n}</span>
-            <p className="col-span-10 max-w-[58ch] pd-display text-[19px] font-medium leading-[1.35] tracking-[-0.01em] text-[var(--pd-ink)]">
+            <p className="col-span-10 pd-display text-[19px] font-medium leading-[1.35] tracking-[-0.01em] text-[var(--pd-ink)]">
               {item.text}
             </p>
           </div>

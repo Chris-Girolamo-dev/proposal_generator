@@ -41,7 +41,7 @@ export function ServicesAgreementSection({
         say={<>Executed off-platform<br />by client legal.</>}
       />
 
-      <div className="mt-8 max-w-[68ch]">
+      <div className="mt-8">
         <p className="text-[12px] leading-[1.6] text-[var(--pd-tag)]">
           This Agreement is entered into as of {effectiveDate} (the &ldquo;Effective Date&rdquo;)
           by and between{" "}

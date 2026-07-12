@@ -46,7 +46,7 @@ export function DataBoundariesSection({
         title="Data boundaries"
         say={<>What we hold.<br />What we never touch.</>}
       />
-      <p className="mt-8 max-w-[56ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
+      <p className="mt-8 text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         OPFOR is planning and decision support. The boundary below is architectural, not policy.
       </p>
 
@@ -71,7 +71,7 @@ export function DataBoundariesSection({
         <p className="pd-display text-[15px] font-semibold text-[var(--pd-ink)]">
           Out of GxP scope by design
         </p>
-        <p className="mt-1.5 max-w-[62ch] text-[12px] leading-[1.55] text-[var(--pd-tag)]">
+        <p className="mt-1.5 text-[12px] leading-[1.55] text-[var(--pd-tag)]">
           OPFOR is never a system of record and performs no GxP activity. It ingests only
           decision-support exports your team already receives. No source documents. Adoption does
           not wait on a computerized-system validation project.

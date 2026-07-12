@@ -55,11 +55,19 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
             Proposal <span className="text-[15px]">{proposal.proposal_number ?? 928801}</span>{" "}
             {stampRest}
           </span>
-          <span>OPFOR SUPPLY</span>
         </div>
         {proposal.subtitle && (
-          <p className="pd-tag mt-10 max-w-[38ch] text-[13px] leading-[1.6]">
-            {proposal.subtitle}
+          <p className="pd-tag pd-tagline mt-10 text-[15px] leading-[1.6]">
+            <span className="pd-tagline-shape" aria-hidden="true" />
+            {proposal.subtitle.split(/(for life)/i).map((seg, i) =>
+              /^for life$/i.test(seg) ? (
+                <span key={i} className="text-[#E5192B]">
+                  {seg}
+                </span>
+              ) : (
+                seg
+              ),
+            )}
           </p>
         )}
       </div>

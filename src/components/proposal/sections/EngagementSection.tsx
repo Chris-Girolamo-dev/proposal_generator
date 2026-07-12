@@ -35,7 +35,7 @@ export function EngagementSection({
         team, <span className="text-[var(--pd-mid)]">{weeksLabel}.</span>
       </h3>
 
-      <p className="mt-6 max-w-[52ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
+      <p className="mt-6 text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         {operatorsLabel} work directly with your team for {weeksLabel}: one leads the engagement
         end to end; the other builds the forecasting model and integrates it against your live
         data. We run this with you, not for you: one question, {weeksLabel}, and it is the only
@@ -51,7 +51,7 @@ export function EngagementSection({
             className="no-break grid grid-cols-12 gap-4 border-t border-[var(--pd-line)] py-4"
           >
             <span className="pd-meta col-span-2 pt-0.5">{m.badge}</span>
-            <div className="col-span-10 max-w-[62ch]">
+            <div className="col-span-10">
               <p className="pd-display text-[15px] font-semibold text-[var(--pd-ink)]">{m.role}</p>
               <p className="mt-1 text-[12.5px] leading-[1.6] text-[var(--pd-dim)]">
                 {m.description}
@@ -61,7 +61,7 @@ export function EngagementSection({
         ))}
         <div className="no-break grid grid-cols-12 gap-4 border-y border-[var(--pd-line)] py-4">
           <span className="pd-meta col-span-2 pt-0.5">Scope</span>
-          <div className="col-span-10 max-w-[62ch]">
+          <div className="col-span-10">
             <p className="pd-display text-[15px] font-semibold text-[var(--pd-ink)]">Fixed scope</p>
             <p className="mt-1 text-[12.5px] leading-[1.6] text-[var(--pd-dim)]">
               {phases.length} build phases over {weeksLabel}, described in full in the plan.

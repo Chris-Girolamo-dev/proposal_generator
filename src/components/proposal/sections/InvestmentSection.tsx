@@ -73,7 +73,7 @@ export function InvestmentSection({
         }
       />
 
-      <div className="no-break mt-3 max-w-md">
+      <div className="no-break mt-3 max-w-2xl">
         {items.map((item, i) => (
           <div
             key={i}
@@ -84,6 +84,9 @@ export function InvestmentSection({
             <div>
               <p className="text-[13.5px] text-[var(--pd-ink)]">
                 {item.label}
+                {!item.optional && item.qty > 1 && (
+                  <span className="pd-meta ml-2">Qty {item.qty}</span>
+                )}
                 {item.optional && <span className="pd-meta ml-2">Optional</span>}
               </p>
               {item.optional && item.description && (
@@ -91,7 +94,6 @@ export function InvestmentSection({
                   {item.description}
                 </p>
               )}
-              {!item.optional && item.qty > 1 && <p className="pd-meta mt-0.5">Qty {item.qty}</p>}
             </div>
             <span
               className={`pd-meta shrink-0 text-[12px] normal-case ${
@@ -108,32 +110,34 @@ export function InvestmentSection({
           // Two-tier: year one beside the locked half-price renewal. Juxtaposing the
           // two numbers, with the renewal drop called out in red, makes the recurring
           // discount the thing the eye lands on.
-          <div className="mt-1 grid grid-cols-2 gap-6 border-t border-[var(--pd-line-strong)] pt-2">
-            <div>
+          <div className="mt-1 border-t border-[var(--pd-line-strong)] pt-2">
+            <div className="flex items-baseline justify-between gap-6">
               <span className="pd-meta">Year one</span>
-              <p className="pd-display text-[22px] font-bold leading-tight tracking-[-0.02em] text-[var(--pd-ink)]">
+              <span className="pd-display text-[22px] font-bold leading-tight tracking-[-0.02em] text-[var(--pd-ink)]">
                 {formatMoney(yearOne, currency)}
-              </p>
-              {discountLine && (
-                <p className="pd-meta mt-0.5 normal-case tracking-[.04em] text-[#E5192B]">{discountLine}</p>
-              )}
+              </span>
             </div>
-            <div>
+            {discountLine && (
+              <p className="pd-meta mt-0.5 normal-case tracking-[.04em] text-right text-[#E5192B]">
+                {discountLine}
+              </p>
+            )}
+            <div className="mt-2 flex items-baseline justify-between gap-6 border-t border-[var(--pd-line)] pt-2">
               <span className="pd-meta">Annual renewal · year two on</span>
-              <p className="pd-display text-[22px] font-bold leading-tight tracking-[-0.02em] text-[var(--pd-ink)]">
+              <span className="pd-display text-[22px] font-bold leading-tight tracking-[-0.02em] text-[var(--pd-ink)]">
                 {formatMoney(renewalCents, currency)}
-              </p>
-              <p className="pd-meta mt-0.5 normal-case tracking-[.04em] text-[#E5192B]">
-                {renewalTag}, locked for life
-              </p>
+              </span>
             </div>
+            <p className="pd-meta mt-0.5 tracking-[.04em] text-right" style={{ color: "#E5192B" }}>
+              {renewalTag}, locked for life
+            </p>
           </div>
         ) : (
           <div className="mt-1 flex items-baseline justify-between border-t border-[var(--pd-line-strong)] pt-2">
             <div>
               <span className="pd-meta">Total investment</span>
               {discountLine && (
-                <p className="pd-meta mt-0.5 normal-case tracking-[.04em] text-[#E5192B]">{discountLine}</p>
+                <p className="pd-meta mt-0.5 tracking-[.04em]" style={{ color: "#E5192B" }}>{discountLine}</p>
               )}
             </div>
             <span className="pd-display text-[24px] font-bold tracking-[-0.02em] text-[var(--pd-ink)]">
@@ -144,7 +148,7 @@ export function InvestmentSection({
       </div>
 
       {bonuses.length > 0 && (
-        <div className="pd-shead mt-3 pt-1.5">
+        <div className="pd-shead mt-3 pt-5">
           <h3 className="pd-display text-[25px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
             The bonuses<span className="text-[var(--pd-mid)]">, yours with the build.</span>
           </h3>
