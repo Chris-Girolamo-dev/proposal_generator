@@ -28,7 +28,7 @@ export function PageHeader({
             (per user direction; the glow variant is retired from the doc). */}
         <Image
           src="/brand/logo/OPFOR_LOGO_NEW_CROPPED.png"
-          alt="OPFOR.ai"
+          alt="OPFOR Supply"
           width={1066}
           height={268}
           className="h-7 w-auto"

@@ -113,7 +113,7 @@ export function ServicesAgreementSection({
       </div>
 
       <div className="pd-meta pd-ocr mt-7 flex justify-between border-t border-[var(--pd-line)] pt-4">
-        <span>OPFOR.AI · CLINICAL SUPPLY FORECASTING</span>
+        <span>OPFOR SUPPLY · CLINICAL SUPPLY FORECASTING</span>
         <span>{number} / {total}</span>
       </div>
     </section>

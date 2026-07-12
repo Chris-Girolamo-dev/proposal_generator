@@ -49,7 +49,7 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
         </h1>
         <div className="pd-meta mt-5 flex justify-between border-t border-[var(--pd-line)] pt-3">
           <span>{stamp} Proposal / {proposal.client_company}</span>
-          <span>OPFOR.AI</span>
+          <span>OPFOR SUPPLY</span>
         </div>
         {proposal.subtitle && (
           <p className="pd-tag mt-10 max-w-[38ch] text-[13px] leading-[1.6]">

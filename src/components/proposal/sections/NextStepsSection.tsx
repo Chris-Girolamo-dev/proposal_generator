@@ -56,7 +56,7 @@ export function NextStepsSection({
             Supply the world<span className="text-[#E5192B]">.</span>
           </span>
         </p>
-        <p className="pd-meta mt-4">info@opforsupply.com · opfor.ai</p>
+        <p className="pd-meta mt-4">info@opforsupply.com · opforsupply.com</p>
       </div>
     </PageShell>
   );
