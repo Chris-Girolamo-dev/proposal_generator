@@ -8,9 +8,9 @@ import { CoverGlobe } from "./CoverGlobe";
 // or timeline here — the cost reveal is saved for the Investment page.
 export function CoverSection({ proposal }: { proposal: Proposal }) {
   const proposalDate = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" });
-  // Cover stamp: [928801 V1.0 DD MM YYYY], numbered by a DB sequence so it never repeats.
+  // Cover stamp: [928801 V1.0 MM DD YYYY], numbered by a DB sequence so it never repeats.
   const issued = proposal.created_at ? new Date(proposal.created_at) : new Date();
-  const stamp = `[${proposal.proposal_number ?? 928801} ${proposal.proposal_version ?? "V1.0"} ${String(issued.getDate()).padStart(2, "0")} ${String(issued.getMonth() + 1).padStart(2, "0")} ${issued.getFullYear()}]`;
+  const stamp = `[${proposal.proposal_number ?? 928801} ${proposal.proposal_version ?? "V1.0"} ${String(issued.getMonth() + 1).padStart(2, "0")} ${String(issued.getDate()).padStart(2, "0")} ${issued.getFullYear()}]`;
 
   const meta = [
     { label: "Prepared for", value: proposal.client_company },
