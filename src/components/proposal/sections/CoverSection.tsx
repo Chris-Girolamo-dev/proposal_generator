@@ -7,14 +7,17 @@ import { CoverGlobe } from "./CoverGlobe";
 // a bstat-style meta strip pinned to the bottom edge. Deliberately no investment
 // or timeline here — the cost reveal is saved for the Investment page.
 export function CoverSection({ proposal }: { proposal: Proposal }) {
-  const proposalDate = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" });
-  // Cover stamp: 928801 V1.0 MM DD YYYY (no brackets; number set larger). Numbered by a DB sequence so it never repeats.
+  // Cover date: DD MMM YYYY, e.g. "12 JUL 2026" (day first, three-letter month). Used
+  // on the stamp line and the Issued footer so both read the same.
   const issued = proposal.created_at ? new Date(proposal.created_at) : new Date();
-  const stampRest = `${proposal.proposal_version ?? "V1.0"} ${String(issued.getMonth() + 1).padStart(2, "0")} ${String(issued.getDate()).padStart(2, "0")} ${issued.getFullYear()}`;
+  const issuedDate = `${String(issued.getDate()).padStart(2, "0")} ${issued
+    .toLocaleDateString("en-US", { month: "short" })
+    .toUpperCase()} ${issued.getFullYear()}`;
+  const stampRest = `${proposal.proposal_version ?? "V1.0"} ${issuedDate}`;
 
   const meta = [
     { label: "Prepared for", value: proposal.client_company },
-    { label: "Issued", value: proposalDate },
+    { label: "Issued", value: issuedDate },
   ];
 
   return (
@@ -26,7 +29,7 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
         clientCompany={proposal.client_company}
         clientLogoUrl={proposal.client_logo_url}
         noBorder
-        trailing={<p className="pd-meta">Proposal / {proposalDate}</p>}
+        trailing={<p className="pd-meta">Proposal / {issuedDate}</p>}
       />
 
       {/* mt-2 (was mt-14): the rule sits ~1/2in higher, tight under the brand row,
@@ -50,7 +53,7 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
         <div className="pd-meta mt-5 flex justify-between border-t border-[var(--pd-line)] pt-3">
           <span>
             Proposal <span className="text-[15px]">{proposal.proposal_number ?? 928801}</span>{" "}
-            {stampRest} / {proposal.client_company}
+            {stampRest}
           </span>
           <span>OPFOR SUPPLY</span>
         </div>

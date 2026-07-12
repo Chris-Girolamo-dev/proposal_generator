@@ -312,7 +312,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     "If the delivered model does not hold to the agreed service-level target on validation data, we keep working at no additional cost until it does.",
 
   cost_items: [
-    { label: "Clinical Supply Forecasting Simulator", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 0 },
+    { label: "OPFOR Genesis Clinical Supply Forecasting Simulator", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 0 },
     {
       label: "IRT integration",
       description: "Optional. Billed per integration; refunded onto your following-year renewal.",
