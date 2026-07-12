@@ -15,7 +15,7 @@ const CLAIMS = [
   },
   {
     title: "Your protocol never enters the product",
-    body: "There is no document upload. Setup consumes planning parameters only: countries, visit schedule, kit types. Drafting happens with you, outside the product.",
+    body: "There is no document upload. Setup consumes planning parameters only: countries, visit schedule, kit types. Drafting happens with you, outside the product. Blinded data is firewalled the same way: reduced in your browser, on your machine, and never transmitted to us or stored.",
   },
   {
     title: "Counts, not people",
