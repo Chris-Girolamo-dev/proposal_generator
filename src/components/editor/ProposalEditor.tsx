@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Plus, Sparkles, Trash2 } from "lucide-react";
+import { Plus, RotateCcw, Sparkles, Trash2 } from "lucide-react";
 import { updateProposal } from "@/lib/proposal/actions";
 import { generateOpportunities } from "@/lib/proposal/ai";
+import { DEFAULT_PROPOSAL } from "@/lib/proposal/defaults";
 import { LogoUpload } from "./LogoUpload";
 import {
   lineTotalCents,
@@ -56,6 +57,15 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   }
   function removeProblem(index: number) {
     setProblems((list) => renumber(list.filter((_, i) => i !== index)));
+  }
+  const defaultProblems = DEFAULT_PROPOSAL.problems;
+  function resetProblemToDefault(index: number) {
+    const def = defaultProblems[index];
+    if (!def) return;
+    setProblems((list) => list.map((it, i) => (i === index ? { ...it, text: def.text } : it)));
+  }
+  function resetAllProblemsToDefault() {
+    setProblems(renumber(defaultProblems.map((p) => ({ ...p }))));
   }
   async function handleGenerate() {
     setGenError(null);
@@ -257,31 +267,53 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
           <button onClick={addProblem} className="btn-secondary">
             <Plus size={14} /> Add point
           </button>
+          <button
+            onClick={resetAllProblemsToDefault}
+            className="btn-secondary"
+            title="Replace all points with the default copy"
+          >
+            <RotateCcw size={14} /> Reset all to default
+          </button>
         </div>
         {genError && <p className="mt-2 text-xs text-crit">{genError}</p>}
 
         <div className="mt-4 space-y-3">
-          {problems.map((item, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <span className="mt-2.5 w-6 shrink-0 font-mono text-sm text-text-3">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <textarea
-                className="input-field"
-                rows={2}
-                value={item.text}
-                onChange={(e) => updateProblem(i, e.target.value)}
-              />
-              <button
-                onClick={() => removeProblem(i)}
-                className="btn-secondary mt-1 px-2"
-                aria-label="Remove point"
-                title="Remove point"
-              >
-                <Trash2 size={14} />
-              </button>
-            </div>
-          ))}
+          {problems.map((item, i) => {
+            const def = defaultProblems[i];
+            const isDefault = def ? item.text.trim() === def.text.trim() : false;
+            return (
+              <div key={i} className="flex items-start gap-3">
+                <span className="mt-2.5 w-6 shrink-0 font-mono text-sm text-text-3">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <textarea
+                  className="input-field"
+                  rows={2}
+                  value={item.text}
+                  onChange={(e) => updateProblem(i, e.target.value)}
+                />
+                {def && (
+                  <button
+                    onClick={() => resetProblemToDefault(i)}
+                    disabled={isDefault}
+                    className="btn-secondary mt-1 px-2 disabled:opacity-40"
+                    aria-label="Reset this point to default"
+                    title={isDefault ? "Already the default copy" : "Reset this point to the default copy"}
+                  >
+                    <RotateCcw size={14} />
+                  </button>
+                )}
+                <button
+                  onClick={() => removeProblem(i)}
+                  className="btn-secondary mt-1 px-2"
+                  aria-label="Remove point"
+                  title="Remove point"
+                >
+                  <Trash2 size={14} />
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
 
