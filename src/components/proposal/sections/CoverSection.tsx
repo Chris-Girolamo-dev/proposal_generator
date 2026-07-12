@@ -8,9 +8,9 @@ import { CoverGlobe } from "./CoverGlobe";
 // or timeline here — the cost reveal is saved for the Investment page.
 export function CoverSection({ proposal }: { proposal: Proposal }) {
   const proposalDate = new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" });
-  // Cover stamp: [928801 V1.0 MM DD YYYY], numbered by a DB sequence so it never repeats.
+  // Cover stamp: 928801 V1.0 MM DD YYYY (no brackets; number set larger). Numbered by a DB sequence so it never repeats.
   const issued = proposal.created_at ? new Date(proposal.created_at) : new Date();
-  const stamp = `[${proposal.proposal_number ?? 928801} ${proposal.proposal_version ?? "V1.0"} ${String(issued.getMonth() + 1).padStart(2, "0")} ${String(issued.getDate()).padStart(2, "0")} ${issued.getFullYear()}]`;
+  const stampRest = `${proposal.proposal_version ?? "V1.0"} ${String(issued.getMonth() + 1).padStart(2, "0")} ${String(issued.getDate()).padStart(2, "0")} ${issued.getFullYear()}`;
 
   const meta = [
     { label: "Prepared for", value: proposal.client_company },
@@ -48,7 +48,10 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
           <span className="block text-[var(--pd-mid)]">{proposal.project_title}</span>
         </h1>
         <div className="pd-meta pd-ocr mt-5 flex justify-between border-t border-[var(--pd-line)] pt-3">
-          <span>{stamp} Proposal / {proposal.client_company}</span>
+          <span>
+            <span className="text-[15px]">{proposal.proposal_number ?? 928801}</span> {stampRest}{" "}
+            Proposal / {proposal.client_company}
+          </span>
           <span>OPFOR SUPPLY</span>
         </div>
         {proposal.subtitle && (
