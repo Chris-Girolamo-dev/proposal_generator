@@ -330,7 +330,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     { label: "Unlimited studies, for life", tag: "For life" },
     { label: "Unlimited seats, for life", tag: "For life" },
     // Price-lock value per user.
-    { label: "Locked-for-life renewal: your annual price never increases", value_cents: 325_000, tag: "Guaranteed" },
+    { label: "Locked-for-life renewal: your annual price never increases" },
     { label: "Testimonial credit off your next renewal", value_cents: 700_000, tag: "On renewal" },
     { label: "Unlimited scenario breakdown videos", value_cents: 295_000 },
     { label: "Weekly working call, one hour a week", value_cents: 1_404_000 },
