@@ -19,7 +19,7 @@ const CLAIMS = [
   },
   {
     title: "Counts, not people",
-    body: "The subject report is reduced to per-site, per-month counts in your browser. Only the counts leave your machine. No individual subject record is stored; the stored structure cannot describe a person.",
+    body: "The subject report is reduced to per-site, per-month counts in your browser. Only the counts leave your machine. No individual subject record is stored.",
   },
   {
     title: "No treatment-arm data, in any mode",
