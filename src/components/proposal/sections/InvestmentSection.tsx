@@ -168,7 +168,7 @@ export function InvestmentSection({
       )}
 
       <p className="pd-meta mt-1">
-        50% at signature · balance across Q3 and Q4 · quarterly thereafter · Net 30
+        50% at signature · balance across Q3 and Q4 · renewals billed annually in advance · Net 30
       </p>
     </PageShell>
   );

@@ -36,7 +36,7 @@ export const DEFAULT_SERVICES_AGREEMENT: AgreementClause[] = [
     "Client will pay the fees set out in the Investment section above.",
   ] },
   { number: "2.2", title: "Invoicing", body: [
-    "Provider will invoice fifty percent (50%) of first-year fees upon execution of this Agreement, and the remainder in two equal installments invoiced in the third and fourth calendar quarters of the first year. Thereafter, fees are invoiced quarterly in advance. Payment is due within thirty (30) days of the invoice date.",
+    "Provider will invoice fifty percent (50%) of first-year fees upon execution of this Agreement, and the remainder in two equal installments invoiced in the third and fourth calendar quarters of the first year. Thereafter, the annual renewal fee is invoiced in full, in advance, at the start of each renewal year. Payment is due within thirty (30) days of the invoice date.",
   ] },
   { number: "3.1", title: "Payment Terms", body: [
     "Late payments accrue interest at 1.5% per month, or the maximum allowed by law, whichever is lower.",
