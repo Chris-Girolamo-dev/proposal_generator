@@ -10,7 +10,7 @@
   font-display: swap;
 }
 
-/* Semantic Tailwind utilities — map tokens.css primitives to bg-*/text-*/border-* utilities.
+/* Semantic Tailwind utilities — map tokens.css primitives to bg-, text-, and border- utilities.
    MUST stay in @theme inline: a plain @theme bakes the value at build time and light/dark
    (driven by [data-theme] on <html>) would never re-resolve. */
 @theme inline {
