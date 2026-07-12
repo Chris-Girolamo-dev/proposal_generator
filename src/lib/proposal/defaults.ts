@@ -142,7 +142,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   ],
 
   deliverables: [
-    { text: "Custom demand forecasting model calibrated to your protocol and historical data." },
+    { text: "Custom demand forecasting model calibrated to your protocol & historical data." },
     { text: "Monte Carlo risk engine with configurable service-level and buffer targets." },
     { text: "Interactive scenario-planning dashboard (web-based, access-controlled)." },
     { text: "Data pipeline connecting your enrollment and inventory sources." },

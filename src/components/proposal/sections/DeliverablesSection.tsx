@@ -29,13 +29,13 @@ export function DeliverablesSection({
         {items.map((item, i) => (
           <div
             key={i}
-            className={`no-break grid grid-cols-12 items-baseline gap-4 px-5 py-4 ${
+            className={`no-break flex items-baseline gap-5 px-5 py-4 ${
               i > 0 ? "border-t border-[var(--pd-line)]" : ""
             }`}
           >
-            <span className="pd-meta col-span-1">{String(i + 1).padStart(2, "0")}</span>
-            <p className="col-span-9 text-[13.5px] leading-[1.5] text-[var(--pd-ink)]">{item.text}</p>
-            <span className="pd-meta col-span-2 text-right">Included</span>
+            <span className="pd-meta w-6 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+            <p className="flex-1 text-[13px] leading-[1.5] text-[var(--pd-ink)]">{item.text}</p>
+            <span className="pd-meta shrink-0 text-right">Included</span>
           </div>
         ))}
       </div>
