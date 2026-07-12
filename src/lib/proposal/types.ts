@@ -88,6 +88,8 @@ export interface Proposal {
   bonuses: BonusItem[];
   currency: string;
   total_cents: number;
+  /** Annual renewal price (year two on). 0 = flat annual (no separate renewal tier). */
+  renewal_cents: number;
 
   /** Visual edition of the exported PDF. Editor offers Light ("plate-globe") /
       Dark ("plate-globe-dark"); any ProposalVariant string is accepted. */

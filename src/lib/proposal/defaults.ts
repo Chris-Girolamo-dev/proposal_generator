@@ -136,6 +136,7 @@ export const MOAT_WHY_US_POINTS = [
 
 export const DEFAULT_PROPOSAL: ProposalDraft = {
   proposal_version: "V1.0",
+  renewal_cents: 0, // set per client in the editor (½ of year one, locked)
   client_company: "[Client Company]",
   client_logo_url: null,
   project_title: "Clinical Supply Forecasting Simulator",
@@ -329,7 +330,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     { label: "Unlimited studies, for life", tag: "For life" },
     { label: "Unlimited seats, for life", tag: "For life" },
     // Price-lock value per user.
-    { label: "Locked-for-life price guarantee: your annual investment never increases", value_cents: 325_000, tag: "Guaranteed" },
+    { label: "Locked-for-life renewal: your annual price never increases", value_cents: 325_000, tag: "Guaranteed" },
     { label: "Testimonial credit off your next renewal", value_cents: 700_000, tag: "On renewal" },
     { label: "Unlimited scenario breakdown videos", value_cents: 295_000 },
     { label: "Weekly working call, one hour a week", value_cents: 1_404_000 },

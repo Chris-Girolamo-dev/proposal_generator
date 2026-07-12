@@ -99,6 +99,7 @@ export function ProposalDocument({
         items={proposal.cost_items}
         bonuses={proposal.bonuses}
         currency={proposal.currency}
+        renewalCents={proposal.renewal_cents}
         number={moat ? "08" : "07"}
         total={total}
         say={moat ? <>Seconds to an answer.<br />No vendor queue.</> : undefined}

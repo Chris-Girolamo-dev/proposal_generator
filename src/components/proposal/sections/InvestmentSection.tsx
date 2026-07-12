@@ -17,6 +17,7 @@ export function InvestmentSection({
   items,
   bonuses,
   currency,
+  renewalCents = 0,
   say,
   number = "07",
   total,
@@ -26,6 +27,7 @@ export function InvestmentSection({
   items: CostItem[];
   bonuses: BonusItem[];
   currency: string;
+  renewalCents?: number;
   say?: React.ReactNode;
   number?: string;
   total?: string;
@@ -33,6 +35,10 @@ export function InvestmentSection({
   clientLogoUrl: string | null;
 }) {
   const bonusTotal = bonusTotalCents(bonuses);
+  const yearOne = subtotalCents(items);
+  const hasRenewal = renewalCents > 0 && yearOne > 0;
+  const renewalPct = hasRenewal ? Math.round((renewalCents / yearOne) * 100) : 0;
+  const renewalTag = renewalPct === 50 ? "Half of year one" : `${renewalPct}% of year one`;
 
   return (
     <PageShell number={number} total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
@@ -40,14 +46,29 @@ export function InvestmentSection({
         number={number}
         total={total}
         title="The investment"
-        say={say ?? <>One-time build.<br />Fixed price.</>}
+        say={
+          say ??
+          (hasRenewal ? (
+            <>
+              Year one, then half.
+              <br />
+              Locked for life.
+            </>
+          ) : (
+            <>
+              One-time build.
+              <br />
+              Fixed price.
+            </>
+          ))
+        }
       />
 
-      <div className="no-break mt-4 max-w-md">
+      <div className="no-break mt-3 max-w-md">
         {items.map((item, i) => (
           <div
             key={i}
-            className={`flex items-baseline justify-between gap-6 py-1.5 ${
+            className={`flex items-baseline justify-between gap-6 py-1 ${
               i > 0 ? "border-t border-[var(--pd-line)]" : ""
             }`}
           >
@@ -74,17 +95,40 @@ export function InvestmentSection({
           </div>
         ))}
 
-        <div className="mt-1 flex items-baseline justify-between border-t border-[var(--pd-line-strong)] pt-2">
-          <span className="pd-meta">Total investment</span>
-          <span className="pd-display text-[24px] font-bold tracking-[-0.02em] text-[var(--pd-ink)]">
-            {formatMoney(subtotalCents(items), currency)}
-          </span>
-        </div>
+        {hasRenewal ? (
+          // Two-tier: year one beside the locked half-price renewal. Juxtaposing the
+          // two numbers, with the renewal drop called out in red, makes the recurring
+          // discount the thing the eye lands on.
+          <div className="mt-1 grid grid-cols-2 gap-6 border-t border-[var(--pd-line-strong)] pt-2">
+            <div>
+              <span className="pd-meta">Year one</span>
+              <p className="pd-display text-[22px] font-bold leading-tight tracking-[-0.02em] text-[var(--pd-ink)]">
+                {formatMoney(yearOne, currency)}
+              </p>
+            </div>
+            <div>
+              <span className="pd-meta">Annual renewal · year two on</span>
+              <p className="pd-display text-[22px] font-bold leading-tight tracking-[-0.02em] text-[var(--pd-ink)]">
+                {formatMoney(renewalCents, currency)}
+              </p>
+              <p className="pd-meta mt-0.5 normal-case tracking-[.04em] text-[#E5192B]">
+                {renewalTag}, locked for life
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-1 flex items-baseline justify-between border-t border-[var(--pd-line-strong)] pt-2">
+            <span className="pd-meta">Total investment</span>
+            <span className="pd-display text-[24px] font-bold tracking-[-0.02em] text-[var(--pd-ink)]">
+              {formatMoney(yearOne, currency)}
+            </span>
+          </div>
+        )}
       </div>
 
       {bonuses.length > 0 && (
-        <div className="pd-shead mt-3 pt-2">
-          <h3 className="pd-display text-[28px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
+        <div className="pd-shead mt-3 pt-1.5">
+          <h3 className="pd-display text-[25px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
             The bonuses<span className="text-[var(--pd-mid)]">, yours with the build.</span>
           </h3>
 
@@ -96,7 +140,7 @@ export function InvestmentSection({
                   i > 0 ? "border-t border-[var(--pd-line)]" : ""
                 }`}
               >
-                <p className="text-[11.5px] leading-[1.4] text-[var(--pd-ink)]">{b.label}</p>
+                <p className="text-[11px] leading-[1.35] text-[var(--pd-ink)]">{b.label}</p>
                 <p className="pd-meta flex shrink-0 items-baseline">
                   <span className="w-16 text-right normal-case text-[var(--pd-ink)]">
                     {b.value_cents != null ? formatMoney(b.value_cents, currency) : ""}
@@ -123,7 +167,7 @@ export function InvestmentSection({
         </div>
       )}
 
-      <p className="pd-meta mt-2">
+      <p className="pd-meta mt-1">
         50% at signature · balance across Q3 and Q4 · quarterly thereafter · Net 30
       </p>
     </PageShell>

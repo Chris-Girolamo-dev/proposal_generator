@@ -35,6 +35,7 @@ export interface ProposalHeaderUpdate {
   guarantee: string;
   cost_items: CostItem[];
   bonuses: BonusItem[];
+  renewal_cents: number;
   variant: string;
   moat: boolean;
 }

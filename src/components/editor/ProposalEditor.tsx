@@ -29,6 +29,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   const [subtitle, setSubtitle] = useState(proposal.subtitle);
   const [guarantee, setGuarantee] = useState(proposal.guarantee);
   const [costItems, setCostItems] = useState<CostItem[]>(proposal.cost_items);
+  const [renewalCents, setRenewalCents] = useState(proposal.renewal_cents ?? 0);
   const [bonuses, setBonuses] = useState<BonusItem[]>(proposal.bonuses ?? []);
   const [variant, setVariant] = useState(proposal.variant ?? "plate-globe");
   const [moat, setMoat] = useState(proposal.moat ?? true);
@@ -65,6 +66,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         subtitle,
         guarantee,
         cost_items: costItems,
+        renewal_cents: renewalCents,
         bonuses,
         variant,
         moat,
@@ -262,10 +264,41 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
           ))}
         </div>
 
-        <div className="mt-4 flex justify-end border-t border-border pt-4">
-          <span className="font-display text-lg font-semibold text-fg">
-            Total: {formatMoney(subtotalCents(costItems), proposal.currency)}
-          </span>
+        <div className="mt-4 border-t border-border pt-4">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <label className="label">Annual renewal — year 2 onward ($)</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  min={0}
+                  step={0.01}
+                  className="input-field w-40"
+                  placeholder="0 = flat price"
+                  value={renewalCents ? renewalCents / 100 : ""}
+                  onChange={(e) =>
+                    setRenewalCents(e.target.value === "" ? 0 : Math.round(Number(e.target.value) * 100))
+                  }
+                />
+                <button
+                  type="button"
+                  onClick={() => setRenewalCents(Math.round(subtotalCents(costItems) / 2))}
+                  className="btn-secondary whitespace-nowrap text-xs"
+                >
+                  ½ of year one
+                </button>
+              </div>
+              <p className="mt-1 text-xs text-text-3">
+                {renewalCents > 0 && subtotalCents(costItems) > 0
+                  ? `${Math.round((renewalCents / subtotalCents(costItems)) * 100)}% of year one, locked for life`
+                  : "Leave 0 for a single flat price (no renewal tier)."}
+              </p>
+            </div>
+            <span className="font-display text-lg font-semibold text-fg">
+              {renewalCents > 0 ? "Year one: " : "Total: "}
+              {formatMoney(subtotalCents(costItems), proposal.currency)}
+            </span>
+          </div>
         </div>
       </div>
 

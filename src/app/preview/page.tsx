@@ -4,8 +4,9 @@ import { subtotalCents, type Proposal } from "@/lib/proposal/types";
 
 // No-auth, no-DB route: renders the LeftClick-structured / OPFOR-skinned template
 // against DEFAULT_PROPOSAL so the design can be checked before Supabase is wired up.
+// Demo models structure B: ~$68K year one, ~$34K locked renewal (see renewal_cents below).
 const demoCostItems = [
-  { label: "Clinical Supply Forecasting Simulator", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 4_500_000 },
+  { label: "Clinical Supply Forecasting Simulator", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 6_150_000 },
   { label: "White-glove onboarding", description: "Hands-on setup with your team.", qty: 3, unit_cents: 150_000 },
   { label: "Training hours", description: "Live working sessions post-launch.", qty: 5, unit_cents: 40_000 },
   {
@@ -26,6 +27,7 @@ const mockProposal: Proposal = {
   slug: "preview",
   cost_items: demoCostItems,
   total_cents: subtotalCents(demoCostItems),
+  renewal_cents: 3_400_000, // $34,000 — half of the $68,000 year one, locked
   status: "draft",
   // variant/moat here only satisfy the type; the actual edition comes from the
   // ?v= and ?m= query params below.
