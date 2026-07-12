@@ -43,7 +43,7 @@ export function InvestmentSection({
         say={say ?? <>One-time build.<br />Fixed price.</>}
       />
 
-      <div className="no-break mt-5 max-w-md">
+      <div className="no-break mt-4 max-w-md">
         {items.map((item, i) => (
           <div
             key={i}
@@ -83,16 +83,16 @@ export function InvestmentSection({
       </div>
 
       {bonuses.length > 0 && (
-        <div className="pd-shead mt-4 pt-3">
-          <h3 className="pd-display text-[34px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
+        <div className="pd-shead mt-3 pt-2">
+          <h3 className="pd-display text-[28px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
             The bonuses<span className="text-[var(--pd-mid)]">, yours with the build.</span>
           </h3>
 
-          <div className="mt-3">
+          <div className="mt-2">
             {bonuses.map((b, i) => (
               <div
                 key={i}
-                className={`no-break flex items-baseline justify-between gap-6 py-[2px] ${
+                className={`no-break flex items-baseline justify-between gap-6 py-[1px] ${
                   i > 0 ? "border-t border-[var(--pd-line)]" : ""
                 }`}
               >
@@ -108,7 +108,7 @@ export function InvestmentSection({
           </div>
 
           {bonusTotal > 0 && (
-            <div className="no-break mt-1 flex items-baseline justify-between border-y border-[var(--pd-line-strong)] py-1.5">
+            <div className="no-break mt-1 flex items-baseline justify-between border-y border-[var(--pd-line-strong)] py-1">
               <span className="pd-meta">Total bonus value</span>
               <span className="flex items-baseline gap-4">
                 <span className="pd-display text-[20px] font-bold tracking-[-0.02em] text-[var(--pd-ink)] line-through decoration-[rgba(229,25,43,.55)] decoration-[1.5px]">

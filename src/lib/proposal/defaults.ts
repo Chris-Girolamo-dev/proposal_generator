@@ -140,7 +140,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   client_logo_url: null,
   project_title: "Clinical Supply Forecasting Simulator",
   subtitle:
-    "A purpose-built demand forecasting and scenario-planning engine that grows with your team, and your clinical programs.",
+    "A purpose-built demand forecasting and scenario-planning engine that grows with your team, and your clinical programs. Unlimited scenarios, studies, & seats, for life.",
 
   // Areas of opportunity (was "problems")
   problems: [
@@ -323,6 +323,11 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   // The value stack shown under the price: real values on the right, an
   // Included/credited stamp instead of a charge. Order = punch order.
   bonuses: [
+    // Headline "for life" bonuses. Values left blank on purpose: set per call once the
+    // prospect names their study count and team size, then bake the qty into the label
+    // e.g. "(12) studies covered" and set a value.
+    { label: "Unlimited studies, for life", tag: "For life" },
+    { label: "Unlimited seats, for life", tag: "For life" },
     // Price-lock value per user.
     { label: "Locked-for-life price guarantee: your annual investment never increases", value_cents: 325_000, tag: "Guaranteed" },
     { label: "Testimonial credit off your next renewal", value_cents: 700_000, tag: "On renewal" },

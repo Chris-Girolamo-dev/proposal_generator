@@ -89,6 +89,12 @@ export interface Proposal {
   currency: string;
   total_cents: number;
 
+  /** Visual edition of the exported PDF. Editor offers Light ("plate-globe") /
+      Dark ("plate-globe-dark"); any ProposalVariant string is accepted. */
+  variant: string;
+  /** Include the Data boundaries page + moat-backed Why-OPFOR points. */
+  moat: boolean;
+
   status: ProposalStatus;
   created_at: string;
   updated_at: string;
@@ -97,7 +103,16 @@ export interface Proposal {
 /** Editable subset used by the proposal editor (excludes server-managed fields). */
 export type ProposalDraft = Omit<
   Proposal,
-  "id" | "owner_id" | "slug" | "proposal_number" | "total_cents" | "status" | "created_at" | "updated_at"
+  | "id"
+  | "owner_id"
+  | "slug"
+  | "proposal_number"
+  | "total_cents"
+  | "status"
+  | "created_at"
+  | "updated_at"
+  | "variant"
+  | "moat"
 >;
 
 export const lineTotalCents = (i: CostItem): number => Math.round(i.qty * i.unit_cents);

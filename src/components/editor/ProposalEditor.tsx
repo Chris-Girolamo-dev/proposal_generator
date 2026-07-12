@@ -4,7 +4,22 @@ import { useState, useTransition } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { updateProposal } from "@/lib/proposal/actions";
 import { LogoUpload } from "./LogoUpload";
-import { lineTotalCents, subtotalCents, formatMoney, type CostItem, type Proposal } from "@/lib/proposal/types";
+import {
+  lineTotalCents,
+  subtotalCents,
+  bonusTotalCents,
+  formatMoney,
+  type BonusItem,
+  type CostItem,
+  type Proposal,
+} from "@/lib/proposal/types";
+
+// Theme options map the user-facing Light/Dark choice to the two reviewed
+// plate-globe editions that render to PDF.
+const THEMES = [
+  { value: "plate-globe", label: "Light" },
+  { value: "plate-globe-dark", label: "Dark" },
+];
 
 export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   const [proposalNumber, setProposalNumber] = useState(proposal.proposal_number ?? 928801);
@@ -14,19 +29,30 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   const [subtitle, setSubtitle] = useState(proposal.subtitle);
   const [guarantee, setGuarantee] = useState(proposal.guarantee);
   const [costItems, setCostItems] = useState<CostItem[]>(proposal.cost_items);
+  const [bonuses, setBonuses] = useState<BonusItem[]>(proposal.bonuses ?? []);
+  const [variant, setVariant] = useState(proposal.variant ?? "plate-globe");
+  const [moat, setMoat] = useState(proposal.moat ?? true);
   const [isPending, startTransition] = useTransition();
   const [savedAt, setSavedAt] = useState<Date | null>(null);
 
   function updateCostItem(index: number, patch: Partial<CostItem>) {
     setCostItems((items) => items.map((it, i) => (i === index ? { ...it, ...patch } : it)));
   }
-
   function addCostItem() {
     setCostItems((items) => [...items, { label: "", description: "", qty: 1, unit_cents: 0 }]);
   }
-
   function removeCostItem(index: number) {
     setCostItems((items) => items.filter((_, i) => i !== index));
+  }
+
+  function updateBonus(index: number, patch: Partial<BonusItem>) {
+    setBonuses((list) => list.map((b, i) => (i === index ? { ...b, ...patch } : b)));
+  }
+  function addBonus() {
+    setBonuses((list) => [...list, { label: "", tag: "Included" }]);
+  }
+  function removeBonus(index: number) {
+    setBonuses((list) => list.filter((_, i) => i !== index));
   }
 
   function handleSave() {
@@ -39,10 +65,15 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         subtitle,
         guarantee,
         cost_items: costItems,
+        bonuses,
+        variant,
+        moat,
       });
       setSavedAt(new Date());
     });
   }
+
+  const previewHref = `/preview?v=${variant}${moat ? "&m=1" : ""}`;
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-12">
@@ -55,6 +86,9 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
           {savedAt && (
             <span className="text-xs text-text-3">Saved {savedAt.toLocaleTimeString()}</span>
           )}
+          <a href={previewHref} className="btn-secondary" target="_blank" rel="noopener noreferrer">
+            Preview
+          </a>
           <a href={`/api/pdf/${proposal.id}`} className="btn-secondary" target="_blank" rel="noopener noreferrer">
             Download PDF
           </a>
@@ -64,9 +98,11 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         </div>
       </div>
 
+      {/* ── Proposal details ─────────────────────────────────────────── */}
       <div className="card space-y-5 p-6">
         <LogoUpload proposalId={proposal.id} initialUrl={proposal.client_logo_url} />
-        <div className="grid grid-cols-2 gap-4">
+
+        <div className="grid grid-cols-3 gap-4">
           <div>
             <label className="label">Proposal number</label>
             {/* Auto-assigned sequentially from 928801 on create; editable, but the DB
@@ -86,7 +122,32 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
               onChange={(e) => setProposalVersion(e.target.value)}
             />
           </div>
+          <div>
+            <label className="label">Theme</label>
+            <select
+              className="input-field"
+              value={variant}
+              onChange={(e) => setVariant(e.target.value)}
+            >
+              {THEMES.map((t) => (
+                <option key={t.value} value={t.value}>
+                  {t.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
+
+        <label className="flex items-center gap-2.5 text-sm text-text-2">
+          <input
+            type="checkbox"
+            checked={moat}
+            onChange={(e) => setMoat(e.target.checked)}
+            className="h-4 w-4 accent-red"
+          />
+          Include the Data boundaries page (data-privacy / moat edition)
+        </label>
+
         <div>
           <label className="label">Client company</label>
           <input
@@ -105,8 +166,9 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         </div>
         <div>
           <label className="label">Subtitle</label>
-          <input
+          <textarea
             className="input-field"
+            rows={2}
             value={subtitle}
             onChange={(e) => setSubtitle(e.target.value)}
           />
@@ -122,6 +184,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         </div>
       </div>
 
+      {/* ── Investment line items ────────────────────────────────────── */}
       <div className="card mt-6 p-6">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="font-display text-base font-semibold text-fg">Investment</h2>
@@ -130,52 +193,70 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
           </button>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-4">
           {costItems.map((item, i) => (
-            <div key={i} className="grid grid-cols-[1fr_auto_auto_auto] items-start gap-3">
-              <div>
-                <input
-                  className="input-field"
-                  placeholder="Label"
-                  value={item.label}
-                  onChange={(e) => updateCostItem(i, { label: e.target.value })}
-                />
-                <input
-                  className="input-field mt-2"
-                  placeholder="Description (optional)"
-                  value={item.description ?? ""}
-                  onChange={(e) => updateCostItem(i, { description: e.target.value })}
-                />
-              </div>
-              <input
-                type="number"
-                min={0}
-                className="input-field w-20"
-                value={item.qty}
-                onChange={(e) => updateCostItem(i, { qty: Number(e.target.value) })}
-              />
-              <input
-                type="number"
-                min={0}
-                step={0.01}
-                className="input-field w-28"
-                placeholder="Unit price"
-                value={item.unit_cents / 100}
-                onChange={(e) =>
-                  updateCostItem(i, { unit_cents: Math.round(Number(e.target.value) * 100) })
-                }
-              />
-              <div className="flex h-full items-center gap-2">
-                <span className="w-24 shrink-0 text-right text-sm tabular-nums text-text-2">
-                  {formatMoney(lineTotalCents(item), proposal.currency)}
-                </span>
+            <div key={i} className="rounded-lg border border-border bg-surface-2 p-4">
+              <div className="mb-3 flex items-start gap-3">
+                <div className="flex-1 space-y-2">
+                  <input
+                    className="input-field"
+                    placeholder="Label (e.g. Clinical Supply Forecasting Simulator)"
+                    value={item.label}
+                    onChange={(e) => updateCostItem(i, { label: e.target.value })}
+                  />
+                  <input
+                    className="input-field"
+                    placeholder="Description (optional)"
+                    value={item.description ?? ""}
+                    onChange={(e) => updateCostItem(i, { description: e.target.value })}
+                  />
+                </div>
                 <button
                   onClick={() => removeCostItem(i)}
                   className="btn-secondary px-2"
                   aria-label="Remove line item"
+                  title="Remove line item"
                 >
                   <Trash2 size={14} />
                 </button>
+              </div>
+
+              <div className="flex flex-wrap items-end gap-4">
+                <div>
+                  <label className="label">Qty</label>
+                  <input
+                    type="number"
+                    min={0}
+                    className="input-field w-24"
+                    value={item.qty}
+                    onChange={(e) => updateCostItem(i, { qty: Number(e.target.value) })}
+                  />
+                </div>
+                <div>
+                  <label className="label">Unit price ($)</label>
+                  <input
+                    type="number"
+                    min={0}
+                    step={0.01}
+                    className="input-field w-36"
+                    value={item.unit_cents / 100}
+                    onChange={(e) =>
+                      updateCostItem(i, { unit_cents: Math.round(Number(e.target.value) * 100) })
+                    }
+                  />
+                </div>
+                <label className="flex items-center gap-2 pb-2.5 text-sm text-text-2">
+                  <input
+                    type="checkbox"
+                    checked={item.optional ?? false}
+                    onChange={(e) => updateCostItem(i, { optional: e.target.checked })}
+                    className="h-4 w-4 accent-red"
+                  />
+                  Optional add-on
+                </label>
+                <span className="ml-auto pb-2.5 text-sm tabular-nums text-text-2">
+                  {item.optional ? "excluded" : formatMoney(lineTotalCents(item), proposal.currency)}
+                </span>
               </div>
             </div>
           ))}
@@ -184,6 +265,69 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         <div className="mt-4 flex justify-end border-t border-border pt-4">
           <span className="font-display text-lg font-semibold text-fg">
             Total: {formatMoney(subtotalCents(costItems), proposal.currency)}
+          </span>
+        </div>
+      </div>
+
+      {/* ── Bonuses (value stack) ────────────────────────────────────── */}
+      <div className="card mt-6 p-6">
+        <div className="mb-1 flex items-center justify-between">
+          <h2 className="font-display text-base font-semibold text-fg">Bonuses</h2>
+          <button onClick={addBonus} className="btn-secondary">
+            <Plus size={14} /> Add bonus
+          </button>
+        </div>
+        <p className="mb-4 text-xs text-text-3">
+          Leave value blank to show only the status tag (no dollar figure). Put a quantity in the
+          label itself, e.g. &ldquo;(12) studies covered&rdquo;.
+        </p>
+
+        <div className="space-y-3">
+          {bonuses.map((b, i) => (
+            <div key={i} className="flex items-start gap-3">
+              <input
+                className="input-field flex-1"
+                placeholder="Bonus label"
+                value={b.label}
+                onChange={(e) => updateBonus(i, { label: e.target.value })}
+              />
+              <div className="w-32 shrink-0">
+                <input
+                  type="number"
+                  min={0}
+                  step={0.01}
+                  className="input-field"
+                  placeholder="Value ($)"
+                  value={b.value_cents != null ? b.value_cents / 100 : ""}
+                  onChange={(e) =>
+                    updateBonus(i, {
+                      value_cents:
+                        e.target.value === "" ? undefined : Math.round(Number(e.target.value) * 100),
+                    })
+                  }
+                />
+              </div>
+              <input
+                className="input-field w-40 shrink-0"
+                placeholder="Tag (e.g. Included)"
+                value={b.tag ?? ""}
+                onChange={(e) => updateBonus(i, { tag: e.target.value })}
+              />
+              <button
+                onClick={() => removeBonus(i)}
+                className="btn-secondary px-2"
+                aria-label="Remove bonus"
+                title="Remove bonus"
+              >
+                <Trash2 size={14} />
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 flex justify-end border-t border-border pt-4">
+          <span className="font-display text-lg font-semibold text-fg">
+            Total bonus value: {formatMoney(bonusTotalCents(bonuses), proposal.currency)}
           </span>
         </div>
       </div>

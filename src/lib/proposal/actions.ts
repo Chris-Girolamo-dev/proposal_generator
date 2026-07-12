@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { DEFAULT_PROPOSAL } from "./defaults";
-import { subtotalCents, type CostItem } from "./types";
+import { subtotalCents, type BonusItem, type CostItem } from "./types";
 
 export async function createProposal() {
   const supabase = await createClient();
@@ -34,6 +34,9 @@ export interface ProposalHeaderUpdate {
   subtitle: string;
   guarantee: string;
   cost_items: CostItem[];
+  bonuses: BonusItem[];
+  variant: string;
+  moat: boolean;
 }
 
 export async function updateProposal(id: string, update: ProposalHeaderUpdate) {

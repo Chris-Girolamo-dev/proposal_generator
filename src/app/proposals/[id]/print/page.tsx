@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { verifyProposalToken } from "@/lib/pdf/sign";
-import { ProposalDocument } from "@/components/proposal/ProposalDocument";
+import { ProposalDocument, type ProposalVariant } from "@/components/proposal/ProposalDocument";
 import type { Proposal } from "@/lib/proposal/types";
 
 // Cookie-less render target for the PDF export route (see api/pdf/[id]). Not reachable
@@ -23,5 +23,12 @@ export default async function PrintProposalPage({
 
   if (!data) notFound();
 
-  return <ProposalDocument proposal={data as Proposal} />;
+  const proposal = data as Proposal;
+  return (
+    <ProposalDocument
+      proposal={proposal}
+      variant={(proposal.variant as ProposalVariant) ?? "plate-globe"}
+      moat={proposal.moat ?? true}
+    />
+  );
 }

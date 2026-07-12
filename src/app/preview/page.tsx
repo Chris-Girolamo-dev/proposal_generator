@@ -27,6 +27,10 @@ const mockProposal: Proposal = {
   cost_items: demoCostItems,
   total_cents: subtotalCents(demoCostItems),
   status: "draft",
+  // variant/moat here only satisfy the type; the actual edition comes from the
+  // ?v= and ?m= query params below.
+  variant: "plate-globe",
+  moat: false,
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
 };
