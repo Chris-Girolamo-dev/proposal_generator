@@ -190,6 +190,11 @@ body {
   font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
   print-color-adjust: exact;
   -webkit-print-color-adjust: exact;
+  /* True page width, always. In print this equals the letter page (no-op); on
+     screen it stops a wide monitor from stretching the layout, so the browser
+     preview matches the exported PDF at any zoom. */
+  max-width: 8.5in;
+  margin-inline: auto;
 }
 /* The ground must sit on each section, not only the wrapper — Chromium's print
    engine drops a tall ancestor's background on pages after the first, which left
