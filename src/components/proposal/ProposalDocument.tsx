@@ -1,5 +1,5 @@
 import type { Proposal } from "@/lib/proposal/types";
-import { MOAT_ROADMAP_NOTE, SECTION_INTROS } from "@/lib/proposal/defaults";
+import { SECTION_INTROS } from "@/lib/proposal/defaults";
 import { CoverSection } from "./sections/CoverSection";
 import { NumberedSection } from "./sections/NumberedSection";
 import { DeliverablesSection } from "./sections/DeliverablesSection";
@@ -27,8 +27,8 @@ export function ProposalDocument({
 }: {
   proposal: Proposal;
   variant?: ProposalVariant;
-  /** Moat edition: adds the Data boundaries page (07) and the Why-OPFOR roadmap
-      line, renumbering downstream sections to NN / 10. Kept as a separate
+  /** Moat edition: adds the Data boundaries page (07) and the Investment latency
+      aside, renumbering downstream sections to NN / 10. Kept as a separate
       edition so the pre-moat template stays intact for comparison. */
   moat?: boolean;
 }) {
@@ -84,7 +84,6 @@ export function ProposalDocument({
       <WhyUsSection
         whyUs={proposal.why_us}
         total={total}
-        roadmapNote={moat ? MOAT_ROADMAP_NOTE : undefined}
         clientCompany={clientCompany}
         clientLogoUrl={clientLogoUrl}
       />

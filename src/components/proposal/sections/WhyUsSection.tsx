@@ -8,13 +8,11 @@ import { PageShell } from "./PageShell";
 export function WhyUsSection({
   whyUs,
   total,
-  roadmapNote,
   clientCompany,
   clientLogoUrl,
 }: {
   whyUs: WhyUs;
   total?: string;
-  roadmapNote?: string;
   clientCompany: string;
   clientLogoUrl: string | null;
 }) {
@@ -64,19 +62,19 @@ export function WhyUsSection({
             {whyUs.capabilities.map((c, i) => (
               <span
                 key={i}
-                className="pd-meta border-r border-[var(--pd-line)] px-3.5 py-1 last:border-r-0"
+                className="pd-meta border-r border-[var(--pd-line)] px-3.5 py-1 tracking-[.10em] last:border-r-0"
               >
-                {c}
+                {c.split("*").map((part, j) =>
+                  j % 2 === 1 ? (
+                    <b key={j} className="font-medium text-[#E5192B]">{part}</b>
+                  ) : (
+                    part
+                  )
+                )}
               </span>
             ))}
           </div>
         </div>
-      )}
-
-      {roadmapNote && (
-        <p className="pd-meta mt-2.5 normal-case tracking-[.04em]">
-          <span className="uppercase tracking-[.08em]">On the roadmap</span> · {roadmapNote}
-        </p>
       )}
     </PageShell>
   );

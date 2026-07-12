@@ -128,15 +128,11 @@ export const MOAT_WHY_US_POINTS = [
       "If the data can't support a confident forecast at your target service level, we tell you before you pay for a model that can't deliver it.",
   },
   {
-    title: "Done with you, not for you.",
+    title: "No patient data. Ever.",
     description:
-      "Your team owns the model, the pipeline, and the documentation when we're done, not us.",
+      "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser before anything is transmitted.",
   },
 ];
-
-/** Vision-voiced roadmap line (S1) — "in build", never claimed as shipped. */
-export const MOAT_ROADMAP_NOTE =
-  "What-if copilot: plain-English questions, engine-run answers in seconds. In build now.";
 
 export const DEFAULT_PROPOSAL: ProposalDraft = {
   client_company: "[Client Company]",
@@ -253,14 +249,21 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       { value: "End-to-end", label: "from data pipeline to boardroom dashboard" },
     ],
     capabilities: [
-      "Monte Carlo Risk Modeling",
-      "Per-SKU Buffer Optimization",
-      "Depot-Level Demand Tracking",
-      "Randomization-Aware Forecasting",
-      "Shortfall Early Warning",
-      "Multi-Country Rollout Planning",
-      "Real-Time Scenario Replanning",
-      "SOC 2-Compliant Hosting",
+      "Demand per *protocol*",
+      "Per *arm*",
+      "Per *visit schedule*",
+      "Enrollment *curves*",
+      "Titration *paths*",
+      "Dropout *modeling*",
+      "Depot *allocation*",
+      "Shelf-life *aware*",
+      "Live *reforecast*",
+      "IRT *actuals*",
+      "Cohort *management*",
+      "Monte Carlo *simulations*",
+      "Demand *aggregation*",
+      "Budget *planning*",
+      "DP *alignment*",
     ],
     points: [
       {
@@ -289,9 +292,9 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
           "If the data can't support a confident forecast at your target service level, we tell you before you pay for a model that can't deliver it.",
       },
       {
-        title: "Done with you, not for you.",
+        title: "No patient data. Ever.",
         description:
-          "Your team owns the model, the pipeline, and the documentation when we're done, not us.",
+          "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser before anything is transmitted.",
       },
     ],
   },
