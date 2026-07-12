@@ -17,6 +17,7 @@ export function InvestmentSection({
   items,
   bonuses,
   currency,
+  say,
   number = "07",
   total,
   clientCompany,
@@ -25,6 +26,7 @@ export function InvestmentSection({
   items: CostItem[];
   bonuses: BonusItem[];
   currency: string;
+  say?: React.ReactNode;
   number?: string;
   total?: string;
   clientCompany: string;
@@ -38,7 +40,7 @@ export function InvestmentSection({
         number={number}
         total={total}
         title="The investment"
-        say={<>One-time build.<br />Fixed price.</>}
+        say={say ?? <>One-time build.<br />Fixed price.</>}
       />
 
       <div className="no-break mt-5 max-w-md">

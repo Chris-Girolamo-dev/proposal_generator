@@ -15,7 +15,7 @@ const CLAIMS = [
   },
   {
     title: "Your protocol never enters the product",
-    body: "There is no document upload. Setup consumes planning parameters only: countries, visit schedule, kit types. Scenario drafting happens with you, outside the product.",
+    body: "There is no document upload. Setup consumes planning parameters only: countries, visit schedule, kit types. Drafting happens with you, outside the product.",
   },
   {
     title: "Counts, not people",
@@ -61,8 +61,7 @@ export function DataBoundariesSection({
         say={<>What we hold.<br />What we never touch.</>}
       />
       <p className="mt-6 max-w-[56ch] text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
-        OPFOR is planning and decision support. The boundary below is architectural — the product
-        is built so these facts cannot drift.
+        OPFOR is planning and decision support. The boundary below is architectural, not policy.
       </p>
 
       {/* One-way data flow: the IRT is sealed; the only path is the client's own
@@ -85,8 +84,7 @@ export function DataBoundariesSection({
           <FlowBox label="OPFOR" sub="Engine runs in your browser" />
         </div>
         <p className="pd-meta mt-2 text-[9.5px]">
-          One direction, initiated by you. No integration to install, no credentials to grant, no
-          access for your security team to review.
+          One direction, initiated by you. No integration, no credentials, nothing to security-review.
         </p>
       </div>
 

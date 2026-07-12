@@ -102,6 +102,7 @@ export function ProposalDocument({
         currency={proposal.currency}
         number={moat ? "08" : "07"}
         total={total}
+        say={moat ? <>Assumption to answer in seconds,<br />run by your team. No vendor queue.</> : undefined}
         clientCompany={clientCompany}
         clientLogoUrl={clientLogoUrl}
       />
