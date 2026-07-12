@@ -130,7 +130,7 @@ export const MOAT_WHY_US_POINTS = [
   {
     title: "No patient data. Ever.",
     description:
-      "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser before anything is transmitted.",
+      "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser. Only the counts leave your machine.",
   },
 ];
 
@@ -294,7 +294,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       {
         title: "No patient data. Ever.",
         description:
-          "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser before anything is transmitted.",
+          "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser. Only the counts leave your machine.",
       },
     ],
   },
