@@ -45,6 +45,18 @@ export interface CostItem {
   description?: string;
   qty: number;
   unit_cents: number;
+  /** Optional add-on: shown in the price table with its price but excluded from the total. */
+  optional?: boolean;
+}
+
+/** A value-stack bonus shown on the Investment page: real value on the right,
+    an "Included / credited" stamp instead of a price. */
+export interface BonusItem {
+  label: string;
+  /** Real-world value in cents; omit for unpriceable bonuses (guarantees, 24/7 access). */
+  value_cents?: number;
+  /** Right-column stamp; defaults to "Included". e.g. "Credited on renewal" */
+  tag?: string;
 }
 
 export interface Proposal {
@@ -68,6 +80,7 @@ export interface Proposal {
   services_agreement: AgreementClause[];
 
   cost_items: CostItem[];
+  bonuses: BonusItem[];
   currency: string;
   total_cents: number;
 
@@ -84,8 +97,12 @@ export type ProposalDraft = Omit<
 
 export const lineTotalCents = (i: CostItem): number => Math.round(i.qty * i.unit_cents);
 
+/** Optional add-ons show their price but never count toward the total. */
 export const subtotalCents = (items: CostItem[]): number =>
-  items.reduce((sum, i) => sum + lineTotalCents(i), 0);
+  items.reduce((sum, i) => sum + (i.optional ? 0 : lineTotalCents(i)), 0);
+
+export const bonusTotalCents = (bonuses: BonusItem[]): number =>
+  bonuses.reduce((sum, b) => sum + (b.value_cents ?? 0), 0);
 
 export const formatMoney = (cents: number, currency = "usd"): string =>
   new Intl.NumberFormat("en-US", {

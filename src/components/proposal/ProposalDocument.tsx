@@ -72,6 +72,7 @@ export function ProposalDocument({
       <WhyUsSection whyUs={proposal.why_us} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <InvestmentSection
         items={proposal.cost_items}
+        bonuses={proposal.bonuses}
         currency={proposal.currency}
         clientCompany={clientCompany}
         clientLogoUrl={clientLogoUrl}

@@ -8,6 +8,13 @@ const demoCostItems = [
   { label: "Clinical Supply Forecasting Simulator", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 4_500_000 },
   { label: "White-glove onboarding", description: "Hands-on setup with your team.", qty: 3, unit_cents: 150_000 },
   { label: "Training hours", description: "Live working sessions post-launch.", qty: 5, unit_cents: 40_000 },
+  {
+    label: "IRT integration",
+    description: "Optional. Billed per integration; refunded onto your following-year renewal.",
+    qty: 1,
+    unit_cents: 568_000,
+    optional: true,
+  },
 ];
 
 const mockProposal: Proposal = {

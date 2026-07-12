@@ -263,6 +263,29 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
 
   cost_items: [
     { label: "Clinical Supply Forecasting Simulator", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 0 },
+    {
+      label: "IRT integration",
+      description: "Optional. Billed per integration; refunded onto your following-year renewal.",
+      qty: 1,
+      unit_cents: 568_000,
+      optional: true,
+    },
+  ],
+
+  // The value stack shown under the price: real values on the right, an
+  // Included/credited stamp instead of a charge. Order = punch order.
+  bonuses: [
+    { label: "Locked-for-life price guarantee: your annual investment never increases", tag: "Guaranteed" },
+    { label: "Testimonial credit off your next renewal", value_cents: 700_000, tag: "On renewal" },
+    { label: "Unlimited scenario breakdown videos", tag: "Included" },
+    { label: "SOC 2-compliant host-for-you", value_cents: 74_900 },
+    { label: "Two RTSM/IRT integration fee waivers ($6,755 each)", value_cents: 1_351_000, tag: "Credited on renewal" },
+    { label: "Unlimited Anthropic API usage", value_cents: 120_000 },
+    { label: "Step-by-step study build master manual", value_cents: 79_000 },
+    { label: "Long Range Planning module", value_cents: 479_500 },
+    { label: "24/7 customer service access", tag: "Included" },
+    { label: "21 Master-builder training video guides", value_cents: 522_900 },
+    { label: "11 Do-it-for-you white glove study builds", value_cents: 821_700 },
   ],
   currency: "usd",
 
