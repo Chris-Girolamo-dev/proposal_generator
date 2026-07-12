@@ -14,7 +14,7 @@ export function SectionHeading({
 }) {
   return (
     <div className="pd-shead grid grid-cols-12 items-baseline gap-4 pt-5">
-      <span className="pd-meta col-span-2">{number} / {total}</span>
+      <span className="pd-meta pd-ocr col-span-2">{number} / {total}</span>
       <h2 className="col-span-7 pd-display text-[34px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
         {title}
       </h2>
