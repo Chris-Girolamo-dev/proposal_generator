@@ -36,11 +36,11 @@ export function InvestmentSection({
         say={<>One-time build.<br />Fixed price.</>}
       />
 
-      <div className="no-break mt-6 max-w-md">
+      <div className="no-break mt-5 max-w-md">
         {items.map((item, i) => (
           <div
             key={i}
-            className={`flex items-baseline justify-between gap-6 py-2 ${
+            className={`flex items-baseline justify-between gap-6 py-1.5 ${
               i > 0 ? "border-t border-[var(--pd-line)]" : ""
             }`}
           >
@@ -76,14 +76,16 @@ export function InvestmentSection({
       </div>
 
       {bonuses.length > 0 && (
-        <div className="pd-shead mt-6 pt-3">
-          <p className="pd-meta">The bonuses · yours with the build</p>
+        <div className="pd-shead mt-5 pt-3">
+          <h3 className="pd-display text-[34px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
+            The bonuses<span className="text-[var(--pd-mid)]">, yours with the build.</span>
+          </h3>
 
-          <div className="mt-2">
+          <div className="mt-3">
             {bonuses.map((b, i) => (
               <div
                 key={i}
-                className={`no-break flex items-baseline justify-between gap-6 py-[3px] ${
+                className={`no-break flex items-baseline justify-between gap-6 py-[2px] ${
                   i > 0 ? "border-t border-[var(--pd-line)]" : ""
                 }`}
               >
@@ -101,18 +103,23 @@ export function InvestmentSection({
           </div>
 
           {bonusTotal > 0 && (
-            <div className="no-break mt-1 flex items-baseline justify-between border-y border-[var(--pd-line-strong)] py-2">
-              <span className="pd-meta">Total bonus value · included at no charge</span>
-              <span className="pd-display text-[18px] font-bold tracking-[-0.02em] text-[var(--pd-ink)]">
-                {formatMoney(bonusTotal, currency)}
+            <div className="no-break mt-1 flex items-baseline justify-between border-y border-[var(--pd-line-strong)] py-1.5">
+              <span className="pd-meta">Total bonus value</span>
+              <span className="flex items-baseline gap-4">
+                <span className="pd-display text-[20px] font-bold tracking-[-0.02em] text-[var(--pd-ink)] line-through decoration-[#E5192B] decoration-[2.5px]">
+                  {formatMoney(bonusTotal, currency)}
+                </span>
+                <span className="pd-display text-[22px] font-bold uppercase tracking-[-0.02em] text-[#E5192B]">
+                  Free
+                </span>
               </span>
             </div>
           )}
         </div>
       )}
 
-      <p className="pd-meta mt-3">
-        Invoiced by milestone · Net 15 · Full terms in the services agreement
+      <p className="pd-meta mt-2">
+        Invoiced by milestone · Net 30 · Full terms in the services agreement
       </p>
     </PageShell>
   );
