@@ -1,5 +1,5 @@
 import type { Proposal } from "@/lib/proposal/types";
-import { SECTION_INTROS } from "@/lib/proposal/defaults";
+import { MOAT_WHY_US_POINTS, SECTION_INTROS } from "@/lib/proposal/defaults";
 import { CoverSection } from "./sections/CoverSection";
 import { NumberedSection } from "./sections/NumberedSection";
 import { DeliverablesSection } from "./sections/DeliverablesSection";
@@ -35,6 +35,12 @@ export function ProposalDocument({
   const clientCompany = proposal.client_company;
   const clientLogoUrl = proposal.client_logo_url;
   const total = moat ? "10" : "09";
+  // The moat edition swaps in three architecture-backed Why-OPFOR points. This must live
+  // here, the single call site every render path shares (both /preview pages and the
+  // signed print route PDF export go through this component) -- it previously lived
+  // duplicated in each preview page only, so the print route (the actual PDF a client
+  // receives) never applied it and silently showed the generic points instead.
+  const whyUs = moat ? { ...proposal.why_us, points: MOAT_WHY_US_POINTS } : proposal.why_us;
 
   return (
     <div className="proposal-doc" data-variant={variant}>
@@ -82,7 +88,7 @@ export function ProposalDocument({
         clientLogoUrl={clientLogoUrl}
       />
       <WhyUsSection
-        whyUs={proposal.why_us}
+        whyUs={whyUs}
         total={total}
         clientCompany={clientCompany}
         clientLogoUrl={clientLogoUrl}

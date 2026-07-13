@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { ProposalDocument, type ProposalVariant } from "@/components/proposal/ProposalDocument";
-import { MOAT_WHY_US_POINTS } from "@/lib/proposal/defaults";
 import type { Proposal } from "@/lib/proposal/types";
 
 // In-browser preview of the REAL proposal being edited. Unlike /preview (the static
@@ -45,9 +44,8 @@ export default async function ProposalPreviewPage({
   // The editor emits ?m=1 only when moat is on, so presence maps 1:1 to the live toggle.
   const moat = m === "1";
 
-  const proposal = moat
-    ? { ...saved, why_us: { ...saved.why_us, points: MOAT_WHY_US_POINTS } }
-    : saved;
-
-  return <ProposalDocument proposal={proposal} variant={variant} moat={moat} />;
+  // The moat points swap happens once, inside ProposalDocument -- the single call site
+  // every render path (this preview, the static demo preview, and the print/PDF route)
+  // shares, so all three always stay in sync.
+  return <ProposalDocument proposal={saved} variant={variant} moat={moat} />;
 }

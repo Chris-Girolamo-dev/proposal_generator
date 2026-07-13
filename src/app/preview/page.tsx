@@ -1,5 +1,5 @@
 import { ProposalDocument, type ProposalVariant } from "@/components/proposal/ProposalDocument";
-import { DEFAULT_PROPOSAL, MOAT_WHY_US_POINTS } from "@/lib/proposal/defaults";
+import { DEFAULT_PROPOSAL } from "@/lib/proposal/defaults";
 import { subtotalCents, type Proposal } from "@/lib/proposal/types";
 
 // No-auth, no-DB route: renders the LeftClick-structured / OPFOR-skinned template
@@ -50,9 +50,9 @@ export default async function PreviewPage({
   const moat = m === "1";
   // ?d=15 — preview a year-one discount (blank in real defaults).
   const discount_pct = d ? Number(d) : 0;
-  const base = { ...mockProposal, discount_pct };
-  const proposal = moat
-    ? { ...base, why_us: { ...base.why_us, points: MOAT_WHY_US_POINTS } }
-    : base;
+  // The moat points swap happens once, inside ProposalDocument -- the single call site
+  // every render path (this preview, the real-data preview, and the print/PDF route)
+  // shares, so all three always stay in sync.
+  const proposal = { ...mockProposal, discount_pct };
   return <ProposalDocument proposal={proposal} variant={variant} moat={moat} />;
 }

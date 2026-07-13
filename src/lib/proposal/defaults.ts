@@ -123,9 +123,9 @@ export const MOAT_WHY_US_POINTS = [
       "Deterministic engine: any forecast re-derives exactly from its configuration snapshot. Every change is versioned.",
   },
   {
-    title: "Decision-ready, or we say so.",
+    title: "Calibrated to your actuals.",
     description:
-      "If the data can't support a confident forecast at your target service level, we tell you before you pay for a model that can't deliver it.",
+      "Every model ships trained against your actual historical and protocol parameters, never a generic industry template.",
   },
   {
     title: "No patient data. Ever.",
@@ -254,9 +254,9 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     blurb:
       "We build forecasting systems for supply-constrained operations. Our work has driven measurable reductions in overage and stockout risk across clinical and commercial supply programs. We pair modeling depth with a process your team owns, so it keeps working after we leave.",
     stats: [
-      { value: "6+ yrs", label: "applying AI to supply and forecasting" },
+      { value: "26+ yrs", label: "team experience in drug development & supply chain" },
       { value: "95%+", label: "target service levels engineered into every model" },
-      { value: "End-to-end", label: "from first report to boardroom dashboard" },
+      { value: "At all levels", label: "from actuals pipeline to boardroom dashboard" },
     ],
     capabilities: [
       "Demand per *protocol*",
@@ -297,9 +297,9 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
           "The dashboard is how this gets funded internally. Forecast accuracy is why it matters. We optimize for the second, and the first follows.",
       },
       {
-        title: "Decision-ready, or we say so.",
+        title: "Calibrated to your actuals.",
         description:
-          "If the data can't support a confident forecast at your target service level, we tell you before you pay for a model that can't deliver it.",
+          "Every model ships trained against your actual historical and protocol parameters, never a generic industry template.",
       },
       {
         title: "No patient data. Ever.",
