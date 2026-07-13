@@ -316,7 +316,11 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   ],
 
   guarantee:
-    "If the delivered model does not hold to the agreed service-level target on validation data, we keep working at no additional cost until it does.",
+    // "validation data" (the statistical sense) read as computerized-system validation to a
+    // pharma audience, and contradicted the Data boundaries page, which says adoption does not
+    // wait on a validation project. "your historical data" says the same thing without the
+    // regulatory collision.
+    "If the delivered model does not hold to the agreed service-level target on your historical data, we keep working at no additional cost until it does.",
 
   cost_items: [
     { label: "OPFOR Genesis Clinical Supply Forecasting Simulator", description: "Core model, risk engine, and dashboard build.", qty: 1, unit_cents: 0 },
