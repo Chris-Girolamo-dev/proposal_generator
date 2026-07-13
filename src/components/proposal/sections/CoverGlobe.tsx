@@ -66,11 +66,13 @@ export function GlobeArt({ className }: { className: string }) {
 export function CoverGlobe() {
   return (
     <>
-      <GlobeArt className="pd-globe pointer-events-none absolute right-[-36px] top-[130px] z-[-1] w-[470px] opacity-[.55]" />
+      <GlobeArt className="pd-globe pointer-events-none absolute right-[-36px] top-[177px] z-[-1] w-[470px] opacity-[.55]" />
       {/* Clipped mount: the wrapper matches the plate frame (inset 26px) and hides
-          any linework that would spill into the margin outside the border. */}
+          any linework that would spill into the margin outside the border. Its top offset
+          stays exactly 26px less than the unclipped mount's, so both land the globe in the
+          same spot on the page. */}
       <div className="pd-globe-plate pointer-events-none absolute inset-[26px] z-[-1] overflow-hidden">
-        <GlobeArt className="absolute right-[-62px] top-[104px] w-[470px] opacity-[.55]" />
+        <GlobeArt className="absolute right-[-62px] top-[151px] w-[470px] opacity-[.55]" />
       </div>
     </>
   );

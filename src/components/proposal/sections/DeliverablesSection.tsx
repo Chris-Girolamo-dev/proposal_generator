@@ -24,8 +24,7 @@ export function DeliverablesSection({
         say={<>A working system,<br />not a slide deck.</>}
       />
       <p className="mt-8 text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
-        Everything below is included in the engagement and itemized here exactly as it will be
-        delivered.
+        Everything below is in scope and itemized here exactly as it will be delivered.
       </p>
 
       <div className="mt-12 border border-[var(--pd-line-strong)]">

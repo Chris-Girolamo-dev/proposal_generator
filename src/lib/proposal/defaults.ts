@@ -18,7 +18,7 @@ export const SECTION_TITLES = {
 /** Intro paragraph that sits under each numbered section, mirroring the LeftClick layout. */
 export const SECTION_INTROS = {
   opportunity:
-    "Forecasting is innately high-leverage. Done well it compounds in your favor; done manually it compounds against you. In your current workflow, a few persistent, high-impact areas are quietly capping accuracy and speed:",
+    "Forecasting is innately high-leverage. Done well it compounds in your favor; done manually it compounds against you. In your current workflow, a few persistent, high-impact areas are capping accuracy and speed:",
   solution:
     "These gaps close the same way every time. Clean inputs, a model that shows its uncertainty, and a process your team owns. Here is what that looks like.",
 } as const;
@@ -172,7 +172,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     },
     {
       n: "02",
-      text: "Monte Carlo simulation that quantifies stockout and overage risk at your target service level.",
+      text: "10,000 run Monte Carlo simulation that quantifies stockout and overage risk at your target service level.",
     },
     {
       n: "03",
@@ -181,6 +181,10 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     {
       n: "04",
       text: "A shared, auditable dashboard that gives supply, clinical, and finance one aligned number, in demand and dollars.",
+    },
+    {
+      n: "05",
+      text: "Production plan lot optimization and automated depot transfers, sized from the forecast instead of by hand.",
     },
   ],
 
@@ -191,6 +195,9 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     { text: "A clean intake for the reports you already export." },
     { text: "Documentation so your team runs and updates forecasts without us." },
     { text: "Handover training and 30 days of post-launch support." },
+    {
+      text: "Team accounts so supply, clinical, and finance work from shared scenarios and one source of truth from day one.",
+    },
   ],
 
   timeline: [

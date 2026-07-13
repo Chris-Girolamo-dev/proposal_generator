@@ -35,18 +35,21 @@ export function PageHeader({
         />
         <span className="text-lg text-[var(--pd-mid)]">×</span>
         {clientLogoUrl ? (
-          // An uploaded client logo's colors are unknown — some marks are designed
-          // for a dark ground and have near-white elements that vanish on paper. A
-          // light neutral card gives every logo a contrast floor. Bounding box (not
-          // fixed height) so any aspect ratio scales without ballooning the other axis.
-          <div className="bg-[var(--pd-chip)] px-3 py-1.5">
-            {/* eslint-disable-next-line @next/next/no-img-element -- external Supabase Storage URL */}
-            <img
-              src={clientLogoUrl}
-              alt={clientCompany}
-              className="max-h-8 max-w-[130px] w-auto object-contain"
-            />
-          </div>
+          // Sits directly on the page ground — no backdrop card. Uploads are run through
+          // removeLogoBackground() (lib/proposal/remove-logo-bg.ts), which flood-fills a
+          // baked-in solid background to transparent, so a neutral chip behind the mark
+          // would just reintroduce the rectangle we stripped. Bounding box (not fixed
+          // height) so any aspect ratio scales without ballooning the other axis.
+          //
+          // Trade-off, kept deliberately: a mark drawn for a dark ground (near-white
+          // elements) has no contrast floor here and could wash out on paper. If that ever
+          // shows up, reach for a per-proposal opt-in chip, not a blanket one.
+          /* eslint-disable-next-line @next/next/no-img-element -- external Supabase Storage URL */
+          <img
+            src={clientLogoUrl}
+            alt={clientCompany}
+            className="max-h-8 max-w-[130px] w-auto object-contain"
+          />
         ) : (
           <span className="pd-display text-base font-semibold tracking-tight text-[var(--pd-ink)]">
             {clientCompany}
