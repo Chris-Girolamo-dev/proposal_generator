@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { Plus, RotateCcw, Sparkles, Trash2 } from "lucide-react";
-import { updateProposal } from "@/lib/proposal/actions";
+import { resetCopyFromTemplate, updateProposal } from "@/lib/proposal/actions";
 import { generateOpportunities } from "@/lib/proposal/ai";
 import { DEFAULT_PROPOSAL } from "@/lib/proposal/defaults";
 import { LogoUpload } from "./LogoUpload";
@@ -40,6 +40,8 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   const [moat, setMoat] = useState(proposal.moat ?? true);
   const [isPending, startTransition] = useTransition();
   const [savedAt, setSavedAt] = useState<Date | null>(null);
+  const [isResetting, startResetTransition] = useTransition();
+  const [resetAt, setResetAt] = useState<Date | null>(null);
 
   // Areas-of-Opportunity generation from a pasted sales-call transcript.
   const [transcript, setTranscript] = useState("");
@@ -122,6 +124,23 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         moat,
       });
       setSavedAt(new Date());
+      setResetAt(null); // keep the status line showing the most recent action, not a stale one
+    });
+  }
+
+  // Separate transition from the Save one, so the two buttons show pending independently.
+  function handleResetCopy() {
+    const ok = window.confirm(
+      "Replace this proposal's Solution, Scope, Timeline, Engagement, Why us, Next steps and " +
+        "Services agreement with the current template?\n\n" +
+        "Your client details, Areas of Opportunity, costs, bonuses and discount are left alone.",
+    );
+    if (!ok) return;
+
+    startResetTransition(async () => {
+      await resetCopyFromTemplate(proposal.id);
+      setResetAt(new Date());
+      setSavedAt(null);
     });
   }
 
@@ -141,9 +160,27 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
           <h1 className="font-display text-2xl font-semibold text-fg">Edit Proposal</h1>
         </div>
         <div className="flex items-center gap-3">
-          {savedAt && (
-            <span className="text-xs text-text-3">Saved {savedAt.toLocaleTimeString()}</span>
+          {resetAt ? (
+            <span className="text-xs text-text-3">
+              Copy reset {resetAt.toLocaleTimeString()}
+            </span>
+          ) : (
+            savedAt && (
+              <span className="text-xs text-text-3">Saved {savedAt.toLocaleTimeString()}</span>
+            )
           )}
+          {/* Pulls the boilerplate sections up to the current template. Proposals snapshot
+              DEFAULT_PROPOSAL at creation, so edits to defaults.ts never reach a proposal
+              that already exists — this is the way to bring an old one forward. */}
+          <button
+            onClick={handleResetCopy}
+            disabled={isResetting}
+            className="btn-secondary"
+            title="Replace the boilerplate sections with the current template. Client details, Areas of Opportunity, costs and bonuses are left alone."
+          >
+            <RotateCcw size={14} className="mr-1.5 inline" />
+            {isResetting ? "Resetting…" : "Reset copy"}
+          </button>
           <a href={previewHref} className="btn-secondary" target="_blank" rel="noopener noreferrer">
             Preview
           </a>
