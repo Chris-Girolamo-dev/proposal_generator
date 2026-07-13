@@ -113,9 +113,9 @@ export const MOAT_WHY_US_POINTS = [
       "A neutral layer over whatever randomization system each study runs. Medidata live today; other formats onboard per study.",
   },
   {
-    title: "Calibrated to your data, not a benchmark.",
+    title: "Calibrated to your actuals, not a benchmark.",
     description:
-      "Every model ships trained against your actual historical and protocol data, not a generic industry template.",
+      "Every model ships trained against your historical and protocol actuals, not a generic industry template.",
   },
   {
     title: "Every forecast is reproducible.",
@@ -282,9 +282,9 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
           "You get a working model and dashboard, not a strategy deck for another vendor to implement.",
       },
       {
-        title: "Calibrated to your data, not a benchmark.",
+        title: "Calibrated to your actuals, not a benchmark.",
         description:
-          "Every model ships trained against your actual historical and protocol data, not a generic industry template.",
+          "Every model ships trained against your historical and protocol actuals, not a generic industry template.",
       },
       {
         title: "Senior team, narrow focus.",
