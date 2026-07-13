@@ -129,7 +129,9 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   const discountCents = discountPct > 0 ? Math.round(grossYearOne * (discountPct / 100)) : 0;
   const netYearOne = grossYearOne - discountCents;
 
-  const previewHref = `/preview?v=${variant}${moat ? "&m=1" : ""}`;
+  // Preview the REAL proposal (auth-scoped), not the static /preview design demo. Content
+  // reflects the last Save; the variant + moat toggles preview live via query params.
+  const previewHref = `/proposals/${proposal.id}/preview?v=${variant}${moat ? "&m=1" : ""}`;
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-12">
