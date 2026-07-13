@@ -6,10 +6,30 @@ export const maxDuration = 60;
 
 async function launchBrowser() {
   if (process.env.NODE_ENV === "production") {
+    // @sparticuz/chromium only extracts its bundled shared libraries (al2023.tar.br ->
+    // /tmp/al2023/lib) and sets LD_LIBRARY_PATH when it believes it is on Lambda. It decides
+    // that by sniffing AWS_EXECUTION_ENV / AWS_LAMBDA_JS_RUNTIME for the strings "20.x" or
+    // "22.x" -- and it recognises neither Node 24 nor Vercel's runtime. Unrecognised, it
+    // still extracted the chromium binary but none of its libraries, so the binary died with
+    // "libnss3.so: cannot open shared object file". Claiming nodejs22.x makes it take the
+    // AL2023 branch, which is the correct image for Vercel's current Node runtimes.
+    //
+    // This MUST be assigned before the import below -- the package runs that check at module
+    // load, not on first use. And do not "fix" the value to nodejs24.x to match the real
+    // runtime: that matches neither check, so it would fall through to the Amazon Linux 2
+    // path and extract the wrong libraries.
+    process.env.AWS_LAMBDA_JS_RUNTIME = "nodejs22.x";
+
     const [{ default: chromium }, { default: puppeteer }] = await Promise.all([
       import("@sparticuz/chromium"),
       import("puppeteer-core"),
     ]);
+
+    // Leave graphicsMode alone. In v131 the "--use-angle=swiftshader" flag is pushed
+    // unconditionally (its conditional is commented out upstream, Sparticuz/chromium#247),
+    // so disabling graphics would skip extracting swiftshader while still asking Chromium
+    // to use it.
+    //
     // headless must come from the package rather than a bare `true`: it selects the
     // chromium-shell mode the bundled binary actually ships, whereas `true` can send
     // puppeteer looking for a full headless Chrome that isn't there.
