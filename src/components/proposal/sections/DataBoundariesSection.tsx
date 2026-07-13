@@ -74,7 +74,8 @@ export function DataBoundariesSection({
         <p className="mt-1.5 text-[12px] leading-[1.55] text-[var(--pd-tag)]">
           OPFOR is never a system of record and performs no GxP activity. It ingests only
           decision-support exports your team already receives. No source documents. Adoption does
-          not wait on a computerized-system validation project.
+          not wait on a computerized-system validation project. That is exactly why you are
+          forecasting in minutes, not months. Guaranteed.
         </p>
       </div>
     </PageShell>
