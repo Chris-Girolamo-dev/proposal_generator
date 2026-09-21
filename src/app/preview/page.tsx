@@ -32,6 +32,7 @@ const mockProposal: Proposal = {
   // ?v= and ?m= query params below.
   variant: "plate-globe",
   moat: false,
+  founders_cohort: true,
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
 };

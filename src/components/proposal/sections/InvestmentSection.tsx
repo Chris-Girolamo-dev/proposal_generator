@@ -24,6 +24,7 @@ export function InvestmentSection({
   discountPct = 0,
   number = "07",
   total,
+  foundersCohort = true,
   clientCompany,
   clientLogoUrl,
 }: {
@@ -34,6 +35,7 @@ export function InvestmentSection({
   discountPct?: number;
   number?: string;
   total?: string;
+  foundersCohort?: boolean;
   clientCompany: string;
   clientLogoUrl: string | null;
 }) {
@@ -128,7 +130,7 @@ export function InvestmentSection({
         )}
       </div>
 
-      <FoundersCohortBlock tone="investment" />
+      {foundersCohort && <FoundersCohortBlock tone="investment" />}
 
       {bonuses.length > 0 && (
         <div className="pd-shead mt-3 pt-5">

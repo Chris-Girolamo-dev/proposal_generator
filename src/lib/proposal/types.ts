@@ -98,6 +98,8 @@ export interface Proposal {
   variant: string;
   /** Include the Data boundaries page + moat-backed Why-OPFOR points. */
   moat: boolean;
+  /** Whether the Founders Cohort offer copy renders (cover + investment page). */
+  founders_cohort: boolean;
 
   status: ProposalStatus;
   created_at: string;
@@ -117,6 +119,7 @@ export type ProposalDraft = Omit<
   | "updated_at"
   | "variant"
   | "moat"
+  | "founders_cohort"
 >;
 
 export const lineTotalCents = (i: CostItem): number => Math.round(i.qty * i.unit_cents);

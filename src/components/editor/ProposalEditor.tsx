@@ -38,6 +38,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   const [problems, setProblems] = useState<NumberedItem[]>(proposal.problems ?? []);
   const [variant, setVariant] = useState(proposal.variant ?? "plate-globe");
   const [moat, setMoat] = useState(proposal.moat ?? true);
+  const [foundersCohort, setFoundersCohort] = useState(proposal.founders_cohort ?? true);
   const [isPending, startTransition] = useTransition();
   const [savedAt, setSavedAt] = useState<Date | null>(null);
   const [isResetting, startResetTransition] = useTransition();
@@ -124,6 +125,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         problems: renumber(problems),
         variant,
         moat,
+        founders_cohort: foundersCohort,
       });
       setSavedAt(new Date());
       setResetAt(null); // keep the status line showing the most recent action, not a stale one
@@ -243,6 +245,16 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
             className="h-4 w-4 accent-red"
           />
           Include the Data boundaries page (data-privacy / moat edition)
+        </label>
+
+        <label className="flex items-center gap-2.5 text-sm text-text-2">
+          <input
+            type="checkbox"
+            checked={foundersCohort}
+            onChange={(e) => setFoundersCohort(e.target.checked)}
+            className="h-4 w-4 accent-red"
+          />
+          Include the Founders Cohort 2026 offer (cover and investment page)
         </label>
 
         <div>

@@ -37,6 +37,9 @@ export function ProposalDocument({
   const clientCompany = proposal.client_company;
   const clientLogoUrl = proposal.client_logo_url;
   const total = moat ? "10" : "09";
+  // Offer copy is per proposal: a renewal or a non-cohort client should not see it.
+  // Older rows predate the column, so an absent value means on.
+  const foundersCohort = proposal.founders_cohort ?? true;
   // The moat edition swaps in three architecture-backed Why-OPFOR points. This must live
   // here, the single call site every render path shares (both /preview pages and the
   // signed print route PDF export go through this component) -- it previously lived
@@ -62,7 +65,7 @@ export function ProposalDocument({
 
   return (
     <div className="proposal-doc" data-variant={variant}>
-      <CoverSection proposal={proposal} />
+      <CoverSection proposal={proposal} foundersCohort={foundersCohort} />
 
       <ContentsSection
         entries={contents}
@@ -131,6 +134,7 @@ export function ProposalDocument({
         renewalCents={proposal.renewal_cents}
         discountPct={proposal.discount_pct}
         number={moat ? "08" : "07"}
+        foundersCohort={foundersCohort}
         total={total}
         clientCompany={clientCompany}
         clientLogoUrl={clientLogoUrl}

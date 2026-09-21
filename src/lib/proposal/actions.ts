@@ -40,6 +40,7 @@ export interface ProposalHeaderUpdate {
   problems: NumberedItem[];
   variant: string;
   moat: boolean;
+  founders_cohort: boolean;
 }
 
 export async function updateProposal(id: string, update: ProposalHeaderUpdate) {

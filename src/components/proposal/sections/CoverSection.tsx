@@ -7,7 +7,13 @@ import { CoverGlobe } from "./CoverGlobe";
 // uppercase Space Grotesk headline with a dim second line, an OCR-A tagline, and
 // a bstat-style meta strip pinned to the bottom edge. Deliberately no investment
 // or timeline here — the cost reveal is saved for the Investment page.
-export function CoverSection({ proposal }: { proposal: Proposal }) {
+export function CoverSection({
+  proposal,
+  foundersCohort = true,
+}: {
+  proposal: Proposal;
+  foundersCohort?: boolean;
+}) {
   // Cover date: DD MMM YYYY, e.g. "12 JUL 2026" (day first, three-letter month). Used
   // on the stamp line and the Issued footer so both read the same.
   const issued = proposal.created_at ? new Date(proposal.created_at) : new Date();
@@ -76,7 +82,7 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
           </p>
         )}
 
-        <FoundersCohortBlock tone="cover" />
+        {foundersCohort && <FoundersCohortBlock tone="cover" />}
       </div>
 
       <div className="mt-auto grid grid-cols-4 gap-5">
