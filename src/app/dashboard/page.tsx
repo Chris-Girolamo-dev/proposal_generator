@@ -2,8 +2,9 @@ import Link from "next/link";
 import { FileText, LogOut } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/lib/supabase/actions";
-import { deleteProposal } from "@/lib/proposal/actions";
+import { deleteProposal, duplicateProposal } from "@/lib/proposal/actions";
 import { DeleteProposalButton } from "@/components/editor/DeleteProposalButton";
+import { DuplicateProposalButton } from "@/components/editor/DuplicateProposalButton";
 import { formatMoney } from "@/lib/proposal/types";
 import type { Proposal } from "@/lib/proposal/types";
 
@@ -83,7 +84,10 @@ export default async function DashboardPage() {
                   </span>
                 </div>
               </Link>
-              <DeleteProposalButton action={deleteProposal.bind(null, p.id)} />
+              <div className="flex shrink-0 items-center gap-2">
+                <DuplicateProposalButton action={duplicateProposal.bind(null, p.id)} />
+                <DeleteProposalButton action={deleteProposal.bind(null, p.id)} />
+              </div>
             </div>
           ))}
         </div>

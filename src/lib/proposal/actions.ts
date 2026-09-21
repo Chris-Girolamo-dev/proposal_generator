@@ -114,3 +114,46 @@ export async function deleteProposal(id: string) {
 
   revalidatePath("/dashboard");
 }
+
+/**
+ * Copies an existing proposal into a new draft and opens it, so a finished proposal can
+ * serve as the starting point for the next one.
+ *
+ * Everything the user authored comes across: client details, Areas of Opportunity, costs,
+ * bonuses, discount, renewal, variant and moat. The server-managed identity does not --
+ * id, slug and proposal_number are left to their column defaults so the copy gets its own
+ * never-reissued number rather than colliding on the unique constraint. Status resets to
+ * draft: a copy of something already sent has not itself been sent.
+ */
+export async function duplicateProposal(id: string) {
+  const supabase = await createClient();
+
+  const { data: source, error: readError } = await supabase
+    .from("proposals")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (readError || !source) {
+    throw new Error(readError?.message ?? "Could not find that proposal to duplicate.");
+  }
+
+  // Drop the fields the database owns; everything else is carried over verbatim.
+  const carried = { ...source };
+  for (const owned of ["id", "slug", "proposal_number", "created_at", "updated_at"]) {
+    delete carried[owned];
+  }
+
+  const { data: copy, error: writeError } = await supabase
+    .from("proposals")
+    .insert({ ...carried, status: "draft" })
+    .select("id")
+    .single();
+
+  if (writeError || !copy) {
+    throw new Error(writeError?.message ?? "Could not duplicate that proposal.");
+  }
+
+  revalidatePath("/dashboard");
+  redirect(`/proposals/${copy.id}/edit`);
+}
