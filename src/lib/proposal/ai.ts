@@ -98,16 +98,72 @@ export async function generateOpportunities(
   }
 
 
+  if (res.stop_reason === "max_tokens") {
+    return {
+      ok: false,
+      error: "The model ran out of room before finishing. Shorten the transcript and try again.",
+    };
+  }
+
   const tool = res.content.find((c) => c.type === "tool_use");
   if (!tool || tool.type !== "tool_use") {
     return { ok: false, error: "The model did not return structured output. Try again." };
   }
-  const opportunities = (tool.input as { opportunities?: { text?: string }[] }).opportunities ?? [];
-  const items = opportunities
-    .map((it) => (it.text ?? "").trim())
-    .filter(Boolean)
+
+  const texts = normalizeOpportunities(
+    (tool.input as { opportunities?: unknown } | null)?.opportunities,
+  );
+  if (texts.length === 0) {
+    return {
+      ok: false,
+      error: "Nothing usable came back from that transcript. Add more detail and try again.",
+    };
+  }
+
+  const items = texts
     .slice(0, 4)
     .map((textItem, i) => ({ n: String(i + 1).padStart(2, "0"), text: textItem }));
 
   return { ok: true, items };
+}
+
+/**
+ * Pulls the opportunity strings out of whatever the tool call actually contained.
+ *
+ * The schema asks for an array of {text}, but a forced tool call is not a guarantee of
+ * shape: the value has come back as a JSON-encoded string and as an object keyed by index,
+ * and either one made a bare .map() throw -- which escaped as an unreadable production
+ * error. Anything unrecognised yields [] so the caller reports it instead of crashing.
+ */
+function normalizeOpportunities(raw: unknown): string[] {
+  let value: unknown = raw;
+
+  if (typeof value === "string") {
+    const asString = value;
+    try {
+      value = JSON.parse(asString);
+    } catch {
+      // A bare string is a single opportunity, not malformed output.
+      return [asString.trim()].filter(Boolean);
+    }
+  }
+
+  // An object keyed by index ({"0": {...}}) carries its items in the values.
+  const list = Array.isArray(value)
+    ? value
+    : value && typeof value === "object"
+      ? Object.values(value as Record<string, unknown>)
+      : [];
+
+  return list
+    .map((it) => {
+      if (typeof it === "string") return it;
+      if (it && typeof it === "object") {
+        const { text } = it as { text?: unknown };
+        if (typeof text === "string") return text;
+      }
+      return "";
+    })
+    .map((t) => t.trim())
+    .filter(Boolean);
 }
