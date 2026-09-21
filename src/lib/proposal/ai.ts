@@ -131,21 +131,35 @@ export async function generateOpportunities(
  * Pulls the opportunity strings out of whatever the tool call actually contained.
  *
  * The schema asks for an array of {text}, but a forced tool call is not a guarantee of
- * shape: the value has come back as a JSON-encoded string and as an object keyed by index,
- * and either one made a bare .map() throw -- which escaped as an unreadable production
- * error. Anything unrecognised yields [] so the caller reports it instead of crashing.
+ * shape. Observed in production: the value arrives as a STRING holding a JSON object that
+ * wraps the array under its own "opportunities" key -- double-encoded and double-nested --
+ * so a bare .map() throws and a naive Object.values() silently yields nothing.
+ *
+ * This unwraps strings and {opportunities: ...} envelopes until it reaches a list, flattens
+ * one level of nesting, and accepts items as {text} or bare strings. Anything unrecognised
+ * yields [] so the caller reports it instead of crashing.
  */
 function normalizeOpportunities(raw: unknown): string[] {
   let value: unknown = raw;
 
-  if (typeof value === "string") {
-    const asString = value;
-    try {
-      value = JSON.parse(asString);
-    } catch {
-      // A bare string is a single opportunity, not malformed output.
-      return [asString.trim()].filter(Boolean);
+  // Bounded: each pass strips one layer, and malformed input must not loop forever.
+  for (let depth = 0; depth < 5; depth++) {
+    if (typeof value === "string") {
+      const asString = value.trim();
+      try {
+        value = JSON.parse(asString);
+        continue;
+      } catch {
+        // A bare string is a single opportunity, not malformed output.
+        return [asString].filter(Boolean);
+      }
     }
+    // {opportunities: [...]} nested inside itself.
+    if (value && typeof value === "object" && !Array.isArray(value) && "opportunities" in value) {
+      value = (value as { opportunities: unknown }).opportunities;
+      continue;
+    }
+    break;
   }
 
   // An object keyed by index ({"0": {...}}) carries its items in the values.
@@ -156,6 +170,7 @@ function normalizeOpportunities(raw: unknown): string[] {
       : [];
 
   return list
+    .flat()
     .map((it) => {
       if (typeof it === "string") return it;
       if (it && typeof it === "object") {
