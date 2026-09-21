@@ -28,6 +28,28 @@ export const SECTION_INTROS = {
  * counsel review before relying on it for a real engagement. The Effective Date / party details
  * are rendered separately in ServicesAgreementSection from live proposal data.
  */
+/**
+ * The Founders Cohort offer, stated once and rendered in both places it appears (the cover
+ * and the investment page). These are terms, not bonuses: they describe what the agreement
+ * permanently permits, which is why they were pulled out of the included-scope list where
+ * they read as an afterthought.
+ *
+ * Duration wording is deliberate. "Perpetual" is a term of art in software contracts --
+ * a licence surviving termination -- and is not what is being offered. Section 9.3 of the
+ * services agreement carries the binding version of this, including the change-of-control
+ * limits.
+ */
+export const FOUNDERS_COHORT = {
+  name: "Founders Cohort 2026",
+  terms: [
+    "Unlimited studies",
+    "Unlimited seats",
+    "Renewal price never increases",
+  ],
+  duration:
+    "Held for the life of your agreement, for as long as your subscription stays active.",
+};
+
 export const DEFAULT_SERVICES_AGREEMENT: AgreementClause[] = [
   { number: "1", title: "Services", body: [
     'Provider will perform the services described in this proposal (the "Services") in accordance with the scope, timeline, and deliverables set out above.',
@@ -160,7 +182,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   client_logo_url: null,
   project_title: "Clinical Supply Forecasting Simulator",
   subtitle:
-    "A purpose-built demand forecasting and scenario-planning engine that grows with your team, and your clinical programs. Unlimited scenarios, studies, & seats, for life.",
+    "A purpose-built demand forecasting and scenario-planning engine that grows with your team, and your clinical programs.",
 
   // Areas of opportunity (was "problems")
   problems: [

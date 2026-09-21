@@ -7,12 +7,15 @@ import {
   type CostItem,
 } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
+import { FoundersCohortBlock } from "./FoundersCohortBlock";
 import { PageShell } from "./PageShell";
 
 // Investment — clean ruled price rows (optional add-ons show their price but sit
-// outside the total), the total set large, then the value stack: every bonus with
+// outside the total), the total set large, then the included-scope stack: every item with
 // its real dollar value on the right and an Included/credited stamp, closed by a
-// "total bonus value" strip so the stack visibly dwarfs the price.
+// "total included value" strip so the stack visibly dwarfs the price. Named "Also
+// included" rather than "bonuses": what remains here after the Founders Cohort terms were
+// lifted out is scope that would otherwise be billable, not giveaways.
 export function InvestmentSection({
   items,
   bonuses,
@@ -125,10 +128,12 @@ export function InvestmentSection({
         )}
       </div>
 
+      <FoundersCohortBlock tone="investment" />
+
       {bonuses.length > 0 && (
         <div className="pd-shead mt-3 pt-5">
           <h3 className="pd-display text-[25px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
-            The bonuses<span className="text-[var(--pd-mid)]">, yours with the build.</span>
+            Also included<span className="text-[var(--pd-mid)]">, at no additional cost.</span>
           </h3>
 
           <div className="mt-2">
@@ -152,13 +157,16 @@ export function InvestmentSection({
 
           {bonusTotal > 0 && (
             <div className="no-break mt-1 flex items-baseline justify-between border-y border-[var(--pd-line-strong)] py-1">
-              <span className="pd-meta">Total bonus value</span>
+              <span className="pd-meta">Total included value</span>
               <span className="flex items-baseline gap-4">
                 <span className="pd-display text-[20px] font-bold tracking-[-0.02em] text-[var(--pd-ink)] line-through decoration-[rgba(229,25,43,.55)] decoration-[1.5px]">
                   {formatMoney(bonusTotal, currency)}
                 </span>
+                {/* "Included", not "Free": the struck-through total already makes the
+                    point, and "free" is the exact infomercial cue this section was
+                    renamed to get away from. */}
                 <span className="pd-display text-[22px] font-bold uppercase tracking-[-0.02em] text-[#E5192B]">
-                  Free
+                  Included
                 </span>
               </span>
             </div>

@@ -1,4 +1,5 @@
 import type { Proposal } from "@/lib/proposal/types";
+import { FoundersCohortBlock } from "./FoundersCohortBlock";
 import { PageHeader } from "./PageHeader";
 import { CoverGlobe } from "./CoverGlobe";
 
@@ -74,6 +75,8 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
             )}
           </p>
         )}
+
+        <FoundersCohortBlock tone="cover" />
       </div>
 
       <div className="mt-auto grid grid-cols-4 gap-5">
