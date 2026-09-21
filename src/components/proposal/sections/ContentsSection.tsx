@@ -41,13 +41,16 @@ export function ContentsSection({
         </h2>
       </div>
 
-      <div className="mt-12">
+      {/* Tighter than the numbered pages' rhythm on purpose: the moat edition lists eleven
+          sections, and at py-5 the eleventh pushed the folio onto a second sheet carrying
+          nothing. At py-4 the page holds twelve. */}
+      <div className="mt-10">
         {entries.map((entry) => (
           <a
             key={entry.number}
             href={`#section-${entry.number}`}
             // No closing rule on the last entry -- see NumberedSection.
-            className="no-break grid grid-cols-12 items-baseline gap-4 border-t border-[var(--pd-line)] py-5 no-underline"
+            className="no-break grid grid-cols-12 items-baseline gap-4 border-t border-[var(--pd-line)] py-4 no-underline"
           >
             {/* Title left, folio right. The index is not repeated on the left: the folio
                 already states it, and a doubled number reads as a typo. */}
