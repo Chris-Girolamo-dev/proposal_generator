@@ -335,7 +335,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     blurb:
       "We build forecasting systems for supply-constrained operations. Our work has driven measurable reductions in overage and stockout risk across clinical and commercial supply programs. We pair modeling depth with a process your team owns, so it keeps working after we leave.",
     stats: [
-      { value: "26+ yrs", label: "team experience in drug development & supply chain" },
+      { value: "26+ yrs", label: "drug development, supply chain, & product design" },
       { value: "95%+", label: "target service levels engineered into every model" },
       { value: "At all levels", label: "from actuals pipeline to boardroom dashboard" },
     ],
