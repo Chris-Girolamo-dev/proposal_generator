@@ -493,7 +493,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         <div className="mt-4 space-y-4 border-t border-border pt-4">
           <div className="flex flex-wrap items-end gap-6">
             <div>
-              <label className="label">Annual renewal — year 2 onward ($)</label>
+              <label className="label">Annual renewal, year 2 onward ($)</label>
               <div className="flex items-center gap-2">
                 <input
                   type="number"

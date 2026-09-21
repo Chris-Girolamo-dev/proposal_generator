@@ -52,7 +52,7 @@ export default async function DashboardPage() {
           <FileText size={28} className="text-text-3" strokeWidth={1.5} />
           <p className="font-display text-lg font-medium text-fg">No proposals yet</p>
           <p className="max-w-sm text-sm text-text-2">
-            Create your first proposal from the OPFOR template — fill in the client details and
+            Create your first proposal from the OPFOR template: fill in the client details and
             variable costs, then download a client-ready PDF.
           </p>
           <Link href="/proposals/new" className="btn-primary mt-2">
