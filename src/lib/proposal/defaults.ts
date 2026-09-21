@@ -74,7 +74,25 @@ export const DEFAULT_SERVICES_AGREEMENT: AgreementClause[] = [
   { number: "8", title: "Limitation of Liability", body: [
     "Each Party's total liability is limited to the greater of (i) US $100,000 or (ii) the fees paid or payable under this Agreement in the twelve (12) months preceding the claim. Neither Party is liable for indirect, incidental, consequential, special, or punitive damages, including lost profits or revenue.",
   ] },
-  { number: "9", title: "General", body: [
+  { number: "9.1", title: "Term and Renewal", body: [
+    "This Agreement begins on the Effective Date and continues for an initial term of twelve (12) months, renewing automatically for successive twelve (12) month terms at the renewal fee stated in the Investment section, unless either Party gives written notice of non-renewal at least thirty (30) days before the end of the then-current term.",
+  ] },
+  { number: "9.2", title: "Termination for Cause", body: [
+    "Either Party may terminate this Agreement on written notice if the other Party materially breaches it and fails to cure the breach within thirty (30) days of written notice describing it. Provider may suspend the Services on ten (10) days written notice for fees more than sixty (60) days overdue.",
+  ] },
+  { number: "9.3", title: "Scope of Unlimited Terms", body: [
+    `The unlimited-studies, unlimited-seats, and fixed-renewal-price terms described in this proposal (the "Founders Cohort Terms") are granted to Client as constituted on the Effective Date, together with its subsidiaries as of that date, and are held for the life of this Agreement for as long as Client's subscription remains active. They are personal to Client, are not transferable, and do not extend to any acquirer, successor, parent, or affiliate of Client, or to clinical programs that were not Client's own as of the Effective Date.`,
+  ] },
+  { number: "9.4", title: "Change of Control", body: [
+    "If Client undergoes a change of control (including a merger, acquisition, sale of substantially all assets, or a transaction in which a third party acquires a majority of Client's voting securities), Client will notify Provider in writing within thirty (30) days. Provider may then, on sixty (60) days written notice, either terminate this Agreement or propose revised terms reflecting the combined entity's scope. If Client does not accept the revised terms in writing before the end of that notice period, either Party may terminate this Agreement on written notice, and the Founders Cohort Terms end on that termination. Fees paid for any unused portion of the then-current term are refunded on a pro-rata basis.",
+  ] },
+  { number: "9.5", title: "Assignment", body: [
+    "Neither Party may assign this Agreement without the other's prior written consent, except that either Party may assign it in full to a successor in connection with a merger or sale of substantially all assets, subject to Section 9.4.",
+  ] },
+  { number: "9.6", title: "Effect of Termination", body: [
+    "On termination, Client will pay for Services performed through the effective date of termination, Provider will deliver work product completed and paid for, and each Party will return or destroy the other's Confidential Information on request. Sections 5, 6, 7, and 8 survive termination.",
+  ] },
+  { number: "10", title: "General", body: [
     "Provider is an independent contractor. This Agreement is governed by the laws of [Governing State/Country], without regard to conflict-of-laws principles. This Agreement is the entire understanding between the Parties and supersedes all prior proposals or agreements. Amendments must be in writing signed by both Parties.",
   ] },
 ];
