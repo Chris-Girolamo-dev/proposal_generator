@@ -23,12 +23,7 @@ export function EngagementSection({
 
   return (
     <PageShell number="05" total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
-      <SectionHeading
-        number="05"
-        total={total}
-        title="The engagement"
-        say={<>Senior team.<br />Narrow focus.</>}
-      />
+      <SectionHeading title="The engagement" />
 
       <h3 className="mt-12 max-w-[24ch] pd-display text-[30px] font-semibold leading-[1.12] tracking-[-0.02em] text-[var(--pd-ink)]">
         {operatorsLabel.charAt(0).toUpperCase() + operatorsLabel.slice(1)}, partnered with your
@@ -38,7 +33,7 @@ export function EngagementSection({
       <p className="mt-6 text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         {operatorsLabel} work directly with your team for {weeksLabel}: one leads the engagement
         end to end; the other builds the forecasting model and integrates it against your live
-        data. We run this with you, not for you: one question, {weeksLabel}, and it is the only
+        data. We run this with you, not for you: {weeksLabel}, and it is the only
         thing we work on.
       </p>
 

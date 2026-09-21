@@ -40,12 +40,7 @@ export function DataBoundariesSection({
 }) {
   return (
     <PageShell number={number} total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
-      <SectionHeading
-        number={number}
-        total={total}
-        title="Data boundaries"
-        say={<>What we hold.<br />What we never touch.</>}
-      />
+      <SectionHeading title="Data boundaries" />
       <p className="mt-8 text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         OPFOR is planning and decision support. The boundary below is architectural, not policy.
       </p>

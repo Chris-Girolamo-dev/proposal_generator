@@ -56,8 +56,12 @@ export function CoverSection({ proposal }: { proposal: Proposal }) {
             {stampRest}
           </span>
         </div>
+        {/* Cover blurb sets in the document's body sans, not the OCR-A .pd-tag face: at
+            paragraph length that face reads as machine output rather than prose (review
+            call). .pd-tagline is kept for its measure, and the colour token is applied
+            directly since it used to arrive via .pd-tag. */}
         {proposal.subtitle && (
-          <p className="pd-tag pd-tagline mt-10 text-[15px] leading-[1.6]">
+          <p className="pd-tagline mt-10 text-[15px] leading-[1.6] text-[var(--pd-tag)]">
             <span className="pd-tagline-shape" aria-hidden="true" />
             {proposal.subtitle.split(/(for life)/i).map((seg, i) =>
               /^for life$/i.test(seg) ? (

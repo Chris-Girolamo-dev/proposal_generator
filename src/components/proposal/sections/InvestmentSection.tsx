@@ -19,7 +19,6 @@ export function InvestmentSection({
   currency,
   renewalCents = 0,
   discountPct = 0,
-  say,
   number = "07",
   total,
   clientCompany,
@@ -30,7 +29,6 @@ export function InvestmentSection({
   currency: string;
   renewalCents?: number;
   discountPct?: number;
-  say?: React.ReactNode;
   number?: string;
   total?: string;
   clientCompany: string;
@@ -51,27 +49,7 @@ export function InvestmentSection({
 
   return (
     <PageShell number={number} total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
-      <SectionHeading
-        number={number}
-        total={total}
-        title="The investment"
-        say={
-          say ??
-          (hasRenewal ? (
-            <>
-              Year one, then half.
-              <br />
-              Locked for life.
-            </>
-          ) : (
-            <>
-              One-time build.
-              <br />
-              Fixed price.
-            </>
-          ))
-        }
-      />
+      <SectionHeading title="The investment" />
 
       <div className="no-break mt-3 max-w-2xl">
         {items.map((item, i) => (

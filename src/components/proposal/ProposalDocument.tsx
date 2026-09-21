@@ -1,5 +1,7 @@
 import type { Proposal } from "@/lib/proposal/types";
 import { MOAT_WHY_US_POINTS, SECTION_INTROS } from "@/lib/proposal/defaults";
+import { weeksLabelFromPhases } from "@/lib/proposal/types";
+import { ContentsSection, type ContentsEntry } from "./sections/ContentsSection";
 import { CoverSection } from "./sections/CoverSection";
 import { NumberedSection } from "./sections/NumberedSection";
 import { DeliverablesSection } from "./sections/DeliverablesSection";
@@ -42,15 +44,37 @@ export function ProposalDocument({
   // receives) never applied it and silently showed the generic points instead.
   const whyUs = moat ? { ...proposal.why_us, points: MOAT_WHY_US_POINTS } : proposal.why_us;
 
+  // Built here because this is the only place the moat renumbering is known. Titles must
+  // match the section headings exactly -- a contents page that paraphrases its own document
+  // is worse than none.
+  const contents: ContentsEntry[] = [
+    { number: "01", title: "Areas of opportunity" },
+    { number: "02", title: "Your solution" },
+    { number: "03", title: "What ships" },
+    { number: "04", title: `${weeksLabelFromPhases(proposal.timeline)}, week by week` },
+    { number: "05", title: "The engagement" },
+    { number: "06", title: "Why OPFOR" },
+    ...(moat ? [{ number: "07", title: "Data boundaries" }] : []),
+    { number: moat ? "08" : "07", title: "The investment" },
+    { number: moat ? "09" : "08", title: "Next steps" },
+    { number: moat ? "10" : "09", title: "Services agreement" },
+  ];
+
   return (
     <div className="proposal-doc" data-variant={variant}>
       <CoverSection proposal={proposal} />
+
+      <ContentsSection
+        entries={contents}
+        total={total}
+        clientCompany={clientCompany}
+        clientLogoUrl={clientLogoUrl}
+      />
 
       <NumberedSection
         number="01"
         total={total}
         title="Areas of opportunity"
-        say={<>Where accuracy and speed<br />are being capped today.</>}
         intro={SECTION_INTROS.opportunity}
         items={proposal.problems}
         clientCompany={clientCompany}
@@ -108,7 +132,6 @@ export function ProposalDocument({
         discountPct={proposal.discount_pct}
         number={moat ? "08" : "07"}
         total={total}
-        say={moat ? <>Seconds to an answer.<br />No vendor queue.</> : undefined}
         clientCompany={clientCompany}
         clientLogoUrl={clientLogoUrl}
       />

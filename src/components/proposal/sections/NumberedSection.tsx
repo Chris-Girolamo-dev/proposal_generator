@@ -3,12 +3,13 @@ import { SectionHeading } from "./SectionHeading";
 import { PageShell } from "./PageShell";
 
 // Opportunity / Solution pages — the site's capabilities index: hairline-ruled rows
-// with a mono index number and the item text set large enough to carry the page.
+// with a mono index number. Item text is set at the intro paragraph's size (13.5px)
+// rather than the old 19px display size, per review: the pages read as one voice and
+// the list no longer risks pushing a sixth row onto a second sheet.
 export function NumberedSection({
   number,
   total,
   title,
-  say,
   intro,
   items,
   clientCompany,
@@ -17,7 +18,6 @@ export function NumberedSection({
   number: string;
   total?: string;
   title: React.ReactNode;
-  say?: React.ReactNode;
   intro: string;
   items: NumberedItem[];
   clientCompany: string;
@@ -25,7 +25,7 @@ export function NumberedSection({
 }) {
   return (
     <PageShell number={number} total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
-      <SectionHeading number={number} total={total} title={title} say={say} />
+      <SectionHeading title={title} />
       <p className="mt-8 text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         {intro}
       </p>
@@ -39,7 +39,7 @@ export function NumberedSection({
             }`}
           >
             <span className="pd-meta col-span-1 pt-1">{item.n}</span>
-            <p className="col-span-10 pd-display text-[19px] font-medium leading-[1.35] tracking-[-0.01em] text-[var(--pd-ink)]">
+            <p className="col-span-10 pd-display text-[13.5px] font-medium leading-[1.65] tracking-[-0.01em] text-[var(--pd-ink)]">
               {item.text}
             </p>
           </div>

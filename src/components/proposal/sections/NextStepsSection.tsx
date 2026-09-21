@@ -21,12 +21,7 @@ export function NextStepsSection({
 }) {
   return (
     <PageShell number={number} total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
-      <SectionHeading
-        number={number}
-        total={total}
-        title="Next steps"
-        say={<>Three moves.<br />Then we build.</>}
-      />
+      <SectionHeading title="Next steps" />
 
       <div className="mt-12 grid grid-cols-3 gap-8">
         {steps.map((s, i) => (

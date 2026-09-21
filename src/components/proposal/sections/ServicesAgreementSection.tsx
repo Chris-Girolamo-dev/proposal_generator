@@ -31,15 +31,12 @@ export function ServicesAgreementSection({
   return (
     // pd-agreement: in dark variants these pages reset to paper (see globals.css) —
     // clients e-sign here, and signatures need a light ground.
-    <section className="pd-agreement isolate relative flex min-h-[11in] flex-col p-16">
+    // id matches PageShell's anchor scheme; this section builds its own frame, so it has
+    // to set it explicitly or the contents page links nowhere.
+    <section id={`section-${number}`} className="pd-agreement isolate relative flex min-h-[11in] flex-col p-16">
       <CornerGlobe />
       <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
-      <SectionHeading
-        number={number}
-        total={total}
-        title="Services agreement"
-        say={<>Executed off-platform<br />by client legal.</>}
-      />
+      <SectionHeading title="Services agreement" />
 
       <div className="mt-8">
         <p className="text-[12px] leading-[1.6] text-[var(--pd-tag)]">

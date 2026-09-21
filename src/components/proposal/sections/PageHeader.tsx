@@ -5,7 +5,9 @@ import Image from "next/image";
 // Uses the flat cropped wordmark (the glow variant bakes a radial haze into its
 // alpha channel that smears on this light paper ground — same reason the website
 // switched). `noBorder` drops the bottom hairline for the cover, which has its own
-// meta-row rhythm.
+// meta-row rhythm. The bottom hairline was removed outright: every numbered page
+// already opens with the stronger red-accented .pd-shead rule, so the two read as a
+// doubled line.
 export function PageHeader({
   clientCompany,
   clientLogoUrl,
@@ -19,9 +21,7 @@ export function PageHeader({
 }) {
   return (
     <div
-      className={`flex items-center justify-between ${
-        noBorder ? "" : "mb-6 border-b border-[var(--pd-line)] pb-5"
-      }`}
+      className={`flex items-center justify-between ${noBorder ? "" : "mb-6 pb-5"}`}
     >
       <div className="flex items-center gap-4">
         {/* One wordmark everywhere — the same flat crop on light and dark grounds

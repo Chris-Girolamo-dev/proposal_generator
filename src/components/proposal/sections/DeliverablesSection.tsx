@@ -17,12 +17,7 @@ export function DeliverablesSection({
 }) {
   return (
     <PageShell number="03" total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
-      <SectionHeading
-        number="03"
-        total={total}
-        title="What ships"
-        say={<>A working system,<br />not a slide deck.</>}
-      />
+      <SectionHeading title="What ships" />
       <p className="mt-8 text-[13.5px] leading-[1.65] text-[var(--pd-tag)]">
         Everything below is in scope and itemized here exactly as it will be delivered.
       </p>

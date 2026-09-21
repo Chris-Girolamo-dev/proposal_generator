@@ -18,12 +18,7 @@ export function WhyUsSection({
 }) {
   return (
     <PageShell number="06" total={total} clientCompany={clientCompany} clientLogoUrl={clientLogoUrl}>
-      <SectionHeading
-        number="06"
-        total={total}
-        title="Why OPFOR"
-        say={<>Modeling depth.<br />Your process.</>}
-      />
+      <SectionHeading title="Why OPFOR" />
 
       <div className="mt-6 grid grid-cols-3 gap-5">
         {whyUs.stats.map((stat, i) => (
