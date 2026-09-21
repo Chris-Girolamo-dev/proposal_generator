@@ -515,12 +515,18 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         <div className="space-y-3">
           {bonuses.map((b, i) => (
             <div key={i} className="flex items-start gap-3">
-              <input
-                className="input-field flex-1"
-                placeholder="Bonus label"
-                value={b.label}
-                onChange={(e) => updateBonus(i, { label: e.target.value })}
-              />
+              {/* Width lives on the wrapper, never on .input-field itself: that class sets
+                  width:100% as unlayered CSS, which outranks any Tailwind width utility
+                  (utilities live in @layer utilities, and unlayered rules win). An unwrapped
+                  input therefore claims the whole row and starves its siblings. */}
+              <div className="min-w-0 flex-1">
+                <input
+                  className="input-field"
+                  placeholder="Bonus label"
+                  value={b.label}
+                  onChange={(e) => updateBonus(i, { label: e.target.value })}
+                />
+              </div>
               <div className="w-32 shrink-0">
                 <input
                   type="number"
@@ -537,12 +543,14 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
                   }
                 />
               </div>
-              <input
-                className="input-field w-40 shrink-0"
-                placeholder="Tag (e.g. Included)"
-                value={b.tag ?? ""}
-                onChange={(e) => updateBonus(i, { tag: e.target.value })}
-              />
+              <div className="w-40 shrink-0">
+                <input
+                  className="input-field"
+                  placeholder="Tag (e.g. Included)"
+                  value={b.tag ?? ""}
+                  onChange={(e) => updateBonus(i, { tag: e.target.value })}
+                />
+              </div>
               <button
                 onClick={() => removeBonus(i)}
                 className="btn-secondary px-2"
