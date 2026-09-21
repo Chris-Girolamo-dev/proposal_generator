@@ -2,7 +2,7 @@
 // Domain: clinical-supply / demand forecasting for B2B biotech & pharma.
 // These are starting points the editor pre-fills; you edit per client.
 
-import type { AgreementClause, ProposalDraft, TeamMember } from "./types";
+import type { AgreementClause, PaymentOption, ProposalDraft, TeamMember } from "./types";
 
 export const SECTION_TITLES = {
   opportunity: "Your areas of opportunity", // renamed from "problem areas" for the biotech market
@@ -50,6 +50,34 @@ export const FOUNDERS_COHORT = {
     "Held for the life of your agreement, for as long as your subscription stays active.",
 };
 
+/**
+ * Ways to pay, offered side by side on the investment page.
+ *
+ * The standard schedule is listed first and carries no discount: it is the one the
+ * agreement's invoicing clause (2.2) describes. The other two buy cash certainty -- paid up
+ * front, or committed for two years -- and pay for it with a discount.
+ *
+ * Editable per proposal, so these are a starting point rather than a price list.
+ */
+export const DEFAULT_PAYMENT_OPTIONS: PaymentOption[] = [
+  {
+    label: "Standard",
+    detail: "50% on execution, then two equal installments in Q3 and Q4. Renewal invoiced in full, in advance.",
+    discount_pct: 0,
+    standard: true,
+  },
+  {
+    label: "Paid in full, one year",
+    detail: "100% invoiced on execution, covering the first year.",
+    discount_pct: 2.5,
+  },
+  {
+    label: "Paid in full, two year commitment",
+    detail: "Both years invoiced on execution, with the renewal price locked at signing.",
+    discount_pct: 3.5,
+  },
+];
+
 export const DEFAULT_SERVICES_AGREEMENT: AgreementClause[] = [
   { number: "1", title: "Services", body: [
     'Provider will perform the services described in this proposal (the "Services") in accordance with the scope, timeline, and deliverables set out above.',
@@ -58,7 +86,7 @@ export const DEFAULT_SERVICES_AGREEMENT: AgreementClause[] = [
     "Client will pay the fees set out in the Investment section above.",
   ] },
   { number: "2.2", title: "Invoicing", body: [
-    "Provider will invoice fifty percent (50%) of first-year fees upon execution of this Agreement, and the remainder in two equal installments invoiced in the third and fourth calendar quarters of the first year. Thereafter, the annual renewal fee is invoiced in full, in advance, at the start of each renewal year. Payment is due within thirty (30) days of the invoice date.",
+    "Unless Client selects a different payment option set out in the Investment section above, Provider will invoice fifty percent (50%) of first-year fees upon execution of this Agreement, and the remainder in two equal installments invoiced in the third and fourth calendar quarters of the first year. Thereafter, the annual renewal fee is invoiced in full, in advance, at the start of each renewal year. Payment is due within thirty (30) days of the invoice date.",
   ] },
   { number: "3.1", title: "Payment Terms", body: [
     "Late payments accrue interest at 1.5% per month, or the maximum allowed by law, whichever is lower.",
@@ -84,8 +112,8 @@ export const DEFAULT_SERVICES_AGREEMENT: AgreementClause[] = [
   { number: "6.1", title: "Confidentiality", body: [
     "Each Party will protect the other's Confidential Information with at least the same care it uses for its own similar information, but no less than reasonable care.",
   ] },
-  { number: "6.2", title: "Survival", body: [
-    "Obligations last three (3) years after termination, except trade secrets, which remain protected while they are trade secrets under applicable law.",
+  { number: "6.2", title: "Confidentiality Term", body: [
+    "These confidentiality obligations continue for three (3) years after this Agreement ends, except for trade secrets, which remain protected for as long as they are trade secrets under applicable law.",
   ] },
   { number: "7.1", title: "Provider Indemnity", body: [
     "Provider will defend and indemnify Client against third-party claims that Deliverables infringe intellectual-property rights.",
@@ -405,4 +433,5 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
   currency: "usd",
 
   services_agreement: DEFAULT_SERVICES_AGREEMENT,
+  payment_options: DEFAULT_PAYMENT_OPTIONS,
 };

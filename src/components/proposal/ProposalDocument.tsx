@@ -9,6 +9,7 @@ import { TimelineSection } from "./sections/TimelineSection";
 import { EngagementSection } from "./sections/EngagementSection";
 import { WhyUsSection } from "./sections/WhyUsSection";
 import { DataBoundariesSection } from "./sections/DataBoundariesSection";
+import { IncludedSection } from "./sections/IncludedSection";
 import { InvestmentSection } from "./sections/InvestmentSection";
 import { NextStepsSection } from "./sections/NextStepsSection";
 import { ServicesAgreementSection } from "./sections/ServicesAgreementSection";
@@ -36,7 +37,7 @@ export function ProposalDocument({
 }) {
   const clientCompany = proposal.client_company;
   const clientLogoUrl = proposal.client_logo_url;
-  const total = moat ? "10" : "09";
+  const total = moat ? "11" : "10";
   // Offer copy is per proposal: a renewal or a non-cohort client should not see it.
   // Older rows predate the column, so an absent value means on.
   const foundersCohort = proposal.founders_cohort ?? true;
@@ -59,8 +60,9 @@ export function ProposalDocument({
     { number: "06", title: "Why OPFOR" },
     ...(moat ? [{ number: "07", title: "Data boundaries" }] : []),
     { number: moat ? "08" : "07", title: "The investment" },
-    { number: moat ? "09" : "08", title: "Next steps" },
-    { number: moat ? "10" : "09", title: "Services agreement" },
+    { number: moat ? "09" : "08", title: "Also included" },
+    { number: moat ? "10" : "09", title: "Next steps" },
+    { number: moat ? "11" : "10", title: "Services agreement" },
   ];
 
   return (
@@ -129,7 +131,7 @@ export function ProposalDocument({
       )}
       <InvestmentSection
         items={proposal.cost_items}
-        bonuses={proposal.bonuses}
+        paymentOptions={proposal.payment_options}
         currency={proposal.currency}
         renewalCents={proposal.renewal_cents}
         discountPct={proposal.discount_pct}
@@ -139,17 +141,25 @@ export function ProposalDocument({
         clientCompany={clientCompany}
         clientLogoUrl={clientLogoUrl}
       />
+      <IncludedSection
+        bonuses={proposal.bonuses}
+        currency={proposal.currency}
+        number={moat ? "09" : "08"}
+        total={total}
+        clientCompany={clientCompany}
+        clientLogoUrl={clientLogoUrl}
+      />
       <NextStepsSection
         steps={proposal.next_steps}
         guarantee={proposal.guarantee}
-        number={moat ? "09" : "08"}
+        number={moat ? "10" : "09"}
         total={total}
         clientCompany={clientCompany}
         clientLogoUrl={clientLogoUrl}
       />
       <ServicesAgreementSection
         clauses={proposal.services_agreement}
-        number={moat ? "10" : "09"}
+        number={moat ? "11" : "10"}
         total={total}
         clientCompany={clientCompany}
         clientLogoUrl={clientLogoUrl}

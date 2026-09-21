@@ -4,7 +4,14 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { DEFAULT_PROPOSAL } from "./defaults";
-import { subtotalCents, type BonusItem, type CostItem, type NumberedItem } from "./types";
+import {
+  subtotalCents,
+  type AgreementClause,
+  type BonusItem,
+  type CostItem,
+  type NumberedItem,
+  type PaymentOption,
+} from "./types";
 
 export async function createProposal() {
   const supabase = await createClient();
@@ -41,6 +48,8 @@ export interface ProposalHeaderUpdate {
   variant: string;
   moat: boolean;
   founders_cohort: boolean;
+  payment_options: PaymentOption[];
+  services_agreement: AgreementClause[];
 }
 
 export async function updateProposal(id: string, update: ProposalHeaderUpdate) {

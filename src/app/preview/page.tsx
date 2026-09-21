@@ -1,5 +1,5 @@
 import { ProposalDocument, type ProposalVariant } from "@/components/proposal/ProposalDocument";
-import { DEFAULT_PROPOSAL } from "@/lib/proposal/defaults";
+import { DEFAULT_PAYMENT_OPTIONS, DEFAULT_PROPOSAL } from "@/lib/proposal/defaults";
 import { subtotalCents, type Proposal } from "@/lib/proposal/types";
 
 // No-auth, no-DB route: renders the LeftClick-structured / OPFOR-skinned template
@@ -33,6 +33,7 @@ const mockProposal: Proposal = {
   variant: "plate-globe",
   moat: false,
   founders_cohort: true,
+  payment_options: DEFAULT_PAYMENT_OPTIONS,
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
 };

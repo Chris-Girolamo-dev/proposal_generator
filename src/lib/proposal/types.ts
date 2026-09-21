@@ -100,6 +100,7 @@ export interface Proposal {
   variant: string;
   /** Include the Data boundaries page + moat-backed Why-OPFOR points. */
   moat: boolean;
+  payment_options: PaymentOption[];
   /** Whether the Founders Cohort offer copy renders (cover + investment page). */
   founders_cohort: boolean;
 
@@ -127,6 +128,21 @@ export type ProposalDraft = Omit<
 export const lineTotalCents = (i: CostItem): number => Math.round(i.qty * i.unit_cents);
 
 /** Optional add-ons show their price but never count toward the total. */
+/**
+ * A way to pay, shown on the investment page with its own price.
+ *
+ * `discount_pct` is applied to the year-one price *after* any proposal-level discount, so
+ * the two compose rather than one silently replacing the other. A 0 discount is a real
+ * option (the standard schedule), not an absent one.
+ */
+export interface PaymentOption {
+  label: string;
+  detail: string;
+  discount_pct: number;
+  /** Marks the schedule the agreement's invoicing clause describes. */
+  standard?: boolean;
+}
+
 export const subtotalCents = (items: CostItem[]): number =>
   items.reduce((sum, i) => sum + (i.optional ? 0 : lineTotalCents(i)), 0);
 

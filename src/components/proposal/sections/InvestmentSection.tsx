@@ -1,10 +1,9 @@
 import {
   lineTotalCents,
   subtotalCents,
-  bonusTotalCents,
   formatMoney,
-  type BonusItem,
   type CostItem,
+  type PaymentOption,
 } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
 import { FoundersCohortBlock } from "./FoundersCohortBlock";
@@ -18,7 +17,7 @@ import { PageShell } from "./PageShell";
 // lifted out is scope that would otherwise be billable, not giveaways.
 export function InvestmentSection({
   items,
-  bonuses,
+  paymentOptions = [],
   currency,
   renewalCents = 0,
   discountPct = 0,
@@ -29,7 +28,7 @@ export function InvestmentSection({
   clientLogoUrl,
 }: {
   items: CostItem[];
-  bonuses: BonusItem[];
+  paymentOptions?: PaymentOption[];
   currency: string;
   renewalCents?: number;
   discountPct?: number;
@@ -39,7 +38,6 @@ export function InvestmentSection({
   clientCompany: string;
   clientLogoUrl: string | null;
 }) {
-  const bonusTotal = bonusTotalCents(bonuses);
   const yearOneGross = subtotalCents(items);
   const hasDiscount = discountPct > 0 && yearOneGross > 0;
   const discountCents = hasDiscount ? Math.round(yearOneGross * (discountPct / 100)) : 0;
@@ -132,53 +130,47 @@ export function InvestmentSection({
 
       {foundersCohort && <FoundersCohortBlock tone="investment" />}
 
-      {bonuses.length > 0 && (
-        <div className="pd-shead mt-3 pt-5">
-          <h3 className="pd-display text-[25px] font-semibold leading-none tracking-[-0.02em] text-[var(--pd-ink)]">
-            Also included<span className="text-[var(--pd-mid)]">, at no additional cost.</span>
-          </h3>
-
-          <div className="mt-2">
-            {bonuses.map((b, i) => (
+      {paymentOptions.length > 0 && yearOne > 0 && (
+        <div className="no-break mt-5 border-t border-[var(--pd-line)] pt-4">
+          <p className="pd-meta mb-2">Payment options</p>
+          {paymentOptions.map((option, i) => {
+            // Option discounts apply to the net year-one price, so they compose with any
+            // proposal-level discount rather than silently replacing it.
+            const saved = Math.round(yearOne * ((option.discount_pct || 0) / 100));
+            const price = yearOne - saved;
+            return (
               <div
                 key={i}
-                className={`no-break flex items-baseline justify-between gap-6 py-[1px] ${
+                className={`flex items-baseline justify-between gap-6 py-1.5 ${
                   i > 0 ? "border-t border-[var(--pd-line)]" : ""
                 }`}
               >
-                <p className="text-[11px] leading-[1.35] text-[var(--pd-ink)]">{b.label}</p>
-                <p className="pd-meta flex shrink-0 items-baseline">
-                  <span className="w-16 text-right normal-case text-[var(--pd-ink)]">
-                    {b.value_cents != null ? formatMoney(b.value_cents, currency) : ""}
+                <div className="min-w-0">
+                  <p className="text-[12px] font-medium leading-[1.4] text-[var(--pd-ink)]">
+                    {option.label}
+                  </p>
+                  {option.detail && (
+                    <p className="text-[11px] leading-[1.45] text-[var(--pd-dim)]">
+                      {option.detail}
+                    </p>
+                  )}
+                </div>
+                <p className="flex shrink-0 items-baseline gap-4">
+                  <span className="pd-meta w-24 text-right normal-case">
+                    {option.discount_pct > 0
+                      ? `${option.discount_pct % 1 === 0 ? option.discount_pct : option.discount_pct.toFixed(1)}% off`
+                      : ""}
                   </span>
-                  <span className="w-24 text-right">{b.tag ?? "Included"}</span>
+                  <span className="pd-display w-28 text-right text-[15px] font-bold tracking-[-0.02em] text-[var(--pd-ink)]">
+                    {formatMoney(price, currency)}
+                  </span>
                 </p>
               </div>
-            ))}
-          </div>
-
-          {bonusTotal > 0 && (
-            <div className="no-break mt-1 flex items-baseline justify-between border-y border-[var(--pd-line-strong)] py-1">
-              <span className="pd-meta">Total included value</span>
-              <span className="flex items-baseline gap-4">
-                <span className="pd-display text-[20px] font-bold tracking-[-0.02em] text-[var(--pd-ink)] line-through decoration-[rgba(229,25,43,.55)] decoration-[1.5px]">
-                  {formatMoney(bonusTotal, currency)}
-                </span>
-                {/* "Included", not "Free": the struck-through total already makes the
-                    point, and "free" is the exact infomercial cue this section was
-                    renamed to get away from. */}
-                <span className="pd-display text-[22px] font-bold uppercase tracking-[-0.02em] text-[#E5192B]">
-                  Included
-                </span>
-              </span>
-            </div>
-          )}
+            );
+          })}
         </div>
       )}
 
-      <p className="pd-meta mt-1">
-        50% at signature · balance across Q3 and Q4 · renewals billed annually in advance · Net 30
-      </p>
     </PageShell>
   );
 }

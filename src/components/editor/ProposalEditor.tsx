@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Plus, RotateCcw, Sparkles, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronUp, Plus, RotateCcw, Sparkles, Trash2 } from "lucide-react";
 import { resetCopyFromTemplate, updateProposal } from "@/lib/proposal/actions";
 import { generateOpportunities } from "@/lib/proposal/ai";
-import { DEFAULT_PROPOSAL } from "@/lib/proposal/defaults";
+import { DEFAULT_PAYMENT_OPTIONS, DEFAULT_PROPOSAL } from "@/lib/proposal/defaults";
 import { LogoUpload } from "./LogoUpload";
 import {
   lineTotalCents,
@@ -15,6 +15,8 @@ import {
   type CostItem,
   type NumberedItem,
   type Proposal,
+  type PaymentOption,
+  type AgreementClause,
 } from "@/lib/proposal/types";
 
 // Theme options map the user-facing Light/Dark choice to the two reviewed
@@ -39,6 +41,14 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
   const [variant, setVariant] = useState(proposal.variant ?? "plate-globe");
   const [moat, setMoat] = useState(proposal.moat ?? true);
   const [foundersCohort, setFoundersCohort] = useState(proposal.founders_cohort ?? true);
+  // Rows written before these columns existed come back empty; fall back to the template so
+  // the editor never shows a blank section for a proposal that renders one.
+  const [paymentOptions, setPaymentOptions] = useState<PaymentOption[]>(
+    proposal.payment_options?.length ? proposal.payment_options : DEFAULT_PAYMENT_OPTIONS,
+  );
+  const [clauses, setClauses] = useState<AgreementClause[]>(
+    proposal.services_agreement ?? DEFAULT_PROPOSAL.services_agreement,
+  );
   const [isPending, startTransition] = useTransition();
   const [savedAt, setSavedAt] = useState<Date | null>(null);
   const [isResetting, startResetTransition] = useTransition();
@@ -89,6 +99,36 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
     }
   }
 
+  function updatePaymentOption(index: number, patch: Partial<PaymentOption>) {
+    setPaymentOptions((list) => list.map((o, i) => (i === index ? { ...o, ...patch } : o)));
+  }
+  function addPaymentOption() {
+    setPaymentOptions((list) => [...list, { label: "", detail: "", discount_pct: 0 }]);
+  }
+  function removePaymentOption(index: number) {
+    setPaymentOptions((list) => list.filter((_, i) => i !== index));
+  }
+
+  function updateClause(index: number, patch: Partial<AgreementClause>) {
+    setClauses((list) => list.map((c, i) => (i === index ? { ...c, ...patch } : c)));
+  }
+  function addClause() {
+    setClauses((list) => [...list, { number: "", title: "", body: [""] }]);
+  }
+  function removeClause(index: number) {
+    setClauses((list) => list.filter((_, i) => i !== index));
+  }
+  /** Clauses render in array order, so moving one is how the document is reordered. */
+  function moveClause(index: number, direction: -1 | 1) {
+    setClauses((list) => {
+      const target = index + direction;
+      if (target < 0 || target >= list.length) return list;
+      const next = [...list];
+      [next[index], next[target]] = [next[target], next[index]];
+      return next;
+    });
+  }
+
   function updateCostItem(index: number, patch: Partial<CostItem>) {
     setCostItems((items) => items.map((it, i) => (i === index ? { ...it, ...patch } : it)));
   }
@@ -126,6 +166,8 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
         variant,
         moat,
         founders_cohort: foundersCohort,
+        payment_options: paymentOptions,
+        services_agreement: clauses,
       });
       setSavedAt(new Date());
       setResetAt(null); // keep the status line showing the most recent action, not a stale one
@@ -579,6 +621,154 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
           <span className="font-display text-lg font-semibold text-fg">
             Total bonus value: {formatMoney(bonusTotalCents(bonuses), proposal.currency)}
           </span>
+        </div>
+      </div>
+
+      {/* ── Payment options ──────────────────────────────────────────── */}
+      <div className="card mt-6 p-6">
+        <div className="mb-1 flex items-center justify-between">
+          <h2 className="font-display text-base font-semibold text-fg">Payment options</h2>
+          <button onClick={addPaymentOption} className="btn-secondary">
+            <Plus size={14} /> Add option
+          </button>
+        </div>
+        <p className="mb-4 text-xs text-text-3">
+          Shown side by side on the investment page, each with its own price. Discount is a
+          percentage off year one; leave it at 0 for the standard schedule.
+        </p>
+
+        <div className="space-y-3">
+          {paymentOptions.map((o, i) => (
+            <div key={i} className="rounded-lg border border-border p-3">
+              <div className="flex items-start gap-3">
+                <div className="min-w-0 flex-1">
+                  <input
+                    className="input-field"
+                    placeholder="Option name (e.g. Paid in full, one year)"
+                    value={o.label}
+                    onChange={(e) => updatePaymentOption(i, { label: e.target.value })}
+                  />
+                </div>
+                <div className="w-28 shrink-0">
+                  <input
+                    type="number"
+                    min={0}
+                    max={100}
+                    step={0.1}
+                    className="input-field"
+                    placeholder="Disc. %"
+                    value={o.discount_pct ? o.discount_pct : ""}
+                    onChange={(e) =>
+                      updatePaymentOption(i, {
+                        discount_pct: e.target.value === "" ? 0 : Number(e.target.value),
+                      })
+                    }
+                  />
+                </div>
+                <button
+                  onClick={() => removePaymentOption(i)}
+                  className="btn-secondary px-2"
+                  aria-label="Remove payment option"
+                  title="Remove payment option"
+                >
+                  <Trash2 size={14} />
+                </button>
+              </div>
+              <textarea
+                className="input-field mt-2 min-h-[56px] resize-y"
+                placeholder="How it is invoiced"
+                value={o.detail}
+                onChange={(e) => updatePaymentOption(i, { detail: e.target.value })}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Services agreement clauses ───────────────────────────────── */}
+      <div className="card mt-6 p-6">
+        <div className="mb-1 flex items-center justify-between">
+          <h2 className="font-display text-base font-semibold text-fg">Services agreement</h2>
+          <button onClick={addClause} className="btn-secondary">
+            <Plus size={14} /> Add clause
+          </button>
+        </div>
+        <p className="mb-4 text-xs text-text-3">
+          Every clause is editable so a client redline can be turned around without a code
+          change. Clauses print in the order below. Separate paragraphs with a blank line;
+          tick Bullets to print the paragraphs as a bulleted list.
+        </p>
+
+        <div className="space-y-3">
+          {clauses.map((c, i) => (
+            <div key={i} className="rounded-lg border border-border p-3">
+              <div className="flex items-start gap-3">
+                <div className="w-20 shrink-0">
+                  <input
+                    className="input-field"
+                    placeholder="No."
+                    value={c.number}
+                    onChange={(e) => updateClause(i, { number: e.target.value })}
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <input
+                    className="input-field"
+                    placeholder="Clause title"
+                    value={c.title}
+                    onChange={(e) => updateClause(i, { title: e.target.value })}
+                  />
+                </div>
+                <button
+                  onClick={() => moveClause(i, -1)}
+                  disabled={i === 0}
+                  className="btn-secondary px-2 disabled:opacity-40"
+                  aria-label="Move clause up"
+                  title="Move up"
+                >
+                  <ChevronUp size={14} />
+                </button>
+                <button
+                  onClick={() => moveClause(i, 1)}
+                  disabled={i === clauses.length - 1}
+                  className="btn-secondary px-2 disabled:opacity-40"
+                  aria-label="Move clause down"
+                  title="Move down"
+                >
+                  <ChevronDown size={14} />
+                </button>
+                <button
+                  onClick={() => removeClause(i)}
+                  className="btn-secondary px-2"
+                  aria-label="Remove clause"
+                  title="Remove clause"
+                >
+                  <Trash2 size={14} />
+                </button>
+              </div>
+
+              <textarea
+                className="input-field mt-2 min-h-[84px] resize-y"
+                placeholder="Clause text"
+                value={c.body.join("\n\n")}
+                onChange={(e) =>
+                  updateClause(i, {
+                    body: e.target.value.split(/\n\s*\n/).map((para) => para.trim()),
+                  })
+                }
+              />
+
+              <label className="mt-2 flex items-center gap-2.5 text-sm text-text-2">
+                <input
+                  type="checkbox"
+                  checked={c.bullets ?? false}
+                  onChange={(e) => updateClause(i, { bullets: e.target.checked })}
+                  className="h-4 w-4 accent-red"
+                />
+                Bullets
+              </label>
+            </div>
+          ))}
         </div>
       </div>
     </div>
