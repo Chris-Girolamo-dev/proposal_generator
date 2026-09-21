@@ -16,7 +16,9 @@ export function FoundersCohortBlock({ tone = "cover" }: { tone?: "cover" | "inve
           <span className="pd-display font-semibold tracking-[-0.01em] text-[#E5192B]">
             {FOUNDERS_COHORT.name}
           </span>
-          <span className="text-[var(--pd-mid)]"> — </span>
+          {/* Middot, not an em dash: the terms list already uses it, and the document
+              avoids em dashes throughout. */}
+          <span className="text-[var(--pd-mid)]"> · </span>
           {FOUNDERS_COHORT.terms.join(" · ")}
         </p>
         <p className="mt-1 text-[11.5px] leading-[1.5] text-[var(--pd-dim)]">

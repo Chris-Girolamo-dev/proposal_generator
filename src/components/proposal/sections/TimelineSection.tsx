@@ -3,8 +3,12 @@ import { SectionHeading } from "./SectionHeading";
 import { PageShell } from "./PageShell";
 
 // The plan — the site's "Method" phases: each phase opens with a strong hairline,
-// a short red bar, an oversized faint Space Grotesk numeral, then title, copy, and
-// a mono deliverables readout. Stacked one per row (reviewer's call) rather than the
+// a short red bar, an oversized faint Space Grotesk numeral, then title and copy.
+//
+// Three text treatments per block, not four (review note: too much variety). The mono
+// tagline stays as the one instrument label; detail and why-it-matters now share a single
+// size and colour so they read as one paragraph rather than two tiers. The mono
+// deliverables readout is gone -- it repeated What ships in a fourth typeface. Stacked one per row (reviewer's call) rather than the
 // old 2×2 grid: the weeks now read in sequence down the page.
 export function TimelineSection({
   phases,
@@ -47,12 +51,9 @@ export function TimelineSection({
               {phase.tagline && <p className="pd-meta mt-1">{phase.tagline.replace(/\.$/, "")}</p>}
               <p className="mt-1 text-[12px] leading-[1.5] text-[var(--pd-tag)]">{phase.detail}</p>
               {phase.whyItMatters && (
-                <p className="mt-1 text-[12px] leading-[1.5] text-[var(--pd-dim)]">
+                <p className="mt-1.5 text-[12px] leading-[1.5] text-[var(--pd-tag)]">
                   {phase.whyItMatters}
                 </p>
-              )}
-              {phase.deliverables && phase.deliverables.length > 0 && (
-                <p className="pd-meta mt-1.5">{phase.deliverables.join(" · ")}</p>
               )}
             </div>
           </div>

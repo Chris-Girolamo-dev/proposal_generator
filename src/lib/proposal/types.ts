@@ -15,7 +15,9 @@ export interface TimelinePhase {
   tagline?: string; // italic accent phrase, e.g. "map the terrain before you build."
   detail: string; // first paragraph — what happens
   whyItMatters?: string; // second paragraph — why it matters. optional: absent on proposals created before this field existed
-  deliverables?: string[]; // short tags shown as a slash-separated row, e.g. ["Data audit", "Model spec"]
+  /** No longer rendered: the timeline dropped its mono deliverables row (it repeated the
+      What ships page in a fourth typeface). Retained so existing rows keep the data. */
+  deliverables?: string[];
   duration?: string; // "Week 1"
 }
 
