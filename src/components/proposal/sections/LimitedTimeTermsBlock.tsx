@@ -5,7 +5,8 @@ import { LIMITED_TIME_TERMS } from "@/lib/proposal/defaults";
  *
  * Each term is its own bulleted line rather than a middot-separated run: three commitments
  * in one sentence read as a single blurred claim, and these are the strongest thing on the
- * page. The dash marker is the same one the agreement's bulleted clauses use.
+ * page. Markers are round bullets; the agreement's hairline dash reads as an em dash at
+ * this size.
  *
  * Two sizes, because the pages have different budgets: the cover has room to breathe, the
  * investment page sits under a price table and a cost list.
@@ -28,13 +29,15 @@ export function LimitedTimeTermsBlock({ tone = "cover" }: { tone?: "cover" | "in
         {LIMITED_TIME_TERMS.terms.map((term) => (
           <li
             key={term}
-            className={`flex gap-2.5 text-[var(--pd-ink)] ${
+            className={`flex gap-2 text-[var(--pd-ink)] ${
               isCover ? "text-[15px] leading-[1.5]" : "text-[12.5px] leading-[1.45]"
             }`}
           >
+            {/* A round bullet, not the agreement's hairline dash: at this size the dash
+                reads as an em dash rather than a list marker. */}
             <span
-              className={`h-px w-3 shrink-0 bg-[var(--pd-line-strong)] ${
-                isCover ? "mt-[11px]" : "mt-[9px]"
+              className={`shrink-0 rounded-full bg-[var(--pd-ink)] ${
+                isCover ? "mt-[9px] h-[4px] w-[4px]" : "mt-[7px] h-[3px] w-[3px]"
               }`}
             />
             {term}
