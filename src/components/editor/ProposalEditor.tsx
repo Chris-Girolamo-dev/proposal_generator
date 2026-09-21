@@ -73,11 +73,13 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
     setGenError(null);
     setGenerating(true);
     try {
-      const items = await generateOpportunities(transcript, clientCompany);
-      if (items.length === 0) {
+      const result = await generateOpportunities(transcript, clientCompany);
+      if (!result.ok) {
+        setGenError(result.error);
+      } else if (result.items.length === 0) {
         setGenError("Nothing usable could be drafted from that transcript. Add more detail and retry.");
       } else {
-        setProblems(items);
+        setProblems(result.items);
       }
     } catch (e) {
       setGenError(e instanceof Error ? e.message : "Generation failed.");

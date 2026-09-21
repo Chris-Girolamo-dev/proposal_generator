@@ -20,68 +20,94 @@ Hard rules:
 
 Return the points with the emit_opportunities tool.`;
 
+export type GenerateResult =
+  | { ok: true; items: NumberedItem[] }
+  | { ok: false; error: string };
+
 /**
  * Turns a sales-call transcript into custom "Areas of Opportunity" items, grounded
- * strictly in the transcript. Returns [] only if nothing usable was found.
- * Requires ANTHROPIC_API_KEY in the server env.
+ * strictly in the transcript. Requires ANTHROPIC_API_KEY in the server env.
+ *
+ * Returns a result object rather than throwing. A server action that throws reaches the
+ * client as Next.js's generic "an error occurred in the Server Components render" in
+ * production builds -- the real message is stripped to avoid leaking server internals --
+ * which left the UI unable to say what actually went wrong. These messages are written to
+ * be safe to show, so they are returned as data instead.
  */
 export async function generateOpportunities(
   transcript: string,
   clientCompany: string,
-): Promise<NumberedItem[]> {
+): Promise<GenerateResult> {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    throw new Error("ANTHROPIC_API_KEY is not set. Add it to .env.local and restart the dev server.");
+    return { ok: false, error: "ANTHROPIC_API_KEY is not set in this environment." };
   }
   const text = transcript.trim();
   if (text.length < 60) {
-    throw new Error("Paste a longer transcript (a few sentences at least) to generate from.");
+    return { ok: false, error: "Paste a longer transcript (a few sentences at least) to generate from." };
   }
 
   const anthropic = new Anthropic({ apiKey });
-  const res = await anthropic.messages.create({
-    model: MODEL,
-    max_tokens: 1500,
-    system: SYSTEM,
-    tools: [
-      {
-        name: "emit_opportunities",
-        description: "Return the Areas of Opportunity items drafted from the transcript.",
-        input_schema: {
-          type: "object",
-          properties: {
-            opportunities: {
-              type: "array",
-              minItems: 1,
-              maxItems: 4,
-              items: {
-                type: "object",
-                properties: { text: { type: "string" } },
-                required: ["text"],
+  let res;
+  try {
+    res = await anthropic.messages.create({
+      model: MODEL,
+      max_tokens: 1500,
+      system: SYSTEM,
+      tools: [
+        {
+          name: "emit_opportunities",
+          description: "Return the Areas of Opportunity items drafted from the transcript.",
+          input_schema: {
+            type: "object",
+            properties: {
+              opportunities: {
+                type: "array",
+                minItems: 1,
+                maxItems: 4,
+                items: {
+                  type: "object",
+                  properties: { text: { type: "string" } },
+                  required: ["text"],
+                },
               },
             },
+            required: ["opportunities"],
           },
-          required: ["opportunities"],
         },
-      },
-    ],
-    tool_choice: { type: "tool", name: "emit_opportunities" },
-    messages: [
-      {
-        role: "user",
-        content: `Prospect company: ${clientCompany || "the prospect"}\n\nSales-call transcript:\n"""\n${text}\n"""`,
-      },
-    ],
-  });
+      ],
+      tool_choice: { type: "tool", name: "emit_opportunities" },
+      messages: [
+        {
+          role: "user",
+          content: `Prospect company: ${clientCompany || "the prospect"}\n\nSales-call transcript:\n"""\n${text}\n"""`,
+        },
+      ],
+    });
+  } catch (e) {
+    // Surface the API's own reason (bad key, no credit, model unavailable, rate limit)
+    // instead of a blank failure. The key itself is never part of these messages.
+    const status = (e as { status?: number }).status;
+    const detail = e instanceof Error ? e.message : String(e);
+    return {
+      ok: false,
+      error: status
+        ? `Anthropic API error ${status}: ${detail}`
+        : `Could not reach the Anthropic API: ${detail}`,
+    };
+  }
+
 
   const tool = res.content.find((c) => c.type === "tool_use");
   if (!tool || tool.type !== "tool_use") {
-    throw new Error("The model did not return structured output. Try again.");
+    return { ok: false, error: "The model did not return structured output. Try again." };
   }
   const opportunities = (tool.input as { opportunities?: { text?: string }[] }).opportunities ?? [];
-  return opportunities
+  const items = opportunities
     .map((it) => (it.text ?? "").trim())
     .filter(Boolean)
     .slice(0, 4)
     .map((textItem, i) => ({ n: String(i + 1).padStart(2, "0"), text: textItem }));
+
+  return { ok: true, items };
 }

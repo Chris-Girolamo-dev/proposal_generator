@@ -3,6 +3,10 @@ import { createClient } from "@/lib/supabase/server";
 import { ProposalEditor } from "@/components/editor/ProposalEditor";
 import type { Proposal } from "@/lib/proposal/types";
 
+// The Areas-of-Opportunity server action calls the Anthropic API from this segment; a
+// long transcript takes a few seconds, comfortably over the platform default.
+export const maxDuration = 60;
+
 export default async function EditProposalPage({
   params,
 }: {

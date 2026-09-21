@@ -5,7 +5,9 @@ const PUBLIC_PATHS = ["/login"];
 // /proposals/*/print is the headless-Chromium render target and authorizes itself via a
 // short-lived signed token instead of cookies (see lib/pdf/sign.ts) since Puppeteer's
 // browser context carries none of the real user's session cookies.
-const AUTH_EXEMPT_PATHS = ["/preview"];
+// /auth/callback is where a magic link / recovery link lands. It runs before any session
+// cookie exists -- exchanging the ?code= is what creates one -- so it must not be bounced.
+const AUTH_EXEMPT_PATHS = ["/preview", "/auth/callback"];
 const AUTH_EXEMPT_PATTERNS = [/^\/proposals\/[^/]+\/print$/];
 
 // This middleware deliberately does NOT import @supabase/ssr, but NOT for the reason an
