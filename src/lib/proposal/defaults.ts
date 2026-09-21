@@ -186,6 +186,10 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       n: "05",
       text: "Production plan lot optimization and automated depot transfers, sized from the forecast instead of by hand.",
     },
+    {
+      n: "06",
+      text: "Portfolio view that rolls up demand across every study sharing a drug product, so one lot is planned against total need, not per protocol.",
+    },
   ],
 
   deliverables: [

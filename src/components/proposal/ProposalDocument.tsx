@@ -61,7 +61,6 @@ export function ProposalDocument({
         number="02"
         total={total}
         title="Your solution"
-        say={<>Clean inputs. Honest<br />uncertainty. Your process.</>}
         intro={SECTION_INTROS.solution}
         items={proposal.benefits}
         clientCompany={clientCompany}
