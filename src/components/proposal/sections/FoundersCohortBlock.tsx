@@ -22,6 +22,9 @@ export function FoundersCohortBlock({ tone = "cover" }: { tone?: "cover" | "inve
           {FOUNDERS_COHORT.terms.join(" · ")}
         </p>
         <p className="mt-1 text-[11.5px] leading-[1.5] text-[var(--pd-dim)]">
+          {/* Close date leads here: beside the price is where a reader decides whether to
+              move now. */}
+          <span className="capitalize">{FOUNDERS_COHORT.closes}</span>.{" "}
           {FOUNDERS_COHORT.duration}
         </p>
       </div>
@@ -32,6 +35,7 @@ export function FoundersCohortBlock({ tone = "cover" }: { tone?: "cover" | "inve
     <div className="mt-7">
       <p className="pd-display text-[15px] font-semibold tracking-[-0.01em]">
         <span className="text-[#E5192B]">{FOUNDERS_COHORT.name}</span>
+        <span className="font-normal text-[var(--pd-dim)]"> · {FOUNDERS_COHORT.closes}</span>
       </p>
       <p className="mt-2 text-[15px] leading-[1.6] text-[var(--pd-ink)]">
         {FOUNDERS_COHORT.terms.join(" · ")}

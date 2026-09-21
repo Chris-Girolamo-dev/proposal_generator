@@ -46,6 +46,10 @@ export const FOUNDERS_COHORT = {
     "Unlimited seats",
     "Renewal price never increases",
   ],
+  /** A real, checkable boundary rather than an adjective. "Limited" makes a scarcity claim
+      the reader cannot verify and the cohort size is not disclosed; a close date is true,
+      states itself, and sits far enough out to pressure nobody. */
+  closes: "closes 31 December 2026",
   duration:
     "Held for the life of your agreement, for as long as your subscription stays active.",
 };
