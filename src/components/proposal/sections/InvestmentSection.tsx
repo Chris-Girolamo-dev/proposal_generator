@@ -7,14 +7,14 @@ import {
   type PaymentOption,
 } from "@/lib/proposal/types";
 import { SectionHeading } from "./SectionHeading";
-import { FoundersCohortBlock } from "./FoundersCohortBlock";
+import { LimitedTimeTermsBlock } from "./LimitedTimeTermsBlock";
 import { PageShell } from "./PageShell";
 
 // Investment — clean ruled price rows (optional add-ons show their price but sit
 // outside the total), the total set large, then the included-scope stack: every item with
 // its real dollar value on the right and an Included/credited stamp, closed by a
 // "total included value" strip so the stack visibly dwarfs the price. Named "Also
-// included" rather than "bonuses": what remains here after the Founders Cohort terms were
+// included" rather than "bonuses": what remains here after the Limited-time terms were
 // lifted out is scope that would otherwise be billable, not giveaways.
 export function InvestmentSection({
   items,
@@ -129,7 +129,7 @@ export function InvestmentSection({
         )}
       </div>
 
-      {foundersCohort && <FoundersCohortBlock tone="investment" />}
+      {foundersCohort && <LimitedTimeTermsBlock tone="investment" />}
 
       {paymentOptions.length > 0 && yearOne > 0 && (
         <div className="no-break mt-5 border-t border-[var(--pd-line)] pt-4">

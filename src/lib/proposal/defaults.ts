@@ -29,18 +29,22 @@ export const SECTION_INTROS = {
  * are rendered separately in ServicesAgreementSection from live proposal data.
  */
 /**
- * The Founders Cohort offer, stated once and rendered in both places it appears (the cover
- * and the investment page). These are terms, not bonuses: they describe what the agreement
+ * The limited-time offer, stated once and rendered in both places it appears (the cover and
+ * the investment page). These are terms, not bonuses: they describe what the agreement
  * permanently permits, which is why they were pulled out of the included-scope list where
  * they read as an afterthought.
+ *
+ * Named plainly rather than as a programme. "Founders Cohort" asked the reader to work out
+ * what it meant, and implied a company still collecting its first clients -- not the signal
+ * to send into a competitive evaluation.
  *
  * Duration wording is deliberate. "Perpetual" is a term of art in software contracts --
  * a licence surviving termination -- and is not what is being offered. Section 9.3 of the
  * services agreement carries the binding version of this, including the change-of-control
  * limits.
  */
-export const FOUNDERS_COHORT = {
-  name: "Founders Cohort 2026",
+export const LIMITED_TIME_TERMS = {
+  name: "Limited-time terms",
   terms: [
     "Unlimited studies",
     "Unlimited seats",
@@ -136,10 +140,10 @@ export const DEFAULT_SERVICES_AGREEMENT: AgreementClause[] = [
     "Either Party may terminate this Agreement on written notice if the other Party materially breaches it and fails to cure the breach within thirty (30) days of written notice describing it. Provider may suspend the Services on ten (10) days written notice for fees more than sixty (60) days overdue.",
   ] },
   { number: "9.3", title: "Scope of Unlimited Terms", body: [
-    `The unlimited-studies, unlimited-seats, and fixed-renewal-price terms described in this proposal (the "Founders Cohort Terms") are granted to Client as constituted on the Effective Date, together with its subsidiaries as of that date, and are held for the life of this Agreement for as long as Client's subscription remains active. They are personal to Client, are not transferable, and do not extend to any acquirer, successor, parent, or affiliate of Client, or to clinical programs that were not Client's own as of the Effective Date.`,
+    `The unlimited-studies, unlimited-seats, and fixed-renewal-price terms described in this proposal (the "Limited-Time Terms") are granted to Client as constituted on the Effective Date, together with its subsidiaries as of that date, and are held for the life of this Agreement for as long as Client's subscription remains active. They are personal to Client, are not transferable, and do not extend to any acquirer, successor, parent, or affiliate of Client, or to clinical programs that were not Client's own as of the Effective Date.`,
   ] },
   { number: "9.4", title: "Change of Control", body: [
-    "If Client undergoes a change of control (including a merger, acquisition, sale of substantially all assets, or a transaction in which a third party acquires a majority of Client's voting securities), Client will notify Provider in writing within thirty (30) days. Provider may then, on sixty (60) days written notice, either terminate this Agreement or propose revised terms reflecting the combined entity's scope. If Client does not accept the revised terms in writing before the end of that notice period, either Party may terminate this Agreement on written notice, and the Founders Cohort Terms end on that termination. Fees paid for any unused portion of the then-current term are refunded on a pro-rata basis.",
+    "If Client undergoes a change of control (including a merger, acquisition, sale of substantially all assets, or a transaction in which a third party acquires a majority of Client's voting securities), Client will notify Provider in writing within thirty (30) days. Provider may then, on sixty (60) days written notice, either terminate this Agreement or propose revised terms reflecting the combined entity's scope. If Client does not accept the revised terms in writing before the end of that notice period, either Party may terminate this Agreement on written notice, and the Limited-Time Terms end on that termination. Fees paid for any unused portion of the then-current term are refunded on a pro-rata basis.",
   ] },
   { number: "9.5", title: "Assignment", body: [
     "Neither Party may assign this Agreement without the other's prior written consent, except that either Party may assign it in full to a successor in connection with a merger or sale of substantially all assets, subject to Section 9.4.",

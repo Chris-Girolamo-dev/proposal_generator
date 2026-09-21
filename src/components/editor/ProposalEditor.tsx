@@ -296,7 +296,7 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
             onChange={(e) => setFoundersCohort(e.target.checked)}
             className="h-4 w-4 accent-red"
           />
-          Include the Founders Cohort 2026 offer (cover and investment page)
+          Include the limited-time terms offer (cover and investment page)
         </label>
 
         <div>
