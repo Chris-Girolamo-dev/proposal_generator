@@ -54,7 +54,7 @@ export function EngagementSection({
             </div>
           </div>
         ))}
-        <div className="no-break grid grid-cols-12 gap-4 border-y border-[var(--pd-line)] py-4">
+        <div className="no-break grid grid-cols-12 gap-4 border-t border-[var(--pd-line)] py-4">
           <span className="pd-meta col-span-2 pt-0.5">Scope</span>
           <div className="col-span-10">
             <p className="pd-display text-[15px] font-semibold text-[var(--pd-ink)]">Fixed scope</p>

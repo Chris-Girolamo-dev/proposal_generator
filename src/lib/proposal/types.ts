@@ -139,6 +139,16 @@ export interface PaymentOption {
   label: string;
   detail: string;
   discount_pct: number;
+  /**
+   * Years the option commits to, defaulting to one. A multi-year option must price the
+   * whole commitment: a two-year option showing a single year's figure understates what
+   * the client is actually signing for.
+   *
+   * Later years are priced at the locked renewal figure when the proposal sets one, and at
+   * the year-one price when it does not -- an unset renewal means no reduced rate has been
+   * agreed, not that later years are free.
+   */
+  years?: number;
   /** Marks the schedule the agreement's invoicing clause describes. */
   standard?: boolean;
 }
@@ -148,6 +158,23 @@ export const subtotalCents = (items: CostItem[]): number =>
 
 export const bonusTotalCents = (bonuses: BonusItem[]): number =>
   bonuses.reduce((sum, b) => sum + (b.value_cents ?? 0), 0);
+
+/**
+ * What a payment option actually costs, across its whole commitment, after its discount.
+ * Returns the total and the per-year figure, since a multi-year total needs both to be
+ * legible.
+ */
+export const paymentOptionTotals = (
+  option: PaymentOption,
+  yearOneCents: number,
+  renewalCents: number,
+): { total: number; perYear: number; years: number } => {
+  const years = Math.max(1, Math.round(option.years ?? 1));
+  const laterYear = renewalCents > 0 ? renewalCents : yearOneCents;
+  const gross = yearOneCents + (years - 1) * laterYear;
+  const total = gross - Math.round(gross * ((option.discount_pct || 0) / 100));
+  return { total, perYear: Math.round(total / years), years };
+};
 
 export const formatMoney = (cents: number, currency = "usd"): string =>
   new Intl.NumberFormat("en-US", {

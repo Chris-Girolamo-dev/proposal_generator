@@ -31,12 +31,12 @@ export function NumberedSection({
       </p>
 
       <div className="mt-12">
-        {items.map((item, i) => (
+        {items.map((item) => (
           <div
             key={item.n}
-            className={`no-break grid grid-cols-12 gap-4 border-t border-[var(--pd-line)] py-6 ${
-              i === items.length - 1 ? "border-b" : ""
-            }`}
+            // No closing rule on the last row: it lands near the footer hairline and the
+            // two read as a doubled line. Each row's top border already separates them.
+            className="no-break grid grid-cols-12 gap-4 border-t border-[var(--pd-line)] py-6"
           >
             <span className="pd-meta col-span-1 pt-1">{item.n}</span>
             <p className="col-span-10 pd-display text-[13.5px] font-medium leading-[1.65] tracking-[-0.01em] text-[var(--pd-ink)]">

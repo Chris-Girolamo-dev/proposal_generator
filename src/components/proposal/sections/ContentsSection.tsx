@@ -42,13 +42,12 @@ export function ContentsSection({
       </div>
 
       <div className="mt-12">
-        {entries.map((entry, i) => (
+        {entries.map((entry) => (
           <a
             key={entry.number}
             href={`#section-${entry.number}`}
-            className={`no-break grid grid-cols-12 items-baseline gap-4 border-t border-[var(--pd-line)] py-5 no-underline ${
-              i === entries.length - 1 ? "border-b" : ""
-            }`}
+            // No closing rule on the last entry -- see NumberedSection.
+            className="no-break grid grid-cols-12 items-baseline gap-4 border-t border-[var(--pd-line)] py-5 no-underline"
           >
             {/* Title left, folio right. The index is not repeated on the left: the folio
                 already states it, and a doubled number reads as a typo. */}

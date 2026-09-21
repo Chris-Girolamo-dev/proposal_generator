@@ -75,6 +75,7 @@ export const DEFAULT_PAYMENT_OPTIONS: PaymentOption[] = [
     label: "Paid in full, two year commitment",
     detail: "Both years invoiced on execution, with the renewal price locked at signing.",
     discount_pct: 3.5,
+    years: 2,
   },
 ];
 

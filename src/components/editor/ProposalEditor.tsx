@@ -633,8 +633,10 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
           </button>
         </div>
         <p className="mb-4 text-xs text-text-3">
-          Shown side by side on the investment page, each with its own price. Discount is a
-          percentage off year one; leave it at 0 for the standard schedule.
+          Shown side by side on the investment page, each priced for its whole commitment.
+          Years is how long the option commits to; later years use the locked renewal price
+          when one is set, otherwise the year-one price. Discount is a percentage off that
+          total; leave it at 0 for the standard schedule.
         </p>
 
         <div className="space-y-3">
@@ -649,7 +651,23 @@ export function ProposalEditor({ proposal }: { proposal: Proposal }) {
                     onChange={(e) => updatePaymentOption(i, { label: e.target.value })}
                   />
                 </div>
-                <div className="w-28 shrink-0">
+                <div className="w-24 shrink-0">
+                  <input
+                    type="number"
+                    min={1}
+                    max={10}
+                    step={1}
+                    className="input-field"
+                    placeholder="Years"
+                    value={o.years ?? 1}
+                    onChange={(e) =>
+                      updatePaymentOption(i, {
+                        years: e.target.value === "" ? 1 : Math.max(1, Number(e.target.value)),
+                      })
+                    }
+                  />
+                </div>
+                <div className="w-24 shrink-0">
                   <input
                     type="number"
                     min={0}

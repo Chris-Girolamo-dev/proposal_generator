@@ -1,4 +1,5 @@
 import {
+  paymentOptionTotals,
   lineTotalCents,
   subtotalCents,
   formatMoney,
@@ -135,9 +136,13 @@ export function InvestmentSection({
           <p className="pd-meta mb-2">Payment options</p>
           {paymentOptions.map((option, i) => {
             // Option discounts apply to the net year-one price, so they compose with any
-            // proposal-level discount rather than silently replacing it.
-            const saved = Math.round(yearOne * ((option.discount_pct || 0) / 100));
-            const price = yearOne - saved;
+            // proposal-level discount rather than silently replacing it. A multi-year
+            // option prices its whole commitment, not one year of it.
+            const { total: price, perYear, years } = paymentOptionTotals(
+              option,
+              yearOne,
+              renewalCents,
+            );
             return (
               <div
                 key={i}
@@ -161,8 +166,15 @@ export function InvestmentSection({
                       ? `${option.discount_pct % 1 === 0 ? option.discount_pct : option.discount_pct.toFixed(1)}% off`
                       : ""}
                   </span>
-                  <span className="pd-display w-28 text-right text-[15px] font-bold tracking-[-0.02em] text-[var(--pd-ink)]">
-                    {formatMoney(price, currency)}
+                  <span className="w-32 text-right">
+                    <span className="pd-display block text-[15px] font-bold tracking-[-0.02em] text-[var(--pd-ink)]">
+                      {formatMoney(price, currency)}
+                    </span>
+                    {years > 1 && (
+                      <span className="pd-meta block normal-case">
+                        {years}-year total · {formatMoney(perYear, currency)}/yr
+                      </span>
+                    )}
                   </span>
                 </p>
               </div>

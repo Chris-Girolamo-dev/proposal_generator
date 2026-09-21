@@ -49,9 +49,7 @@ export function DataBoundariesSection({
         {CLAIMS.map((c, i) => (
           <div
             key={i}
-            className={`no-break grid grid-cols-12 gap-4 border-t border-[var(--pd-line)] py-4 ${
-              i === CLAIMS.length - 1 ? "border-b" : ""
-            }`}
+            className="no-break grid grid-cols-12 gap-4 border-t border-[var(--pd-line)] py-4"
           >
             <span className="pd-meta col-span-1 pt-0.5">{String(i + 1).padStart(2, "0")}</span>
             <p className="col-span-4 pd-display text-[15px] font-semibold leading-[1.25] text-[var(--pd-ink)]">

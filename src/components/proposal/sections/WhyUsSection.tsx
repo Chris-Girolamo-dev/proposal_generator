@@ -57,7 +57,7 @@ export function WhyUsSection({
           (bottom = spacer + the footer's mt-8, so the top spacer starts at basis-8). */}
       <div className="flex-1 basis-7" />
       {whyUs.capabilities && whyUs.capabilities.length > 0 && (
-        <div className="border-y border-[var(--pd-line-strong)]">
+        <div className="border-t border-[var(--pd-line-strong)]">
           <div className="flex flex-wrap">
             {whyUs.capabilities.map((c, i) => (
               <span
