@@ -13,6 +13,8 @@ export function PageShell({
   clientCompany,
   clientLogoUrl,
   folioLabel,
+  anchor,
+  className = "",
   children,
 }: {
   number: string;
@@ -22,6 +24,11 @@ export function PageShell({
   /** Replaces the "NN / TT" folio. The contents page is outside the numbered run, so it
       says CONTENTS instead of taking a number that would shift every section after it. */
   folioLabel?: string;
+  /** Anchor id, defaulting to `section-<number>`. Pass null on continuation pages so a
+      multi-page section does not emit the same id more than once. */
+  anchor?: string | null;
+  /** Extra classes on the page frame -- the agreement pages reset to paper here. */
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -29,7 +36,7 @@ export function PageShell({
     // globe behind this page's content (z-[-1]) without leaking under the ground.
     // id: the contents page links to these; section numbers are stable, so the anchor is
     // derived from the folio rather than threaded through as another prop.
-    <section id={`section-${number}`} className="isolate relative flex min-h-[11in] flex-col p-16">
+    <section id={anchor === null ? undefined : (anchor ?? `section-${number}`)} className={`isolate relative flex min-h-[11in] flex-col p-16 ${className}`}>
       <CornerGlobe />
       <PageHeader clientCompany={clientCompany} clientLogoUrl={clientLogoUrl} />
       <div className="flex flex-1 flex-col">{children}</div>
