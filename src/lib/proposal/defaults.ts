@@ -188,7 +188,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     },
     {
       n: "06",
-      text: "Portfolio view that rolls up demand across every study sharing a drug product, so one lot is planned against total need, not per protocol.",
+      text: "Portfolio view that rolls up demand across studies sharing a drug product, planned against total need, not per protocol.",
     },
   ],
 
