@@ -88,7 +88,7 @@ export function ServicesAgreementSection({
   total = "09",
   clientCompany,
   clientLogoUrl,
-  providerName = "OPFOR",
+  providerName = "OPFOR Supply",
 }: {
   clauses: AgreementClause[];
   number?: string;
