@@ -382,7 +382,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
 
   next_steps: [
     { step: "Approve this proposal to reserve your build slot." },
-    { step: "Kickoff call to grant data access and confirm assumptions." },
+    { step: "Kickoff call to walk the protocol and confirm the forecast assumptions." },
     { step: "We begin the Discovery & Scenario Build within one week of kickoff." },
   ],
 
