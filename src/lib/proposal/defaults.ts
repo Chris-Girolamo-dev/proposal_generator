@@ -304,7 +304,7 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
       label: "Dashboard & Scenarios.",
       tagline: "one-click answers for the room.",
       detail:
-        "We ship the interactive dashboard, wire up one-click scenario planning, and connect the whole thing to your enrollment and inventory sources.",
+        "We ship the interactive dashboard, wire up one-click scenario planning, and bridge the gap to your enrollment and inventory.",
       whyItMatters:
         "A one-click scenario tool means you can defend supply decisions in the room, not after the meeting.",
       deliverables: ["Interactive dashboard", "Scenario planner", "Sources connected"],
