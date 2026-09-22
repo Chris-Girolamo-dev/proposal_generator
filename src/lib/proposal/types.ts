@@ -161,19 +161,20 @@ export const bonusTotalCents = (bonuses: BonusItem[]): number =>
 
 /**
  * What a payment option actually costs, across its whole commitment, after its discount.
- * Returns the total and the per-year figure, since a multi-year total needs both to be
- * legible.
+ * Returns the total, the per-year figure (a multi-year total needs both to be legible) and
+ * the money saved, which is the number that makes a percentage feel real.
  */
 export const paymentOptionTotals = (
   option: PaymentOption,
   yearOneCents: number,
   renewalCents: number,
-): { total: number; perYear: number; years: number } => {
+): { total: number; perYear: number; years: number; saved: number } => {
   const years = Math.max(1, Math.round(option.years ?? 1));
   const laterYear = renewalCents > 0 ? renewalCents : yearOneCents;
   const gross = yearOneCents + (years - 1) * laterYear;
-  const total = gross - Math.round(gross * ((option.discount_pct || 0) / 100));
-  return { total, perYear: Math.round(total / years), years };
+  const saved = Math.round(gross * ((option.discount_pct || 0) / 100));
+  const total = gross - saved;
+  return { total, perYear: Math.round(total / years), years, saved };
 };
 
 export const formatMoney = (cents: number, currency = "usd"): string =>

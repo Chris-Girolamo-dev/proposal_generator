@@ -138,7 +138,7 @@ export function InvestmentSection({
             // Option discounts apply to the net year-one price, so they compose with any
             // proposal-level discount rather than silently replacing it. A multi-year
             // option prices its whole commitment, not one year of it.
-            const { total: price, perYear, years } = paymentOptionTotals(
+            const { total: price, perYear, years, saved } = paymentOptionTotals(
               option,
               yearOne,
               renewalCents,
@@ -161,10 +161,23 @@ export function InvestmentSection({
                   )}
                 </div>
                 <p className="flex shrink-0 items-baseline gap-4">
-                  <span className="pd-meta w-24 text-right normal-case">
-                    {option.discount_pct > 0
-                      ? `${option.discount_pct % 1 === 0 ? option.discount_pct : option.discount_pct.toFixed(1)}% off`
-                      : ""}
+                  {/* The percentage carries the accent and the money sits beside it in
+                      grey: a percentage is an abstraction until the reader is told what it
+                      is worth. */}
+                  <span className="pd-meta w-40 text-right normal-case">
+                    {option.discount_pct > 0 && (
+                      <>
+                        <span className="text-[#E5192B]">
+                          {/* Two decimals, trailing zeros stripped. toFixed(1) printed
+                              7.75 as "7.8%", and with the money shown beside it a reader
+                              can divide and find the two disagree. */}
+                          {Number(option.discount_pct.toFixed(2))}% off
+                        </span>{" "}
+                        <span className="text-[var(--pd-dim)]">
+                          ({formatMoney(saved, currency)})
+                        </span>
+                      </>
+                    )}
                   </span>
                   <span className="w-32 text-right">
                     <span className="pd-display block text-[15px] font-bold tracking-[-0.02em] text-[var(--pd-ink)]">
