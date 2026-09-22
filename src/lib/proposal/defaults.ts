@@ -199,6 +199,11 @@ export const MOAT_WHY_US_POINTS = [
     description:
       "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser.",
   },
+  {
+    title: "Every scenario keeps its history.",
+    description:
+      "Each save records who changed it, when, and what they noted. Any earlier version can be restored.",
+  },
 ];
 
 export const DEFAULT_PROPOSAL: ProposalDraft = {
@@ -367,6 +372,11 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
         description:
           "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser.",
       },
+    {
+      title: "Every scenario keeps its history.",
+      description:
+        "Each save records who changed it, when, and what they noted. Any earlier version can be restored.",
+    },
     ],
   },
 
