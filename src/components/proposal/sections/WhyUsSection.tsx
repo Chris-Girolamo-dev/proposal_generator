@@ -36,7 +36,10 @@ export function WhyUsSection({
       </p>
 
       {whyUs.points && whyUs.points.length > 0 && (
-        <div className="mt-5 grid grid-cols-2 gap-x-8">
+        // One column: in two, the reader scans across a pair before dropping a row, and
+        // two points making adjacent arguments read as one. Four points down the page each
+        // get their own line of attention.
+        <div className="mt-5">
           {whyUs.points.map((point, i) => (
             <div key={i} className="no-break border-t border-[var(--pd-line)] py-2.5">
               <div className="flex items-baseline gap-3">

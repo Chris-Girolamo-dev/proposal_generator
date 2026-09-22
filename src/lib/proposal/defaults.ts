@@ -187,27 +187,17 @@ export const MOAT_WHY_US_POINTS = [
   {
     title: "IRT-agnostic by architecture.",
     description:
-      "A neutral layer over whatever randomization system each study runs. Medidata live today; other formats onboard per study.",
+      "A neutral layer over whatever randomization system each study runs, so the vendor decision does not gate the forecast.",
   },
   {
     title: "Calibrated to your actuals, not a benchmark.",
     description:
-      "Every model ships trained against your historical and protocol actuals, not a generic industry template.",
-  },
-  {
-    title: "Every forecast is reproducible.",
-    description:
-      "Deterministic engine: any forecast re-derives exactly from its configuration snapshot. Every change is versioned.",
-  },
-  {
-    title: "Calibrated to your actuals.",
-    description:
-      "Every model ships trained against your actual historical and protocol parameters, never a generic industry template.",
+      "Every model is trained on your historical and protocol actuals, never a generic industry template.",
   },
   {
     title: "No patient data. Ever.",
     description:
-      "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser. Only the counts leave your machine.",
+      "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser.",
   },
 ];
 
@@ -358,34 +348,24 @@ export const DEFAULT_PROPOSAL: ProposalDraft = {
     ],
     points: [
       {
-        title: "We build systems, not slide decks.",
+        title: "You own it, and you run it.",
         description:
-          "You get a working model and dashboard, not a strategy deck for another vendor to implement.",
+          "You get a running forecasting engine your team operates, not another workbook to rebuild by hand every time a date moves.",
       },
       {
         title: "Calibrated to your actuals, not a benchmark.",
         description:
-          "Every model ships trained against your historical and protocol actuals, not a generic industry template.",
+          "Every model is trained on your historical and protocol actuals, never a generic industry template.",
       },
       {
         title: "Senior team, narrow focus.",
         description:
-          "The same person who scopes the model builds it and hands it over. No account-manager-to-engineer relay.",
-      },
-      {
-        title: "We build for the forecast, not the deck.",
-        description:
-          "The dashboard is how this gets funded internally. Forecast accuracy is why it matters. We optimize for the second, and the first follows.",
-      },
-      {
-        title: "Calibrated to your actuals.",
-        description:
-          "Every model ships trained against your actual historical and protocol parameters, never a generic industry template.",
+          "The person who scopes the model builds it and hands it over. No account-manager-to-engineer relay.",
       },
       {
         title: "No patient data. Ever.",
         description:
-          "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser. Only the counts leave your machine.",
+          "No subject-level records, no treatment arms. Enrollment reduces to per-site counts in your browser.",
       },
     ],
   },
